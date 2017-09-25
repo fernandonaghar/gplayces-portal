@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html>
+<html ng-app="app">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Gplayces</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="app-content/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,700">
+    <link rel="stylesheet" href="app-content/style.default.css" id="theme-stylesheet">
+    <link rel="stylesheet" href="app-content/custom.css">
+    <link rel="shortcut icon" href="img/ic_launcher-web.png">
+    <!-- Font Awesome CDN-->
+    <!-- you can replace it by local Font Awesome-->
+    <script src="https://use.fontawesome.com/99347ac47f.js"></script>
+
+    <!-- Javascript files Angular and Parse -->
+    <script src="//code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="//code.angularjs.org/1.6.0/angular.min.js"></script>
+    <script src="//code.angularjs.org/1.6.0/angular-route.min.js"></script>
+    <script src="//code.angularjs.org/1.6.0/angular-cookies.min.js"></script>
+    <script src="js/angular-ui-router.js"></script>
+    <script src="js/parse.min.js"></script>
+
+    <!-- Font Icons CSS-->
+    <link rel="stylesheet" href="https://file.myfontastic.com/da58YPMQ7U5HY8Rb6UxkNf/icons.css">
+    <!-- Tweaks for older IEs-->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+</head>
+
+<body>
+    <div ng-view></div>
+
+
+
+    <!-- facebook API -->
+    <div id="fb-root"></div>
+    <script>
+        window.fbAsyncInit = function() {
+            Parse.FacebookUtils.init({
+                appId: '340536129479663',
+                autoLogAppEvents: true,
+                xfbml: true,
+                version: 'v2.4'
+            });
+            FB.AppEvents.logPageView();
+        };
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {
+                return;
+            }
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "//connect.facebook.net/pt_BR/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+    <!-- Javascript files Template -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="js/tether.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.cookie.js"></script>
+    <script src="js/jquery.validate.min.js"></script>
+
+    <!-- Javascript files App -->
+    <script src="app.js"></script>
+    <script src="app-services/authentication.service.js"></script>
+    <script src="app-services/flash.service.js"></script>
+
+    <!-- Real user service that uses an api -->
+    <script src="app-services/user.service.js"></script>
+
+    <!-- Fake user service for demo that uses local storage -->
+    <!--<script src="app-services/user.service.local-storage.js"></script> -->
+
+    <!-- controllers -->
+    <script src="home/home.controller.js"></script>
+    <script src="login/login.controller.js"></script>
+    <script src="register/register.controller.js"></script>
+    <script src="place/places.controller.js"></script>
+
+</body>
+
+</html>

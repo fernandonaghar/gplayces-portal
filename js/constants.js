@@ -1,0 +1,6 @@
+angular.module('constants', [])
+    .constant('ENVIRONMENT', 'development')
+    .constant('FACEBOOK_SMM_APP_ID', '123456789')
+    .constant('FACEBOOK_SMM_SCOPES', 'email, user_friends, user_photos,user_birthday,user_work_history,user_education_history,user_about_me,user_interests,user_hometown,user_likes')
+    .constant('PARSE_SMM_APP_ID', 'abcdefghijklmnop')
+    .constant('PARSE_SMM_JAVASCRIPT_KEY', 'abcdefghijklmnop')

@@ -1,0 +1,54 @@
+﻿<div class="page login-page">
+    <div class="container d-flex align-items-center">
+        <div class="form-holder has-shadow">
+            <div class="row">
+                <!-- Logo & Information Panel-->
+                <div class="col-lg-6">
+                    <div class="info d-flex align-items-center">
+                        <div class="content">
+                            <div class="logo">
+                                <h1>Gplayces</h1>
+                            </div>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 bg-white">
+                    <div class="form d-flex align-items-center">
+                        <div class="content">
+                            <div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }" ng-if="flash" ng-bind="flash.message"></div>
+                            <form name="form" ng-submit="vm.register()" role="form">
+                                <div class="form-group" ng-class="{ 'has-error': form.firstName.$dirty && form.firstName.$error.required }">
+                                    <label for="firstName" class="label-material">Primeiro nome</label>
+                                    <input type="text" name="firstName" id="firstName" class="input-material" ng-model="vm.user.firstName" required />
+                                    <span ng-show="form.firstName.$dirty && form.firstName.$error.required" class="help-block">Primeiro nome é requerido.</span>
+                                </div>
+                                <div class="form-group" ng-class="{ 'has-error': form.lastName.$dirty && form.lastName.$error.required }">
+                                    <label for="lastName" class="label-material">Sobrenome</label>
+                                    <input type="text" name="lastName" id="Text1" class="input-material" ng-model="vm.user.lastName" required />
+                                    <span ng-show="form.lastName.$dirty && form.lastName.$error.required" class="help-block">Sobrenome é requerido.</span>
+                                </div>
+                                <div class="form-group" ng-class="{ 'has-error': form.username.$dirty && form.username.$error.required }">
+                                    <label for="username" class="label-material">E-mail</label>
+                                    <input type="text" name="username" id="username" class="input-material" ng-model="vm.user.username" required />
+                                    <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">E-mail é requerido.</span>
+                                </div>
+                                <div class="form-group" ng-class="{ 'has-error': form.password.$dirty && form.password.$error.required }">
+                                    <label for="password" class="label-material">Senha</label>
+                                    <input type="password" name="password" id="password" class="input-material" ng-model="vm.user.password" required />
+                                    <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Senha é requerida.</span>
+                                </div>
+                                <div class="form-actions">
+                                    <button type="submit" ng-disabled="form.$invalid || vm.dataLoading" class="btn btn-primary">Registrar</button>
+                                    <img ng-if="vm.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+                                    />
+                                    <a href="#!/login" class="btn btn-link">Login</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
