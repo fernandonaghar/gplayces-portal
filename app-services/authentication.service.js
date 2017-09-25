@@ -20,7 +20,7 @@
 
             var deferred = $q.defer();
 
-            Parse.FacebookUtils.logIn("lastName,firstName,email,gender,birthday", {
+            Parse.FacebookUtils.logIn("public_profile,email", {
                 success: function(user) {
                     deferred.resolve({ success: true });
                 },
