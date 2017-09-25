@@ -13,8 +13,24 @@
         service.Login = Login;
         service.SetCredentials = SetCredentials;
         service.ClearCredentials = ClearCredentials;
-
+        service.LoginFacebook = LoginFacebook;
         return service;
+
+        function LoginFacebook() {
+
+            var deferred = $q.defer();
+
+            Parse.FacebookUtils.logIn(null, {
+                success: function(user) {
+                    deferred.resolve({ success: true });
+                },
+                error: function(user, error) {
+                    deferred.resolve({ success: false, message: 'Login pelo facebook falhou.' });
+                }
+            });
+
+            return deferred.promise;
+        }
 
         function Login(username, password, callback) {
 
@@ -60,6 +76,7 @@
             Parse.User.logOut().then(() => {
                 var currentUser = Parse.User.current();
             });
+
         }
     }
 
