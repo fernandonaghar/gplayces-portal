@@ -39,6 +39,8 @@
             parse_user.set("username", user.username);
             parse_user.set("password", user.password);
             parse_user.set("email", user.username);
+            parse_user.set("lastName", user.lastName);
+            parse_user.set("firstName", user.firstName);
 
             parse_user.signUp(null, {
                 success: function(parse_user) {

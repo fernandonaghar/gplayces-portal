@@ -1,0 +1,43 @@
+<!-- Template header start -->
+<div class="page home-page">
+    <ng-include src="'app-content/header.html'"></ng-include>
+    <div class="page-content d-flex align-items-stretch">
+        <ng-include src="'app-content/sidebar.html'"></ng-include>
+        <div class="content-inner">
+            <ng-include src="'app-content/inner-header.html'"></ng-include>
+            <!-- Template header end -->
+
+            <div class="project">
+                <div class="row bg-white has-shadow">
+                    <div class="left-col col-lg-6 d-flex align-items-center justify-content-between">
+                        <div class="project-title d-flex align-items-center">
+                            <div class="image has-shadow"><img src="img/project-3.jpg" alt="..." class="img-fluid"></div>
+                            <div class="text">
+                                <h3 class="h4">Meus locais</h3><small>Lorem Ipsum Dolor</small>
+                            </div>
+                        </div>
+                        <div class="project-date"><span class="hidden-sm-down">Today at 4:24 AM</span></div>
+                    </div>
+                    <div class="right-col col-lg-6 d-flex align-items-center">
+                        <div class="time"><i class="fa fa-clock-o"></i>12:00 PM </div>
+                        <div class="comments"><i class="fa fa-comment-o"></i>20</div>
+                        <div class="project-progress">
+                            <div class="progress">
+                                <div role="progressbar" style="width: 50%; height: 6px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-violet"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Template footer start -->
+            <ng-include src="'app-content/footer.html'"></ng-include>
+        </div>
+    </div>
+</div>
+<!-- template footer end -->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="js/tether.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.cookie.js"></script>
+<script src="js/jquery.validate.min.js"></script>

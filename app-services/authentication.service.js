@@ -20,12 +20,12 @@
 
             var deferred = $q.defer();
 
-            Parse.FacebookUtils.logIn(null, {
+            Parse.FacebookUtils.logIn("lastName,firstName,email,gender,birthday,location,facebookID", {
                 success: function(user) {
                     deferred.resolve({ success: true });
                 },
                 error: function(user, error) {
-                    deferred.resolve({ success: false, message: 'Login pelo facebook falhou.' });
+                    deferred.resolve({ success: false, message: 'Login pelo facebook falhou, se preferir, você pode realizar a criação de uma conta e posteriormente associar sua conta do facebook.' });
                 }
             });
 
