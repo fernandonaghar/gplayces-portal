@@ -3,13 +3,13 @@
 
     angular
         .module('app')
-        .controller('PlacesController', PlacesController);
+        .controller('EventController', EventController);
 
     PlacesController.$inject = ['UserService', '$rootScope'];
 
-    function PlacesController(UserService, $rootScope) {
+    function EventController(UserService, $rootScope) {
         var vm = this;
-        vm.title = 'Meus locais';
+        vm.title = 'Eventos';
         vm.user = null;
         vm.allUsers = [];
         vm.deleteUser = deleteUser;

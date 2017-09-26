@@ -22,7 +22,7 @@
 
             Parse.FacebookUtils.logIn("public_profile,email", {
                 success: function(user) {
-                    deferred.resolve({ success: true });
+                    deferred.resolve({ success: true, user_id: user.id });
                 },
                 error: function(user, error) {
                     deferred.resolve({ success: false, message: 'Login pelo facebook falhou, se preferir, você pode realizar a criação de uma conta e posteriormente associar sua conta do facebook.' });

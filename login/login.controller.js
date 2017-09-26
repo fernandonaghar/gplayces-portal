@@ -43,7 +43,7 @@
                 .then(function(response) {
                     if (response != null) {
                         if (response.success) {
-                            AuthenticationService.SetCredentials(vm.username, vm.password);
+                            AuthenticationService.SetCredentials(response.user_id, response.user_id);
                             $location.path('/');
                         } else {
                             FlashService.Error(response.message);

@@ -19,6 +19,18 @@
                 controllerAs: 'vm'
             })
 
+        .when('/events', {
+            controller: 'EventController',
+            templateUrl: 'event/event.view.html',
+            controllerAs: 'vm'
+        })
+
+        .when('/profile', {
+            controller: 'ProfileController',
+            templateUrl: 'profile/profile.view.html',
+            controllerAs: 'vm'
+        })
+
         .when('/places', {
             controller: 'PlacesController',
             templateUrl: 'place/places.view.html',
