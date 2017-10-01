@@ -9,7 +9,7 @@
                             <div class="logo">
                                 <h1>Gplayces</h1>
                             </div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                            <p>Portal para parceiros</p>
                         </div>
                     </div>
                 </div>
@@ -18,6 +18,7 @@
                         <div class="content">
                             <div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }" ng-if="flash" ng-bind="flash.message"></div>
                             <form name="form" ng-submit="vm.register()" role="form">
+
                                 <div class="form-group" ng-class="{ 'has-error': form.firstName.$dirty && form.firstName.$error.required }">
                                     <label for="firstName" class="label-material">Primeiro nome</label>
                                     <input type="text" name="firstName" id="firstName" class="input-material" ng-model="vm.user.firstName" required />
@@ -44,6 +45,7 @@
                                     />
                                     <a href="#!/login" class="btn btn-link">Login</a>
                                 </div>
+
                             </form>
                         </div>
                     </div>

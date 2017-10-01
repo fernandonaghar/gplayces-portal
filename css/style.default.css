@@ -48,7 +48,7 @@ canvas {
 
 header.page-header {
     padding: 20px 0;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
 }
 
 table {
@@ -96,7 +96,7 @@ table {
 }
 
 .content-inner {
-    width: calc(100% - 250px)
+    width: calc(100% - 250px);
 }
 
 .content-inner.active {
@@ -420,7 +420,7 @@ nav.side-navbar ul a:hover {
 }
 
 nav.side-navbar ul li.active a {
-    background: #EEF5F9
+    background: #CDD2D4
 }
 
 nav.side-navbar ul li.active a:hover {
@@ -1338,7 +1338,6 @@ footer.main-footer {
     background: #2f333e;
     color: #fff;
     padding: 10px;
-    margin-top: 30px;
 }
 
 footer.main-footer a {

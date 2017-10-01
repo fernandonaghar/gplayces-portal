@@ -1,0 +1,23 @@
+<header class="page-header">
+    <div class="container-fluid">
+        <h2 class="no-margin-bottom">Perfil</h2>
+    </div>
+</header>
+<div class="col-lg-12">
+    <div class="card">
+        <div id="status-buttons" class="card-header text-center">
+            <a ui-sref-active="active" ui-sref="app.profile.personal"><span>1</span>Pessoal</a>
+            <a ui-sref-active="active" ui-sref="app.profile.address"><span>2</span>Endereço</a>
+        </div>
+        <div id="signup-form" class="card-body">
+            <div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }" ng-if="flash" ng-bind="flash.message"></div>
+            <form id="signup-form">
+
+                <div id="form-views" ui-view>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+</div>

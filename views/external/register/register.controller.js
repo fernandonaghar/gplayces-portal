@@ -18,7 +18,7 @@
                 .then(function(response) {
                     if (response.success) {
                         FlashService.Success('Registro realizado com sucesso, você já pode realizar login.', true);
-                        $location.path('/login');
+                        $state.go('login');
                     } else {
                         FlashService.Error(response.message);
                         vm.dataLoading = false;

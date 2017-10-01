@@ -12,7 +12,6 @@
             restrict: 'A',
             link: function(scope, element) {
                 var $ul = $(element);
-                //$ul.addClass("nav nav-tabs");
 
                 var $tabs = $ul.children();
                 $tabs.removeClass("active");
@@ -21,7 +20,7 @@
 
                 $tabs.each(function() {
                     var $li = $(this);
-                    var addr = $li.find('a').attr('ng-href').substring(1);
+                    var addr = $li.find('a').attr('href').substring(1);
                     if (addr == loc) {
                         $li.addClass("active");
                     }

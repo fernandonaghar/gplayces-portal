@@ -25,14 +25,13 @@
                 .then(function(response) {
                     if (response != null) {
                         if (response.success) {
-                            AuthenticationService.SetCredentials(vm.username, vm.password);
-                            $location.path('/');
+                            $location.path('/dashboard');
                         } else {
                             FlashService.Error(response.message);
                             vm.dataLoading = false;
                         }
                     };
-                });
+                }).catch(angular.noop);
 
         };
 
@@ -43,15 +42,13 @@
                 .then(function(response) {
                     if (response != null) {
                         if (response.success) {
-                            AuthenticationService.SetCredentials(response.user_id, response.user_id);
-                            $location.path('/');
+                            $location.path('/dashboard');
                         } else {
                             FlashService.Error(response.message);
                             vm.dataLoading = false;
                         }
                     };
-                });
-
+                }).catch(angular.noop);
         };
     }
 
