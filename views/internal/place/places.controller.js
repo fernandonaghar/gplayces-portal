@@ -5,24 +5,29 @@
         .module('app')
         .controller('PlacesController', PlacesController);
 
-    PlacesController.$inject = ['UserService', '$rootScope'];
+    PlacesController.$inject = ['$state', '$rootScope', 'PlaceService'];
 
-    function PlacesController(UserService, $rootScope) {
+    function PlacesController($state, $rootScope, PlaceService) {
         var vm = this;
-        vm.title = 'Meus locais';
-        vm.user = null;
+        vm.dataLoading = true;
+        vm.new_place = [];
 
         initController();
 
         function initController() {
-            loadCurrentUser();
+
+            PlaceService.GetPlaces()
+                .then(function(response) {
+                    if (response != null) {
+                        if (response.parse_data.length > 0) {
+                            vm.places = response.parse_data;
+                        } else {
+                            vm.noPlacesFound = true;
+                        };
+                    };
+                    vm.dataLoading = false;
+                })
         }
-
-        function loadCurrentUser() {
-
-            var user = UserService.GetCurrentUser();
-            vm.user = user;
-        };
     }
 
 })();

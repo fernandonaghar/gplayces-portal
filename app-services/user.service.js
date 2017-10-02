@@ -10,11 +10,10 @@
     function UserService($http, $q) {
         var service = {};
         service.GetCurrentUser = GetCurrentUser;
-        service.GetCurrentUserAddress = GetCurrentUserAddress;
+        service.GetCurrentUserInfo = GetCurrentUserInfo;
         service.Create = Create;
         service.SaveCurrentUser = SaveCurrentUser;
-        service.SaveAddressData = SaveAddressData;
-        GetCurrentUserAddress;
+        service.SaveUserInfo = SaveUserInfo;
 
         return service;
 
@@ -57,29 +56,29 @@
             return deferred.promise;
         }
 
-        function GetCurrentUserAddress() {
+        function GetCurrentUserInfo() {
 
             var deferred = $q.defer();
             var parse_user = Parse.User.current();
-            var UserAddress = Parse.Object.extend("UserAddress");
+            var Userinfo = Parse.Object.extend("UserInfo");
 
-            var query = new Parse.Query(UserAddress);
+            var query = new Parse.Query(Userinfo);
             query.equalTo("user", parse_user);
+            query.include(["city"]);
             query.find({
                 success: function(results) {
                     if (results.length > 0) {
-                        var parse_address = results[0];
-                        var address = [];
+                        var parse_info = results[0];
+                        var info = [];
 
-                        address.city = parse_address.attributes.city;
-                        address.state = parse_address.attributes.state;
-                        address.address = parse_address.attributes.address;
-                        address.complement = parse_address.attributes.complement;
-                        address.zipcode = parse_address.attributes.zipcode;
+                        info.city = parse_info.attributes.city;
+                        info.address = parse_info.attributes.address;
+                        info.complement = parse_info.attributes.complement;
+                        info.zipcode = parse_info.attributes.zipcode;
 
-                        deferred.resolve({ success: true, address: address, parse_address: parse_address });
+                        deferred.resolve({ success: true, info: info, parse_info: parse_info });
                     } else {
-                        deferred.resolve({ success: true, address: null });
+                        deferred.resolve({ success: true, info: null });
                     }
                 },
                 error: function(error) {
@@ -89,28 +88,27 @@
             return deferred.promise;
         }
 
-        function SaveAddressData(address) {
+        function SaveUserInfo(info) {
 
             var deferred = $q.defer();
             var parse_user = Parse.User.current();
-            var parse_address;
+            var parse_info;
 
-            var current_address = GetCurrentUserAddress().then(function(response) {
+            var current_info = GetCurrentUserInfo().then(function(response) {
                 if (response != null) {
-                    if (response.parse_address != null)
-                        parse_address = response.parse_address;
+                    if (response.parse_info != null)
+                        parse_info = response.parse_info;
                     else {
-                        var UserAddress = Parse.Object.extend("UserAddress");
-                        parse_address = new UserAddress();
+                        var Userinfo = Parse.Object.extend("UserInfo");
+                        parse_info = new Userinfo();
                     }
 
-                    parse_address.set("zipcode", address.zipcode);
-                    parse_address.set("city", address.city);
-                    parse_address.set("state", address.state);
-                    parse_address.set("address", address.address);
-                    parse_address.set("complement", address.complement);
-                    parse_address.set("user", parse_user);
-                    parse_address.save(null, {
+                    parse_info.set("zipcode", info.zipcode);
+                    parse_info.set("city", info.city);
+                    parse_info.set("address", info.address);
+                    parse_info.set("complement", info.complement);
+                    parse_info.set("user", parse_user);
+                    parse_info.save(null, {
                         success: function(parse_user) {
                             deferred.resolve({ success: true });
                         },

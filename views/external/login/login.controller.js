@@ -5,9 +5,9 @@
         .module('app')
         .controller('LoginController', LoginController);
 
-    LoginController.$inject = ['$location', 'AuthenticationService', 'FlashService'];
+    LoginController.$inject = ['$state', 'AuthenticationService', 'FlashService'];
 
-    function LoginController($location, AuthenticationService, FlashService) {
+    function LoginController($state, AuthenticationService, FlashService) {
         var vm = this;
 
         vm.login = login;
@@ -25,7 +25,7 @@
                 .then(function(response) {
                     if (response != null) {
                         if (response.success) {
-                            $location.path('/dashboard');
+                            $state.go('app.dashboard');
                         } else {
                             FlashService.Error(response.message);
                             vm.dataLoading = false;
@@ -42,7 +42,7 @@
                 .then(function(response) {
                     if (response != null) {
                         if (response.success) {
-                            $location.path('/dashboard');
+                            $state.go('app.dashboard');
                         } else {
                             FlashService.Error(response.message);
                             vm.dataLoading = false;

@@ -21,6 +21,7 @@
         // main app views
             .state('app', {
                 url: '/',
+                redirectTo: 'app.dashboard',
                 views: {
                     'header': {
                         templateUrl: 'views/internal/header.html'
@@ -30,9 +31,7 @@
                         templateUrl: 'views/internal/sidebar/sidebar.html',
                         controllerAs: 'vm'
                     },
-                    'content': {
-                        templateUrl: 'views/internal/content.html'
-                    },
+                    'content': {},
                     'footer': {
                         templateUrl: 'views/internal/footer.html'
                     }
@@ -59,16 +58,17 @@
                 }
             })
 
-        // User profile Data
+        // User profile
         .state('app.profile', {
                 url: 'profile',
                 views: {
                     'content@': {
                         controller: 'ProfileController',
                         templateUrl: 'views/internal/profile/profile.view.html',
-                        controllerAs: 'profile'
+                        controllerAs: 'profile',
                     }
-                }
+                },
+                redirectTo: 'app.profile.personal'
             })
             .state('app.profile.personal', {
                 url: '/personal',
@@ -79,16 +79,47 @@
                 templateUrl: 'views/internal/profile/profile.address.view.html',
             })
 
+        // Places
         .state('app.places', {
-            url: 'places',
-            views: {
-                'content@': {
-                    controller: 'PlacesController',
-                    templateUrl: 'views/internal/place/places.view.html',
-                    controllerAs: 'vm'
-                }
-            }
-        })
+                url: 'places',
+                views: {
+                    'content@': {
+                        controller: 'PlacesController',
+                        templateUrl: 'views/internal/place/places.view.html',
+                        controllerAs: 'vm'
+                    }
+                },
+                redirectTo: 'app.places.myplaces'
+            })
+            .state('app.places.myplaces', {
+                url: '/myplaces',
+                templateUrl: 'views/internal/place/places.myplaces.view.html',
+            })
+            .state('app.places.edit', {
+                url: '/edit',
+                templateUrl: 'views/internal/place/places.edit.view.html',
+                redirectTo: 'app.places.edit.data'
+            })
+            .state('app.places.edit.data', {
+                url: '/data',
+                templateUrl: 'views/internal/place/places.edit.data.view.html',
+            })
+            .state('app.places.edit.contact', {
+                url: '/contact',
+                templateUrl: 'views/internal/place/places.edit.contactdata.view.html',
+            })
+            .state('app.places.edit.address', {
+                url: '/address',
+                templateUrl: 'views/internal/place/places.edit.contactdata.view.html',
+            })
+            .state('app.places.edit.hours', {
+                url: '/hours',
+                templateUrl: 'views/internal/place/places.edit.contactdata.view.html',
+            })
+            .state('app.places.edit.images', {
+                url: '/images',
+                templateUrl: 'views/internal/place/places.edit.contactdata.view.html',
+            })
 
         .state('login', {
             url: '/login',

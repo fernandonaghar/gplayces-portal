@@ -5,13 +5,10 @@
         .module('app')
         .controller('DashboardController', DashboardController);
 
-    DashboardController.$inject = ['UserService', '$rootScope'];
+    DashboardController.$inject = ['$rootScope'];
 
-    function DashboardController(UserService, $rootScope) {
+    function DashboardController($rootScope) {
         var vm = this;
-
-        vm.title = 'Dashboard';
-        vm.user = null;
 
         initController();
 

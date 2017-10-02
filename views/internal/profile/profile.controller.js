@@ -5,9 +5,9 @@
         .module('app')
         .controller('ProfileController', ProfileController);
 
-    ProfileController.$inject = ['UserService', '$scope', '$location', 'FlashService'];
+    ProfileController.$inject = ['$state', 'UserService', '$scope', 'FlashService', 'GeneralServices'];
 
-    function ProfileController(UserService, $scope, $location, FlashService) {
+    function ProfileController($state, UserService, $scope, FlashService, GeneralServices) {
         var profile = this;
         profile.saveUserData = saveUserData;
         profile.saveAddressData = saveAddressData;
@@ -15,13 +15,21 @@
         initController();
 
         function initController() {
-            $location.path('profile/personal');
             profile.user = UserService.GetCurrentUser();
-            UserService.GetCurrentUserAddress().then(function(response) {
+
+            // Get User profile Data
+            UserService.GetCurrentUserInfo().then(function(response) {
                 if (response != null) {
-                    profile.address = response.address;
+                    profile.address = response.info;
                 };
-            }).catch(angular.noop);;
+            }).catch(angular.noop);
+
+            // Get Cities list
+            GeneralServices.GetCities().then(function(response) {
+                if (response != null) {
+                    profile.cities = response.parse_info;
+                };
+            }).catch(angular.noop);
         }
 
         function saveUserData() {
@@ -30,7 +38,7 @@
                 if (response != null) {
                     if (response.success) {
                         profile.dataLoading = false;
-                        $location.path('profile/address');
+                        $state.go('app.profile.address');
                     } else {
                         FlashService.Error(response.message);
                         profile.dataLoading = false;
@@ -41,7 +49,7 @@
 
         function saveAddressData() {
             profile.dataLoading = true;
-            UserService.SaveAddressData(profile.address).then(function(response) {
+            UserService.SaveUserInfo(profile.address).then(function(response) {
                 if (response != null) {
                     if (response.success) {
                         profile.dataLoading = false;

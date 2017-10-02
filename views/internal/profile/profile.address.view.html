@@ -1,15 +1,12 @@
 <p>Endereço</p>
 <div class="form-group">
+    <label class="form-control-label">Cidade</label>
+    <select ng-model="profile.address.city" class="form-control" ng-disabled="ctrl.disabled" ng-options="option.attributes.name for option in profile.cities track by option.id" title="Cidade">
+    </select>
+</div>
+<div class="form-group">
     <label class="form-control-label">CEP</label>
     <input type="number" placeholder="CEP" ng-model="profile.address.zipcode" class="form-control">
-</div>
-<div class="form-group">
-    <label class="form-control-label">Estado</label>
-    <input type="text" placeholder="Estado" ng-model="profile.address.state" class="form-control">
-</div>
-<div class="form-group">
-    <label class="form-control-label">Cidade</label>
-    <input type="text" placeholder="Cidade" ng-model="profile.address.city" class="form-control">
 </div>
 <div class="form-group">
     <label class="form-control-label">Endereço</label>

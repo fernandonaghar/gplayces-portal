@@ -1,0 +1,16 @@
+<div class="card">
+    <div id="status-buttons" class="card-header text-center">
+        <a ui-sref-active="active" ui-sref="app.places.edit.data"><span>1</span>Dados</a>
+        <a ui-sref-active="active" ui-sref="app.places.edit.contact"><span>2</span>Contato</a>
+        <a ui-sref-active="active" ui-sref="app.places.edit.address"><span>3</span>Endereço</a>
+        <a ui-sref-active="active" ui-sref="app.places.edit.hours"><span>4</span>Horários</a>
+        <a ui-sref-active="active" ui-sref="app.places.edit.images"><span>5</span>Imagens</a>
+    </div>
+    <div id="signup-form" class="card-body">
+        <div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }" ng-if="flash" ng-bind="flash.message"></div>
+        <form id="signup-form">
+            <div id="detail-views" ui-view>
+            </div>
+        </form>
+    </div>
+</div>

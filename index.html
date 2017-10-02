@@ -26,7 +26,11 @@
     <script src="//code.angularjs.org/1.6.0/angular-cookies.min.js"></script>
     <script src="//code.angularjs.org/1.6.0/angular-animate.min.js"></script>
     <script src="js/parse.min.js"></script>
-    <script src="js/angular-ui-router.min.js"></script>
+
+    <!-- UI Router -->
+    <script src="node_modules/@uirouter/core/_bundles/ui-router-core.js"></script>
+    <script src="node_modules/@uirouter/angularjs/release/ui-router-angularjs.js"></script>
+
     <!-- Font Icons CSS-->
     <link rel="stylesheet" href="https://file.myfontastic.com/da58YPMQ7U5HY8Rb6UxkNf/icons.css">
     <!--[if lt IE 9]>
@@ -84,8 +88,10 @@
     <script src="app.js"></script>
     <script src="app-services/authentication.service.js"></script>
     <script src="app-services/flash.service.js"></script>
-    <script src="app-services/parse-service.js"></script>
+    <script src="app-services/parse-services.js"></script>
     <script src="app-services/user.service.js"></script>
+    <script src="app-services/general.services.js"></script>
+    <script src="app-services/place.service.js"></script>
 
     <!-- Fake user service for demo that uses local storage -->
     <!--<script src="app-services/user.service.local-storage.js"></script> -->
@@ -97,11 +103,12 @@
     <script src="views/internal/sidebar/sidebar.controller.js"></script>
     <script src="views/internal/dashboard/dashboard.controller.js"></script>
     <script src="views/internal/place/places.controller.js"></script>
+    <script src="views/internal/place/places.new.controller.js"></script>
     <script src="views/internal/profile/profile.controller.js"></script>
     <script src="views/internal/event/event.controller.js"></script>
+
     <!-- directives -->
     <!--<script src="directives/navbar_active.js"></script> -->
-
 </body>
 
 </html>
