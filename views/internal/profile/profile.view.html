@@ -9,9 +9,9 @@
             <a ui-sref-active="active" ui-sref="app.profile.personal"><span>1</span>Pessoal</a>
             <a ui-sref-active="active" ui-sref="app.profile.address"><span>2</span>Endereço</a>
         </div>
-        <div id="signup-form" class="card-body">
+        <div id="sliding-form" class="card-body">
             <div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }" ng-if="flash" ng-bind="flash.message"></div>
-            <form id="signup-form">
+            <form id="sliding-form">
 
                 <div id="form-views" ui-view>
                 </div>

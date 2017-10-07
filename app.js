@@ -2,7 +2,7 @@
     'use strict';
 
     var app = angular
-        .module('app', ['ngRoute', 'ngAnimate', 'ngCookies', 'ui.router'])
+        .module('app', ['ngAnimate', 'ngCookies', 'ui.router', 'ui.bootstrap', 'ngMap'])
         .config(config)
         .run(run);
 
@@ -95,13 +95,29 @@
                 url: '/myplaces',
                 templateUrl: 'views/internal/place/places.myplaces.view.html',
             })
+            .state('app.places.created', {
+                url: '/created',
+                templateUrl: 'views/internal/place/places.created.view.html',
+                controller: 'CreatedPlacesController',
+                controllerAs: 'vm'
+            })
             .state('app.places.edit', {
                 url: '/edit',
+                params: {
+                    place: null,
+                    parse_place: null
+                },
                 templateUrl: 'views/internal/place/places.edit.view.html',
-                redirectTo: 'app.places.edit.data'
+                redirectTo: 'app.places.edit.data',
+                controller: 'PlacesEditController',
+                controllerAs: 'edit'
             })
             .state('app.places.edit.data', {
                 url: '/data',
+                params: {
+                    place: null,
+                    parse_place: null
+                },
                 templateUrl: 'views/internal/place/places.edit.data.view.html',
             })
             .state('app.places.edit.contact', {
@@ -110,7 +126,13 @@
             })
             .state('app.places.edit.address', {
                 url: '/address',
-                templateUrl: 'views/internal/place/places.edit.contactdata.view.html',
+                params: {
+                    place: null,
+                    parse_place: null
+                },
+                templateUrl: 'views/internal/place/places.edit.address.view.html',
+                controller: 'PlacesEditAddressController',
+                controllerAs: 'editaddr'
             })
             .state('app.places.edit.hours', {
                 url: '/hours',
@@ -119,6 +141,16 @@
             .state('app.places.edit.images', {
                 url: '/images',
                 templateUrl: 'views/internal/place/places.edit.contactdata.view.html',
+            })
+            .state('app.places.edit.request_admin', {
+                url: '/admin',
+                params: {
+                    place: null,
+                    parse_place: null
+                },
+                templateUrl: 'views/internal/place/places.edit.request_admin.view.html',
+                controller: 'PlacesRequestAdminController',
+                controllerAs: 'vm'
             })
 
         .state('login', {

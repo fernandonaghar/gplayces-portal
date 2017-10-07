@@ -15,15 +15,6 @@
 
         function GetCities() {
 
-            //create new contact record from parse object instance
-            // var Contact = Parse.Object.extend('Contact');
-            // $scope.newContact = new ParseObject(new Contact(), ['firstName', 'lastName', 'email']);
-
-            // query angular object
-            // var query = new Parse.Query(Parse.Object.extend('Contact'));
-            // ParseQuery(query, {functionToCall:'first'}).then(function(obj){
-            //     $scope.newContact = new ParseObject(obj, ['firstName','lastName','email']);
-            // });
             var deferred = $q.defer();
             var City = Parse.Object.extend("City");
 

@@ -1,28 +1,43 @@
-<div class="form-group">
-    <label class="form-control-label">Nome do local</label>
-    <input type="text" placeholder="Nome do local" ng-model="vm.new_place.name" class="form-control">
-</div>
-<div class="form-group">
-    <label class="form-control-label">Categoria</label>
-    <select ng-model="profile.address.city" class="form-control" ng-disabled="ctrl.disabled" ng-options="option.attributes.name for option in profile.cities track by option.id" title="Cidade">
-    </select>
-</div>
-<div class="form-group">
-    <label class="form-control-label">Descrição em Português</label>
-    <input type="text" placeholder="Descrição em Português" ng-model="profile.user.telephone" class="form-control">
-</div>
-<div class="form-group">
-    <label class="form-control-label">Descrição em Inglês</label>
-    <input type="text" placeholder="Descrição em Inglês" ng-model="profile.user.telephone" class="form-control">
-</div>
-<div class="form-group">
-    <label class="form-control-label">Descrição em Espanhol</label>
-    <input type="text" placeholder="Descrição em Espanhol" ng-model="profile.user.telephone" class="form-control">
-</div>
-<div class="form-actions">
-    <div class="col-xs-6 col-xs-offset-3">
-        <button ng-click="profile.saveUserData()" class="btn btn-primary">Avançar</button>
-        <img ng-if="profile.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
-        />
+<div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }" ng-if="flash" ng-bind="flash.message"></div>
+<form name="form" id="sliding-form">
+
+    <div class="form-group">
+        <label class="form-control-label">Nome do local</label>
+        <input type="text" name="placename" placeholder="Nome do local" ng-model="edit.place.name" class="form-control" required>
+        <span ng-show="form.placename.$dirty && form.placename.$error.required" class="help-block">O nome do local é obrigatório.</span>
     </div>
-</div>
+    <div class="form-group">
+        <label class="form-control-label">Cidade</label>
+        <select ng-model="edit.place.city" required name="city" class="form-control" ng-disabled="edit.disabledCities" ng-options="option.attributes.name for option in edit.cities track by option.id" title="Cidade">
+    </select>
+        <span ng-show="form.city.$dirty && form.city.$error.required" class="help-block">Cidade é obrigatória.</span>
+    </div>
+    <div class="form-group">
+        <label class="form-control-label">Categoria</label>
+        <select ng-model="edit.place.category" required name="category" class="form-control" ng-disabled="edit.disabledCategories" ng-options="option.attributes.namePT for option in edit.categories track by option.id" title="Categoria">
+    </select>
+        <span ng-show="form.category.$dirty && form.category.$error.required" class="help-block">Categoria é obrigatória.</span>
+    </div>
+
+    <div ng-if="isAdmin || isOwner">
+        <div class="form-group">
+            <label class="form-control-label">Descrição em Português</label>
+            <input type="text" placeholder="Descrição em Português" ng-model="edit.place.descriptionPT" class="form-control">
+        </div>
+        <div class="form-group">
+            <label class="form-control-label">Descrição em Inglês</label>
+            <input type="text" placeholder="Descrição em Inglês" ng-model="edit.place.descriptionEN" class="form-control">
+        </div>
+        <div class="form-group">
+            <label class="form-control-label">Descrição em Espanhol</label>
+            <input type="text" placeholder="Descrição em Espanhol" ng-model="edit.place.descriptionES" class="form-control">
+        </div>
+    </div>
+    <div class="form-actions">
+        <div class="col-xs-6 col-xs-offset-3">
+            <button ng-click="edit.savePlaceData()" ng-disabled="form.$invalid || edit.dataLoading" class="btn btn-primary">Avançar</button>
+            <img ng-if="edit.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+            />
+        </div>
+    </div>
+</form>

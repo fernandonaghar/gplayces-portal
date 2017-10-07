@@ -59,7 +59,7 @@ pre {
 /* ANIMATION STYLINGS
 ============================================================================= */
 
-#signup-form {
+#sliding-form {
     position: relative;
     min-height: 585px;
     overflow: hidden;

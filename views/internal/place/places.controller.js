@@ -5,29 +5,44 @@
         .module('app')
         .controller('PlacesController', PlacesController);
 
-    PlacesController.$inject = ['$state', '$rootScope', 'PlaceService'];
+    PlacesController.$inject = ['$scope', '$state', '$rootScope', 'PlaceService', 'FlashService'];
 
-    function PlacesController($state, $rootScope, PlaceService) {
+    function PlacesController($scope, $state, $rootScope, PlaceService, FlashService) {
         var vm = this;
         vm.dataLoading = true;
-        vm.new_place = [];
+        vm.owned_places = [];
+        vm.filteredPlaces = [];
+        vm.owned_places = [];
+        vm.currentPage = 1;
+        vm.numPerPage = 6;
 
         initController();
 
         function initController() {
 
-            PlaceService.GetPlaces()
+            PlaceService.GetOwnedPlaces()
                 .then(function(response) {
                     if (response != null) {
                         if (response.parse_data.length > 0) {
-                            vm.places = response.parse_data;
+                            vm.owned_places = response.parse_data;
+                            var begin = ((vm.currentPage - 1) * vm.numPerPage),
+                                end = begin + vm.numPerPage;
+
+                            vm.filteredPlaces = vm.owned_places.slice(begin, end);
                         } else {
-                            vm.noPlacesFound = true;
+                            vm.noOwnedPlacesFound = true;
                         };
                     };
                     vm.dataLoading = false;
-                })
+                }).catch(angular.noop);
         }
+
+        $scope.$watch('vm.currentPage + vm.numPerPage', function() {
+            var begin = ((vm.currentPage - 1) * vm.numPerPage),
+                end = begin + vm.numPerPage;
+
+            vm.filteredPlaces = vm.owned_places.slice(begin, end);
+        });
     }
 
 })();

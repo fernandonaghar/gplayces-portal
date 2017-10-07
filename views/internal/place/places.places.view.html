@@ -1,0 +1,29 @@
+<img class="loading" ng-if="vm.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+/>
+<div ng-if="!vm.dataLoading && vm.noCreatedPlacesFound" class="project">
+    <div class="row bg-white has-shadow">
+        <div class="left-col col-lg-12 d-flex align-items-center justify-content-between">
+            <div class="project-title d-flex align-items-center">
+                <div class="text">
+                    <p>Nenhum local cadastrado</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="project" ng-repeat="place in vm.owned_places">
+    <div class="row bg-white has-shadow">
+        <div class="left-col col-lg-10 d-flex align-items-center justify-content-between">
+            <div class="project-title d-flex align-items-center">
+                <div class="image has-shadow"><img src="img/project-2.jpg" alt="..." class="img-fluid"></div>
+                <div class="text">
+                    <h3 class="h4">{{ place.attributes.name }}</h3><small>{{ place.attributes.city.attributes.name }}</small>
+                </div>
+            </div>
+            <div class="project-date"><span class="hidden-sm-down">Criado em {{ place.createdAt | date:'dd/MM/yyyy' }}</span></div>
+        </div>
+        <div class="right-col col-lg-2 align-items-center">
+            <a ui-sref="editPlaceData(place)" class="btn btn-primary pull-right"><i class="fa fa-pencil-square-o"></i> Editar</a>
+        </div>
+    </div>
+</div>

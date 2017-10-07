@@ -1,0 +1,33 @@
+<header class="page-header">
+    <div class="container-fluid">
+        <h4 class="no-margin-bottom">Locais criados</h4>
+    </div>
+</header>
+<div ng-if="!vm.dataLoading && vm.noCreatedPlacesFound" class="project">
+    <div class="row bg-white has-shadow">
+        <div class="left-col col-lg-12 d-flex align-items-center justify-content-between">
+            <div class="project-title d-flex align-items-center">
+                <div class="text">
+                    <p>Nenhum local cadastrado.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="project" ng-repeat="place in vm.filteredPlaces">
+    <div class="row bg-white has-shadow">
+        <div class="left-col col-lg-10 d-flex align-items-center justify-content-between">
+            <div class="project-title d-flex align-items-center">
+                <div class="image has-shadow"><img src="img/project-2.jpg" alt="..." class="img-fluid"></div>
+                <div class="text">
+                    <h3 class="h4">{{ place.attributes.name }}</h3><small>{{ place.attributes.address }}</small>
+                </div>
+            </div>
+            <div class="project-date"><span class="hidden-sm-down">Criado em {{ place.createdAt | date:'dd/MM/yyyy' }}</span></div>
+        </div>
+        <div class="right-col col-lg-2 align-items-center">
+            <a ui-sref="app.places.edit({ parse_place: place })" class="btn btn-primary pull-right"><i class="fa fa-pencil-square-o"></i> Editar</a>
+        </div>
+    </div>
+</div>
+<ul ng-if="!vm.dataLoading && !vm.noCreatedPlacesFound" uib-pagination direction-links="false" boundary-links="false" items-per-page="vm.numPerPage" total-items="vm.created_places.length" ng-model="vm.currentPage"></ul>

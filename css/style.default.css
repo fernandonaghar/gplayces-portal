@@ -1,5 +1,6 @@
 body {
-    overflow-x: hidden
+    overflow-x: hidden;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 a,
@@ -2495,4 +2496,11 @@ a.text-primary:hover {
 .pagination-sm .page-item:last-child .page-link {
     border-bottom-right-radius: .2rem;
     border-top-right-radius: .2rem
+}
+
+.pagination {
+    display: inline-block;
+    padding-left: 0;
+    margin: 20px 0;
+    border-radius: 4px
 }

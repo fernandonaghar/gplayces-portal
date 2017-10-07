@@ -9,44 +9,24 @@
 
     function PlaceService($http, $q) {
         var service = {};
-        service.GetPlaces = GetPlaces;
-
+        service.GetCreatedPlaces = GetCreatedPlaces;
+        service.GetOwnedPlaces = GetOwnedPlaces;
+        service.GetPlaceCategories = GetPlaceCategories;
+        service.SavePlace = SavePlace;
+        service.ParseToAngularObject = ParseToAngularObject;
         return service;
 
-        function SaveCurrentUser(user) {
-
-            var deferred = $q.defer();
-            var parse_user = Parse.User.current();
-
-            if (parse_user.attributes.username == parse_user.attributes.email) {
-                parse_user.set("username", user.email);
-            }
-            parse_user.set("email", user.email);
-            parse_user.set("firstName", user.firstName);
-            parse_user.set("lastName", user.lastName);
-            parse_user.set("birthday", user.birthday);
-            parse_user.set("document", user.document);
-
-            parse_user.save(null, {
-                success: function(parse_user) {
-                    deferred.resolve({ success: true });
-                },
-                error: function(parse_user, error) {
-                    deferred.resolve({ success: false, message: 'Erro: "' + error.code + '": ' + error.message });
-                }
-            });
-            return deferred.promise;
-        }
-
-        function GetPlaces() {
+        function GetCreatedPlaces() {
 
             var deferred = $q.defer();
             var parse_user = Parse.User.current();
             var Place = Parse.Object.extend("Place");
 
             var query = new Parse.Query(Place);
-            //query.equalTo("user", parse_user);
+            query.equalTo("creator", parse_user);
+            query.equalTo("owner", null);
             query.include(["city", "category"]);
+            query.descending("createdAt");
             query.find({
                 success: function(results) {
                     deferred.resolve({ success: true, parse_data: results });
@@ -58,71 +38,163 @@
             return deferred.promise;
         }
 
-        function SaveUserInfo(info) {
+        function GetOwnedPlaces() {
 
             var deferred = $q.defer();
             var parse_user = Parse.User.current();
-            var parse_info;
+            var Place = Parse.Object.extend("Place");
 
-            var current_info = GetCurrentUserInfo().then(function(response) {
-                if (response != null) {
-                    if (response.parse_info != null)
-                        parse_info = response.parse_info;
-                    else {
-                        var Userinfo = Parse.Object.extend("UserInfo");
-                        parse_info = new Userinfo();
-                    }
-
-                    parse_info.set("zipcode", info.zipcode);
-                    parse_info.set("city", info.city);
-                    parse_info.set("address", info.address);
-                    parse_info.set("complement", info.complement);
-                    parse_info.set("user", parse_user);
-                    parse_info.save(null, {
-                        success: function(parse_user) {
-                            deferred.resolve({ success: true });
-                        },
-                        error: function(parse_user, error) {
-                            deferred.resolve({ success: false, message: 'Erro: "' + error.code + '": ' + error.message });
-                        }
-                    });
-
-                };
-            }).catch(angular.noop);
-            return deferred.promise;
-        }
-
-        function Create(user) {
-
-            var deferred = $q.defer();
-
-            var parse_user = new Parse.User();
-            parse_user.set("username", user.username);
-            parse_user.set("password", user.password);
-            parse_user.set("email", user.username);
-            parse_user.set("lastName", user.lastName);
-            parse_user.set("firstName", user.firstName);
-
-            parse_user.signUp(null, {
-                success: function(parse_user) {
-                    deferred.resolve({ success: true });
+            var query = new Parse.Query(Place);
+            query.equalTo("owner", parse_user);
+            query.include(["city", "category"]);
+            query.descending("createdAt");
+            query.find({
+                success: function(results) {
+                    deferred.resolve({ success: true, parse_data: results });
                 },
-                error: function(parse_user, error) {
+                error: function(error) {
                     deferred.resolve({ success: false, message: 'Erro: "' + error.code + '": ' + error.message });
                 }
             });
-
             return deferred.promise;
         }
 
-        function handleSuccess(res) {
-            return res.data;
+        function GetPlaceById(id) {
+
+            var deferred = $q.defer();
+            var Place = Parse.Object.extend("Place");
+            var query = new Parse.Query(Place);
+            query.include(["city", "category"]);
+            query.get(id, {
+                success: function(results) {
+                    deferred.resolve({ success: true, parse_data: results });
+                },
+                error: function(error) {
+                    deferred.resolve({ success: false, message: 'Erro: "' + error.code + '": ' + error.message });
+                }
+            });
+            return deferred.promise;
         }
 
-        function handleError(error) {
-            return function() {
-                return { success: false, message: error };
-            };
+        function GetPlaceCategories() {
+
+            var deferred = $q.defer();
+            var Category = Parse.Object.extend("Category");
+            var query = new Parse.Query(Category);
+            query.find({
+                success: function(results) {
+                    deferred.resolve({ success: true, parse_data: results });
+                },
+                error: function(error) {
+                    deferred.resolve({ success: false, message: 'Erro: "' + error.code + '": ' + error.message });
+                }
+            });
+            return deferred.promise;
+        }
+
+        function SavePlace(place) {
+
+            var deferred = $q.defer();
+            var parse_object;
+
+            if (place.id != null) {
+                GetPlaceById(place.id).then(function(response) {
+                    if (response != null) {
+                        if (response.parse_data != null) {
+                            parse_object = response.parse_data;
+                            parse_object = SetPlaceData(place, parse_object);
+                            parse_object.save(null, {
+                                success: function(parse_object) {
+                                    deferred.resolve({ success: true, place: parse_object });
+                                },
+                                error: function(parse_user, error) {
+                                    deferred.resolve({ success: false, message: 'Erro: "' + error.code + '": ' + error.message });
+                                }
+                            }).catch(angular.noop);
+                        } else {
+                            var Place = Parse.Object.extend("Place");
+                            parse_object = new Place();
+                            var parse_user = Parse.User.current();
+                            parse_object.set("creator", parse_user);
+                            parse_object = SetPlaceData(place, parse_object);
+                            parse_object.save(null, {
+                                success: function(parse_object) {
+                                    deferred.resolve({ success: true, place: parse_object });
+                                },
+                                error: function(parse_object, error) {
+                                    deferred.resolve({ success: false, message: 'Erro: "' + error.code + '": ' + error.message });
+                                }
+                            }).catch(angular.noop);
+                        }
+                    }
+                }).catch(angular.noop);
+            } else {
+                var Place = Parse.Object.extend("Place");
+                parse_object = new Place();
+                var parse_user = Parse.User.current();
+                parse_object.set("creator", parse_user);
+                parse_object = SetPlaceData(place, parse_object);
+                parse_object.save(null, {
+                    success: function(parse_object) {
+                        deferred.resolve({ success: true, place: parse_object });
+                    },
+                    error: function(parse_user, error) {
+                        deferred.resolve({ success: false, message: 'Erro: "' + error.code + '": ' + error.message });
+                    }
+                }).catch(angular.noop);
+            }
+            return deferred.promise;
+        }
+
+        function SetPlaceData(place, parse_object) {
+
+            parse_object.set("name", place.name);
+            parse_object.set("city", place.city);
+            parse_object.set("category", place.category);
+            parse_object.set("descriptionPT", place.descriptionPT);
+            parse_object.set("descriptionEN", place.descriptionEN);
+            parse_object.set("descriptionES", place.descriptionES);
+            parse_object.set("address", place.address);
+            parse_object.set("email", place.email);
+            parse_object.set("instagram", place.instagram);
+            parse_object.set("twitter", place.twitter);
+            parse_object.set("facebook", place.facebook);
+            parse_object.set("site", place.site);
+            parse_object.set("address", place.address);
+
+            if (place.latitude != null && place.longitude != null) {
+                var point = new Parse.GeoPoint({ latitude: place.latitude, longitude: place.longitude });
+                parse_object.set("location", point);
+            }
+
+            return parse_object;
+        }
+
+        function ParseToAngularObject(parse_object) {
+
+            var angular_object = [];
+            angular_object.id = parse_object.id;
+            angular_object.name = parse_object.attributes.name;
+            angular_object.city = parse_object.attributes.city;
+            angular_object.category = parse_object.attributes.category;
+            angular_object.descriptionPT = parse_object.attributes.descriptionPT;
+            angular_object.descriptionEN = parse_object.attributes.descriptionEN;
+            angular_object.descriptionES = parse_object.attributes.descriptionES;
+            angular_object.email = parse_object.attributes.email;
+            angular_object.instagram = parse_object.attributes.instagram;
+            angular_object.twitter = parse_object.attributes.twitter;
+            angular_object.facebook = parse_object.attributes.facebook;
+            angular_object.site = parse_object.attributes.site;
+            angular_object.location = parse_object.attributes.location;
+
+            if (parse_object.attributes.location != null) {
+                angular_object.latitude = Number(parse_object.attributes.location.latitude);
+                angular_object.longitude = Number(parse_object.attributes.location.longitude);
+            }
+            angular_object.address = parse_object.attributes.address;
+            angular_object.parse_object = parse_object;
+
+            return angular_object;
         }
     }
 

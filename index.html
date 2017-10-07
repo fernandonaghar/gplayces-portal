@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="css/style.sliding.form.css">
     <link rel="stylesheet" href="css/custom.css">
     <link rel="shortcut icon" href="img/ic_launcher-web.png">
+
     <!-- Font Awesome CDN-->
     <!-- you can replace it by local Font Awesome-->
     <script src="https://use.fontawesome.com/99347ac47f.js"></script>
@@ -30,6 +31,16 @@
     <!-- UI Router -->
     <script src="node_modules/@uirouter/core/_bundles/ui-router-core.js"></script>
     <script src="node_modules/@uirouter/angularjs/release/ui-router-angularjs.js"></script>
+
+    <!-- UI Bootstrap -->
+    <script src="node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
+
+    <!-- Google Map NgMap -->
+    <script src="js/ng-map.js"></script>
+
+    <!-- Azure SDK 
+    <script src=”js/azure-storage.common.min.js”></script>
+    <script src=”js/azure-storage.blob.min.js”></script>-->
 
     <!-- Font Icons CSS-->
     <link rel="stylesheet" href="https://file.myfontastic.com/da58YPMQ7U5HY8Rb6UxkNf/icons.css">
@@ -78,7 +89,7 @@
     </script>
 
     <!-- Javascript files Template -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script> -->
     <script src="js/tether.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery.cookie.js"></script>
@@ -93,22 +104,20 @@
     <script src="app-services/general.services.js"></script>
     <script src="app-services/place.service.js"></script>
 
-    <!-- Fake user service for demo that uses local storage -->
-    <!--<script src="app-services/user.service.local-storage.js"></script> -->
-
     <!-- controllers -->
     <script src="views/external/login/login.controller.js"></script>
     <script src="views/external/register/register.controller.js"></script>
-
     <script src="views/internal/sidebar/sidebar.controller.js"></script>
     <script src="views/internal/dashboard/dashboard.controller.js"></script>
     <script src="views/internal/place/places.controller.js"></script>
-    <script src="views/internal/place/places.new.controller.js"></script>
+    <script src="views/internal/place/createdplaces.controller.js"></script>
+    <script src="views/internal/place/places.editaddress.controller.js"></script>
+    <script src="views/internal/place/places.edit.controller.js"></script>
     <script src="views/internal/profile/profile.controller.js"></script>
     <script src="views/internal/event/event.controller.js"></script>
 
     <!-- directives -->
-    <!--<script src="directives/navbar_active.js"></script> -->
+    <script src="directives/a-disabled.js"></script>
 </body>
 
 </html>
