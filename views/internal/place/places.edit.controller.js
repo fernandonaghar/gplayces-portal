@@ -59,7 +59,13 @@
                         edit.dataLoading = false;
                         edit.place = PlaceService.ParseToAngularObject(response.place);
                         edit.isNewRecord = false;
-                        $state.go('app.places.edit.address', { place: edit.place });
+
+                        if ($state.current.name == 'app.places.edit.data') {
+                            $state.go('app.places.edit.address', { place: edit.place });
+                        } else if ($state.current.name == 'app.places.edit.contact') {
+                            $state.go('app.places.edit.hours', { place: edit.place });
+                        }
+
                     } else {
                         FlashService.Error(response.message);
                         edit.dataLoading = false;
@@ -67,7 +73,6 @@
                 };
             }).catch(angular.noop);
         };
-
     }
 
 })();

@@ -13,7 +13,7 @@
         vm.filteredPlaces = [];
         vm.created_places = [];
         vm.currentPage = 1;
-        vm.numPerPage = 6;
+        vm.numPerPage = 12;
 
         initController();
 

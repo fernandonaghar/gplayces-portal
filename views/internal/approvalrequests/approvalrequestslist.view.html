@@ -1,0 +1,45 @@
+<div class="page-title">
+    <div class="title_left">
+        <h2>Pedidos de administração pendentes</h2>
+        <div class="clearfix"></div>
+    </div>
+</div>
+<div class="x_panel">
+    <div class="x_content">
+        <div ng-if="vm.requestsLoading">
+            <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+            <span class="sr-only">Loading...</span>
+        </div>
+        <div ng-if="!vm.requestsLoading && vm.noAdminRequestsFound">
+            <p>Nenhum pedido de administração encontrado.</p>
+        </div>
+        <uib-accordion close-others="true">
+            <div uib-accordion-group class="panel-default" ng-repeat="request in vm.filteredAdminRequests">
+                <div uib-accordion-heading>
+                    <b>{{ request.attributes.place.attributes.name }} <small> {{ request.attributes.place.attributes.category.attributes.namePT }}</small></b>
+                </div>
+                <p>Pedido realizado em: {{ request.createdAt | date:'dd/MM/yyyy hh:mm:ss' }}</p>
+                <p>Nome do solicitante: {{ request.attributes.requestUser.attributes.firstName }} {{ request.attributes.requestUser.attributes.lastName }}</p>
+                <p>CPF: {{ request.attributes.requestUser.attributes.document }}</p>
+                <p>E-mail: {{ request.attributes.requestUser.attributes.email }}</p>
+                <p>Observações do solicitante: {{ request.attributes.requestComments }}</p>
+                <hr>
+                <a class="btn btn-primary btn-xs" ng-href="{{ vm.URI }}{{ vm.container }}{{ request.id }}{{ vm.key }}" download>Comprovante de endereço</a>
+                <hr>
+                <div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }" ng-if="flash" ng-bind="flash.message"></div>
+                <form name="form">
+                    <div class="form-group">
+                        <label class="form-control-label">Observações de aprovação</label>
+                        <textarea ng-maxlength="250" name="comments" placeholder="Observações" ng-model="vm.approvalComment" class="form-control"></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button ng-click="vm.approveRequest(request, vm.approvalComment)" class="btn btn-primary">Aprovar</button>
+                        <button ng-click="vm.denyRequest(request, vm.approvalComment)" class="btn btn-danger">Rejeitar</button>
+                        <i ng-if="vm.dataLoading" class="fa fa-spinner fa-pulse fa-fw"></i>
+                    </div>
+                </form>
+            </div>
+        </uib-accordion>
+    </div>
+    <ul ng-if="!vm.requestsLoading && !vm.noAdminRequestsFound" uib-pagination direction-links="false" boundary-links="false" items-per-page="vm.numPerPage" total-items="vm.adminRequests.length" ng-model="vm.currentRequestPage"></ul>
+</div>

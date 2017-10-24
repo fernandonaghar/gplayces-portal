@@ -20,7 +20,7 @@
             // Get User profile Data
             UserService.GetCurrentUserInfo().then(function(response) {
                 if (response != null) {
-                    profile.address = response.info;
+                    profile.userinfo = response.info;
                 };
             }).catch(angular.noop);
 
@@ -37,8 +37,17 @@
             UserService.SaveCurrentUser(profile.user).then(function(response) {
                 if (response != null) {
                     if (response.success) {
-                        profile.dataLoading = false;
-                        $state.go('app.profile.address');
+                        UserService.SaveUserInfo(profile.userinfo).then(function(response) {
+                            if (response != null) {
+                                if (response.success) {
+                                    profile.dataLoading = false;
+                                    $state.go('app.profile.address');
+                                } else {
+                                    FlashService.Error(response.message);
+                                    profile.dataLoading = false;
+                                }
+                            };
+                        }).catch(angular.noop);
                     } else {
                         FlashService.Error(response.message);
                         profile.dataLoading = false;
@@ -49,11 +58,11 @@
 
         function saveAddressData() {
             profile.dataLoading = true;
-            UserService.SaveUserInfo(profile.address).then(function(response) {
+            UserService.SaveUserInfo(profile.userinfo).then(function(response) {
                 if (response != null) {
                     if (response.success) {
                         profile.dataLoading = false;
-                        FlashService.Success('Dados atualizados com sucesso!', true);
+                        $state.go('app.profile.photo');
                     } else {
                         FlashService.Error(response.message);
                         profile.dataLoading = false;

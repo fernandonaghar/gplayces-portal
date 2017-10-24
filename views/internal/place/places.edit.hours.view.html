@@ -1,0 +1,72 @@
+<div ng-if="isAdmin || edit.place.isOwner">
+    <form name="form" id="sliding-form">
+        <div class="x_title">
+            <h4>Adicionar novo período</h4>
+            <div class="clearfix"></div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-3 col-sm-3 col-xs-3 form-group has-feedback">
+                    <label class="form-control-label">Dia</label>
+                </div>
+                <div class="col-md-3 col-sm-3 col-xs-3 form-group has-feedback">
+                    <label class="form-control-label">Início</label>
+                </div>
+                <div class="col-md-3 col-sm-3 col-xs-3 form-group has-feedback">
+                    <label class="form-control-label">Fim</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 col-sm-3 col-xs-3 form-group has-feedback">
+                    <select placeholder="Dia" ng-model="edithours.selectedDay" ng-options="day.day for day in edithours.weekdays track by day.id" class="form-control" required></select>
+                </div>
+                <div class="col-md-3 col-sm-3 col-xs-3 form-group has-feedback">
+                    <select placeholder="Início" ng-model="edithours.selectedStart" ng-options="day as day for day in edithours.availableHours" class="form-control" required></select>
+                </div>
+                <div class="col-md-3 col-sm-3 col-xs-3 form-group has-feedback">
+                    <select placeholder="Fim" ng-model="edithours.selectedEnd" ng-options="day as day for day in edithours.availableHours" class="form-control" required></select>
+                </div>
+                <div class="col-md-3 col-sm-3 col-xs-3 form-group has-feedback">
+                    <button ng-click="edithours.saveHoursData()" ng-disabled="form.$invalid || edithours.saveHoursLoading" class="btn btn-primary">Adicionar</button>
+                    <i ng-if="edithours.saveHoursLoading" class="fa fa-spinner fa-pulse fa-fw"></i>
+                </div>
+            </div>
+            <div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }" ng-if="flash" ng-bind="flash.message"></div>
+        </div>
+        <div class="form-group">
+            <div class="x_title">
+                <h4>Horários cadastrados</h4>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Dia</th>
+                            <th>Início</th>
+                            <th>Fim</th>
+                            <th>Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <div ng-if="edithours.hoursLoading">
+                            <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                        <tr ng-if="!edithours.hoursLoading" ng-repeat="hours in edithours.addedHours | orderBy:'attributes.day'">
+                            <th scope="row">{{ hours.attributes.day }}</th>
+                            <td>{{ hours.attributes.start }}</td>
+                            <td>{{ hours.attributes.end }}</td>
+                            <td><button ng-click="edithours.removeHoursData(hours)" ng-disabled="edithours.removeHoursLoading" class="btn btn-xs btn-danger">Remover</button>
+                                <i ng-if="edithours.removeHoursLoading" class="fa fa-spinner fa-pulse fa-fw"></i>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="form-actions">
+            <button ng-click="edithours.advanceFlow()" ng-disabled="edithours.hoursLoading" class="btn btn-primary">Avançar</button>
+        </div>
+    </form>
+</div>

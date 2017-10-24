@@ -1,0 +1,33 @@
+<div class="card">
+    <div id="status-buttons" class="card-header text-center">
+        <a class="active"><span>1</span>Dados pessoais</a>
+        <a><span>2</span>Comprovantes</a>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <p>Por favor confirme seus dados antes de prosseguir</p>
+        <form id="sliding-form">
+            <div class="form-group">
+                <label class="form-control-label">Primeiro nome</label>
+                <input type="text" placeholder="Primeiro nome" ng-model="userdata.user.firstName" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label class="form-control-label">Sobrenome</label>
+                <input type="text" placeholder="Sobrenome" ng-model="userdata.user.lastName" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label class="form-control-label">CPF</label>
+                <input type="number" placeholder="CPF" ng-model="userdata.user.document" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label class="form-control-label">Telefone de contato</label>
+                <input type="number" placeholder="Telefone de contato" ng-model="userdata.user_info.phone" class="form-control" required>
+            </div>
+            <div class="form-actions">
+                <button type="submit" ng-click="userdata.saveUserData()" ng-disabled="form.$invalid || userdata.dataLoading" class="btn btn-primary">Avançar</button>
+                <i ng-if="userdata.dataLoading" class="fa fa-spinner fa-pulse fa-fw"></i>
+            </div>
+        </form>
+    </div>
+</div>

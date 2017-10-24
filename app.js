@@ -2,7 +2,7 @@
     'use strict';
 
     var app = angular
-        .module('app', ['ngAnimate', 'ngCookies', 'ui.router', 'ui.bootstrap', 'ngMap'])
+        .module('app', ['ngAnimate', 'ngCookies', 'ui.router', 'ngSanitize', 'ui.bootstrap', 'uiCropper', 'pascalprecht.translate', 'ui.utils.masks'])
         .config(config)
         .run(run);
 
@@ -13,9 +13,11 @@
     Parse.initialize("92f067f59fe76249b67d268b581fee64");
     Parse.serverURL = 'https://gparsedev.azurewebsites.net/parse';
 
-    config.$inject = ['$stateProvider', '$urlRouterProvider'];
+    config.$inject = ['$stateProvider', '$urlRouterProvider', '$translateProvider'];
 
-    function config($stateProvider, $urlRouterProvider) {
+    function config($stateProvider, $urlRouterProvider, $translateProvider) {
+
+        //-------- Routing section ---------
         $urlRouterProvider.otherwise('/login');
         $stateProvider
         // main app views
@@ -78,30 +80,40 @@
                 url: '/address',
                 templateUrl: 'views/internal/profile/profile.address.view.html',
             })
+            .state('app.profile.photo', {
+                url: '/photo',
+                templateUrl: 'views/internal/profile/profile.photo.view.html',
+                controller: 'ProfilePhotoController',
+                controllerAs: 'photo'
+            })
 
         // Places
         .state('app.places', {
-                url: 'places',
-                views: {
-                    'content@': {
-                        controller: 'PlacesController',
-                        templateUrl: 'views/internal/place/places.view.html',
-                        controllerAs: 'vm'
-                    }
+            url: 'places',
+            views: {
+                'content@': {
+                    templateUrl: 'views/internal/place/places.view.html',
                 },
                 redirectTo: 'app.places.myplaces'
-            })
-            .state('app.places.myplaces', {
-                url: '/myplaces',
-                templateUrl: 'views/internal/place/places.myplaces.view.html',
-            })
-            .state('app.places.created', {
-                url: '/created',
-                templateUrl: 'views/internal/place/places.created.view.html',
-                controller: 'CreatedPlacesController',
-                controllerAs: 'vm'
-            })
-            .state('app.places.edit', {
+            },
+
+        })
+
+        .state('app.places.myplaces', {
+            url: '/myplaces',
+            templateUrl: 'views/internal/place/places.myplaces.view.html',
+            controller: 'OwnedPlacesController',
+            controllerAs: 'vm'
+        })
+
+        .state('app.places.created', {
+            url: '/created',
+            templateUrl: 'views/internal/place/places.created.view.html',
+            controller: 'CreatedPlacesController',
+            controllerAs: 'vm'
+        })
+
+        .state('app.places.edit', {
                 url: '/edit',
                 params: {
                     place: null,
@@ -122,7 +134,13 @@
             })
             .state('app.places.edit.contact', {
                 url: '/contact',
+                params: {
+                    place: null,
+                    parse_place: null
+                },
                 templateUrl: 'views/internal/place/places.edit.contactdata.view.html',
+                controller: 'PlacesEditController',
+                controllerAs: 'edit'
             })
             .state('app.places.edit.address', {
                 url: '/address',
@@ -136,23 +154,81 @@
             })
             .state('app.places.edit.hours', {
                 url: '/hours',
-                templateUrl: 'views/internal/place/places.edit.contactdata.view.html',
+                params: {
+                    place: null,
+                    parse_place: null
+                },
+                templateUrl: 'views/internal/place/places.edit.hours.view.html',
+                controller: 'PlacesEditHoursController',
+                controllerAs: 'edithours'
             })
             .state('app.places.edit.images', {
                 url: '/images',
-                templateUrl: 'views/internal/place/places.edit.contactdata.view.html',
+                params: {
+                    place: null,
+                    parse_place: null
+                },
+                templateUrl: 'views/internal/place/places.edit.images.view.html',
+                controller: 'PlacesEditImagesController',
+                controllerAs: 'editimages'
             })
-            .state('app.places.edit.request_admin', {
+            .state('app.places.edit.images.new', {
+                url: '/new',
+                params: {
+                    place: null,
+                    parse_place: null
+                },
+                templateUrl: 'views/internal/place/places.edit.images.view.html',
+                controller: 'PlacesEditImagesController',
+                controllerAs: 'editimages'
+            })
+
+        .state('app.places.request_admin', {
                 url: '/admin',
                 params: {
                     place: null,
                     parse_place: null
                 },
-                templateUrl: 'views/internal/place/places.edit.request_admin.view.html',
-                controller: 'PlacesRequestAdminController',
-                controllerAs: 'vm'
+                templateUrl: 'views/internal/place/places.requestadmin.view.html',
+                controller: 'PlacesRequestAdminRedirectController',
+                controllerAs: 'request'
+            })
+            .state('app.places.request_admin.userdata', {
+                url: '/user',
+                params: {
+                    place: null,
+                    parse_place: null,
+                    user: null,
+                    user_info: null
+                },
+                templateUrl: 'views/internal/place/places.requestadmin.userdata.view.html',
+                controller: 'PlacesRequestAdminUserDataController',
+                controllerAs: 'userdata'
+            })
+            .state('app.places.request_admin.request', {
+                url: '/request',
+                params: {
+                    place: null,
+                    parse_place: null
+                },
+                controller: 'PlacesRequestAdminRequestController',
+                controllerAs: 'request',
+                templateUrl: 'views/internal/place/places.requestadmin.request.view.html',
             })
 
+        // Approval requests
+        .state('app.approvalrequests', {
+            url: 'approvalrequests',
+            views: {
+                'content@': {
+                    controller: 'ApprovalRequestsController',
+                    templateUrl: 'views/internal/approvalrequests/approvalrequestslist.view.html',
+                    controllerAs: 'vm'
+                }
+            }
+        })
+
+        // login
         .state('login', {
             url: '/login',
             controller: 'LoginController',
@@ -160,12 +236,42 @@
             controllerAs: 'vm'
         })
 
+        // register
         .state('register', {
             url: '/register',
             controller: 'RegisterController',
             templateUrl: 'views/external/register/register.view.html',
             controllerAs: 'vm'
-        })
+        });
+
+        //-------- Translations section ---------
+
+        var en_translations = {
+            'MONDAY': 'Monday',
+            'TUESDAY': 'Tuesday',
+            'WEDNESDAY': 'Wednesday',
+            'THURSDAY': 'Thursday',
+            'FRIDAY': 'Friday',
+            'SATURDAY': 'Saturday',
+            'SUNDAY': 'Sunday',
+            'HOLYDAY': 'Holyday'
+        }
+
+        var pt_translations = {
+            'MONDAY': 'Segunda',
+            'TUESDAY': 'Terça',
+            'WEDNESDAY': 'Quarta',
+            'THURSDAY': 'Quinta',
+            'FRIDAY': 'Sexta',
+            'SATURDAY': 'Sábado',
+            'SUNDAY': 'Domingo',
+            'HOLYDAY': 'Feriado'
+        }
+
+        $translateProvider.translations('en', en_translations);
+        $translateProvider.translations('pt', pt_translations);
+
+        $translateProvider.preferredLanguage('pt');
     }
 
     run.$inject = ['$rootScope', '$location', '$cookies', '$http'];

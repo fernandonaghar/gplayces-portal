@@ -1,24 +1,51 @@
-<!-- Side Navbar -->
-<nav class="side-navbar">
-
-    <div class="sidebar-header d-flex align-items-center">
-        <div class="avatar"><img src="img/avatar-1.jpg" alt="..." class="img-fluid rounded-circle"></div>
-        <div class="title">{{ vm.user.attributes.firstName + " " + vm.user.attributes.lastName }}</h1>
+<div class="col-md-3 left_col" style="min-height: 100vh">
+    <div class="left_col scroll-view">
+        <div class="navbar nav_title" style="border: 0;">
+            <a ui-sref="app.dashboard" class="site_title"><i class="fa fa-paw"></i> <span>GPlayces</span></a>
         </div>
+        <div class="clearfix"></div>
+        <!-- menu profile quick info -->
+        <div class="profile clearfix">
+            <div class="profile_pic">
+                <img src="{{ vm.profileURL }}" alt="..." class="img-circle profile_img">
+            </div>
+            <div class="profile_info">
+                <span>Bem vindo,</span>
+                <h2>{{ vm.user.firstName + " " + vm.user.lastName }}</h2>
+            </div>
+        </div>
+        <br>
+        <!-- sidebar menu -->
+        <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+            <div class="menu_section active">
+                <h3>Menu</h3>
+                <ul class="nav side-menu">
+                    <li ui-sref-active="active">
+                        <a ui-sref="app.dashboard"><i class="fa fa-bar-chart"></i> Dashboard</a>
+                    </li>
+                    <li ui-sref-active="active">
+                        <a><i class="fa fa-home fa-2x"></i> Locais <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu" style="display: block">
+                            <li ui-sref-active="active"><a ui-sref="app.places.myplaces">Meus Locais</a></li>
+                            <li ui-sref-active="active"><a ui-sref="app.places.edit">Cadastro de local</a></li>
+                            <li ui-sref-active="active"><a ui-sref="app.places.created">Locais cadastrados</a></li>
+                        </ul>
+                    </li>
+                    <li ui-sref-active="active">
+                        <a ui-sref="app.events"><i class="fa fa-calendar"></i>Eventos</a>
+                    </li>
+                    <li ui-sref-active="active">
+                        <a><i class="fa fa-lock fa-2x"></i> Admin<span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu" style="display: block">
+                            <li ui-sref-active="active"><a ui-sref="app.approvalrequests">Pedidos de Administração</a></li>
+                        </ul>
+                    </li>
+                    <li ui-sref-active="active">
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- /sidebar menu -->
     </div>
-    <span class="heading">Menu</span>
-    <ul class="list-unstyled" nav-tabs>
-        <li ui-sref-active="active">
-            <a ui-sref="app.dashboard"><i class="fa fa-bar-chart"></i>Dashboard</a>
-        </li>
-        <li ui-sref-active="active">
-            <a ui-sref="app.places"> <i class="icon-home"></i>Locais</a>
-        </li>
-        <li ui-sref-active="active">
-            <a ui-sref="app.events"><i class="icon-grid"></i>Eventos</a>
-        </li>
-        <li ui-sref-active="active">
-            <a ui-sref="app.profile"> <i class="icon-padnote"></i>Perfil</a>
-        </li>
-    </ul>
-</nav>
+</div>

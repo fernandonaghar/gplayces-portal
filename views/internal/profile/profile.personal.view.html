@@ -1,28 +1,33 @@
-<p>Dados pessoais</p>
-<div class="form-group">
-    <label class="form-control-label">Primeiro nome</label>
-    <input type="text" placeholder="Primeiro nome" ng-model="profile.user.firstName" class="form-control">
-</div>
-<div class="form-group">
-    <label class="form-control-label">Sobrenome</label>
-    <input type="text" placeholder="Sobrenome" ng-model="profile.user.lastName" class="form-control">
-</div>
-<div class="form-group">
-    <label class="form-control-label">Data de Nascimento</label>
-    <input type="date" placeholder="Data de Nascimento" ng-model="profile.user.birthday" class="form-control">
-</div>
-<div class="form-group">
-    <label class="form-control-label">CPF</label>
-    <input type="number" placeholder="CPF" ng-model="profile.user.document" class="form-control">
-</div>
-<div class="form-group">
-    <label class="form-control-label">E-mail</label>
-    <input type="email" placeholder="E-mail" ng-model="profile.user.email" class="form-control">
-</div>
-<div class="form-actions">
-    <div class="col-xs-6 col-xs-offset-3">
-        <button ng-click="profile.saveUserData()" class="btn btn-primary">Avançar</button>
-        <img ng-if="profile.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
-        />
+<div class="card">
+    <div class="card-body">
+        <div class="form-group">
+            <label class="form-control-label">Primeiro nome</label>
+            <input type="text" placeholder="Primeiro nome" ng-model="profile.user.firstName" class="form-control">
+        </div>
+        <div class="form-group">
+            <label class="form-control-label">Sobrenome</label>
+            <input type="text" placeholder="Sobrenome" ng-model="profile.user.lastName" class="form-control">
+        </div>
+        <div class="form-group">
+            <label class="form-control-label">Data de Nascimento</label>
+            <input type="date" placeholder="Data de Nascimento" ng-model="profile.user.birthday" class="form-control">
+        </div>
+        <div class="form-group">
+            <label class="form-control-label">CPF</label>
+            <input type="text" placeholder="CPF" ng-model="profile.user.document" ui-br-cpf-mask class="form-control">
+        </div>
+        <div class="form-group">
+            <label class="form-control-label">Telefone de contato</label>
+            <input type="text" ui-br-phone-number placeholder="Telefone" ng-model="profile.userinfo.phone" class="form-control">
+        </div>
+        <div class="form-group">
+            <label class="form-control-label">E-mail</label>
+            <input type="email" placeholder="E-mail" ng-model="profile.user.email" class="form-control">
+        </div>
+        <div class="form-actions">
+            <button ng-click="profile.saveUserData()" class="btn btn-primary">Avançar</button>
+            <img ng-if="profile.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+            />
+        </div>
     </div>
 </div>

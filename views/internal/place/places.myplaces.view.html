@@ -1,35 +1,58 @@
-<header class="page-header">
-    <div class="container-fluid">
-        <h4 class="no-margin-bottom">Meus locais</h4>
-    </div>
-</header>
-<img class="loading" ng-if="vm.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
-/>
-<div ng-if="!vm.dataLoading && vm.noOwnedPlacesFound" class="project">
-    <div class="row bg-white has-shadow">
-        <div class="left-col col-lg-12 d-flex align-items-center justify-content-between">
-            <div class="project-title d-flex align-items-center">
-                <div class="text">
-                    <p>Você ainda não possui nenhum local sob sua administração.</p>
-                </div>
-            </div>
-        </div>
+<div class="page-title">
+    <div class="title_left">
+        <h2>Locais</h2>
+        <div class="clearfix"></div>
     </div>
 </div>
-<div class="project" ng-repeat="place in vm.filteredPlaces">
-    <div class="row bg-white has-shadow">
-        <div class="left-col col-lg-10 d-flex align-items-center justify-content-between">
-            <div class="project-title d-flex align-items-center">
-                <div class="image has-shadow"><img src="img/project-2.jpg" alt="..." class="img-fluid"></div>
-                <div class="text">
-                    <h3 class="h4">{{ place.attributes.name }}</h3><small>{{ place.attributes.address }}</small>
-                </div>
-            </div>
-            <div class="project-date"><span class="hidden-sm-down">Criado em {{ place.createdAt | date:'dd/MM/yyyy' }}</span></div>
-        </div>
-        <div class="right-col col-lg-2 align-items-center">
-            <a ui-sref="app.places.edit({ parse_place: place })" class="btn btn-primary pull-right"><i class="fa fa-pencil-square-o"></i> Editar</a>
-        </div>
+<div class="x_panel">
+    <div class="x_title">
+        <h3>Meus locais</h3>
+        <div class="clearfix"></div>
     </div>
+    <div class="x_content">
+        <div ng-if="vm.dataLoading">
+            <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+            <span class="sr-only">Loading...</span>
+        </div>
+        <div ng-if="!vm.dataLoading && vm.noOwnedPlacesFound">
+            <p>Você ainda não possui nenhum local sob sua administração.</p>
+        </div>
+        <uib-accordion close-others="true">
+            <div uib-accordion-group class="panel-default" ng-repeat="place in vm.filteredPlaces">
+                <div uib-accordion-heading>
+                    <b>{{ place.attributes.name }} <small> {{ place.attributes.category.attributes.namePT }}</small></b>
+                </div>
+                <p>Endereço: {{ place.attributes.address }}</p>
+                <a ui-sref="app.places.edit.data({ parse_place: place })" class="btn btn-primary"><i class="fa fa-pencil-square-o"></i> Editar</a>
+            </div>
+        </uib-accordion>
+    </div>
+    <ul ng-if="!vm.dataLoading && !vm.noOwnedPlacesFound" uib-pagination direction-links="false" boundary-links="false" items-per-page="vm.numPerPage" total-items="vm.owned_places.length" ng-model="vm.currentPage"></ul>
 </div>
-<ul ng-if="!vm.dataLoading && !vm.noOwnedPlacesFound" uib-pagination direction-links="false" boundary-links="false" items-per-page="vm.numPerPage" total-items="vm.owned_places.length" ng-model="vm.currentPage"></ul>
+<div class="x_panel">
+    <div class="x_title">
+        <h3>Pedidos de administração</h3>
+        <div class="clearfix"></div>
+    </div>
+    <div class="x_content">
+        <div ng-if="vm.requestsLoading">
+            <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+            <span class="sr-only">Loading...</span>
+        </div>
+        <div ng-if="!vm.requestsLoading && vm.noAdminRequestsFound">
+            <p>Nenhum pedido de administração encontrado.</p>
+        </div>
+        <uib-accordion close-others="true">
+            <div uib-accordion-group class="panel-default" ng-repeat="request in vm.filteredAdminRequests">
+                <div uib-accordion-heading>
+                    <b>{{ request.attributes.place.attributes.name }} <small> {{  request.attributes.place.attributes.category.attributes.namePT }}</small></b>
+                </div>
+                <p>Endereço: {{ request.attributes.place.attributes.address }}</p>
+                <p>Data de solicitação: {{ request.createdAt | date:'dd/MM/yyyy hh:mm:ss' }}</p>
+                <p>Observações do solicitante: {{ request.attributes.requestComments }}</p>
+                <button ng-click="vm.cancelRequest(request)" class="btn btn-danger"></i>Cancelar Pedido</button>
+            </div>
+        </uib-accordion>
+    </div>
+    <ul ng-if="!vm.requestsLoading && !vm.noAdminRequestsFound" uib-pagination direction-links="false" boundary-links="false" items-per-page="vm.numPerPage" total-items="vm.adminRequests.length" ng-model="vm.currentRequestPage"></ul>
+</div>

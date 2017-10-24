@@ -5,17 +5,25 @@
         .module('app')
         .factory('UserService', UserService);
 
-    UserService.$inject = ['$http', '$q'];
+    UserService.$inject = ['$http', '$q', 'AzureStorageService'];
 
-    function UserService($http, $q) {
+    function UserService($http, $q, AzureStorageService) {
         var service = {};
         service.GetCurrentUser = GetCurrentUser;
         service.GetCurrentUserInfo = GetCurrentUserInfo;
         service.Create = Create;
         service.SaveCurrentUser = SaveCurrentUser;
         service.SaveUserInfo = SaveUserInfo;
+        service.GetProfilePhotoURL = GetProfilePhotoURL;
+        service.UpdateProfilePicture = UpdateProfilePicture;
 
         return service;
+
+        function GetProfilePhotoURL() {
+            var user = GetCurrentUser();
+            var photoURL = AzureStorageService.getBlobURI() + '/profilephoto/' + user.picture + AzureStorageService.getKey();
+            return photoURL;
+        }
 
         function GetCurrentUser() {
 
@@ -28,6 +36,9 @@
             userObject.birthday = parse_user.attributes.birthday;
             userObject.document = parse_user.attributes.document;
             userObject.email = parse_user.attributes.email;
+            userObject.id = parse_user.id;
+            userObject.phone = parse_user.attributes.phone;
+            userObject.picture = parse_user.attributes.picture;
             return userObject;
         }
 
@@ -56,6 +67,24 @@
             return deferred.promise;
         }
 
+        function UpdateProfilePicture(filename) {
+
+            var deferred = $q.defer();
+            var parse_user = Parse.User.current();
+
+            parse_user.set("picture", filename);
+
+            parse_user.save(null, {
+                success: function(parse_object) {
+                    deferred.resolve({ success: true, parse_object: parse_object });
+                },
+                error: function(parse_object, error) {
+                    deferred.resolve({ success: false, message: 'Erro: "' + error.code + '": ' + error.message });
+                }
+            });
+            return deferred.promise;
+        }
+
         function GetCurrentUserInfo() {
 
             var deferred = $q.defer();
@@ -75,6 +104,7 @@
                         info.address = parse_info.attributes.address;
                         info.complement = parse_info.attributes.complement;
                         info.zipcode = parse_info.attributes.zipcode;
+                        info.phone = parse_info.attributes.phone;
 
                         deferred.resolve({ success: true, info: info, parse_info: parse_info });
                     } else {
@@ -108,6 +138,7 @@
                     parse_info.set("address", info.address);
                     parse_info.set("complement", info.complement);
                     parse_info.set("user", parse_user);
+                    parse_info.set("phone", info.phone);
                     parse_info.save(null, {
                         success: function(parse_user) {
                             deferred.resolve({ success: true });

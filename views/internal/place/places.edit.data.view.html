@@ -19,25 +19,22 @@
         <span ng-show="form.category.$dirty && form.category.$error.required" class="help-block">Categoria é obrigatória.</span>
     </div>
 
-    <div ng-if="isAdmin || isOwner">
+    <div ng-if="isAdmin || edit.place.isOwner">
         <div class="form-group">
             <label class="form-control-label">Descrição em Português</label>
-            <input type="text" placeholder="Descrição em Português" ng-model="edit.place.descriptionPT" class="form-control">
+            <textarea ng-maxlength="250" placeholder="Descrição em Português" ng-model="edit.place.descriptionPT" class="form-control"></textarea>
         </div>
         <div class="form-group">
             <label class="form-control-label">Descrição em Inglês</label>
-            <input type="text" placeholder="Descrição em Inglês" ng-model="edit.place.descriptionEN" class="form-control">
+            <textarea ng-maxlength="250" placeholder="Descrição em Inglês" ng-model="edit.place.descriptionEN" class="form-control"></textarea>
         </div>
         <div class="form-group">
             <label class="form-control-label">Descrição em Espanhol</label>
-            <input type="text" placeholder="Descrição em Espanhol" ng-model="edit.place.descriptionES" class="form-control">
+            <textarea ng-maxlength="250" placeholder="Descrição em Espanhol" ng-model="edit.place.descriptionES" class="form-control"></textarea>
         </div>
     </div>
     <div class="form-actions">
-        <div class="col-xs-6 col-xs-offset-3">
-            <button ng-click="edit.savePlaceData()" ng-disabled="form.$invalid || edit.dataLoading" class="btn btn-primary">Avançar</button>
-            <img ng-if="edit.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
-            />
-        </div>
+        <button ng-click="edit.savePlaceData()" ng-disabled="form.$invalid || edit.dataLoading" class="btn btn-primary">Avançar</button>
+        <i ng-if="request.dataLoading" class="fa fa-spinner fa-pulse fa-fw"></i>
     </div>
 </form>
