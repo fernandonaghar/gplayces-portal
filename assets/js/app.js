@@ -26,16 +26,16 @@
                 redirectTo: 'app.dashboard',
                 views: {
                     'header': {
-                        templateUrl: 'views/internal/header.html'
+                        templateUrl: 'assets/views/internal/header.html'
                     },
                     'sidebar': {
                         controller: 'SidebarController',
-                        templateUrl: 'views/internal/sidebar/sidebar.html',
+                        templateUrl: 'assets/views/internal/sidebar/sidebar.html',
                         controllerAs: 'vm'
                     },
                     'content': {},
                     'footer': {
-                        templateUrl: 'views/internal/footer.html'
+                        templateUrl: 'assets/views/internal/footer.html'
                     }
                 }
             })
@@ -44,7 +44,7 @@
                 views: {
                     'content@': {
                         controller: 'DashboardController',
-                        templateUrl: 'views/internal/dashboard/dashboard.view.html',
+                        templateUrl: 'assets/views/internal/dashboard/dashboard.view.html',
                         controllerAs: 'vm'
                     }
                 }
@@ -56,7 +56,7 @@
                 views: {
                     'content@': {
                         controller: 'ProfileController',
-                        templateUrl: 'views/internal/profile/profile.view.html',
+                        templateUrl: 'assets/views/internal/profile/profile.view.html',
                         controllerAs: 'profile',
                     }
                 },
@@ -64,15 +64,15 @@
             })
             .state('app.profile.personal', {
                 url: '/personal',
-                templateUrl: 'views/internal/profile/profile.personal.view.html',
+                templateUrl: 'assets/views/internal/profile/profile.personal.view.html',
             })
             .state('app.profile.address', {
                 url: '/address',
-                templateUrl: 'views/internal/profile/profile.address.view.html',
+                templateUrl: 'assets/views/internal/profile/profile.address.view.html',
             })
             .state('app.profile.photo', {
                 url: '/photo',
-                templateUrl: 'views/internal/profile/profile.photo.view.html',
+                templateUrl: 'assets/views/internal/profile/profile.photo.view.html',
                 controller: 'ProfilePhotoController',
                 controllerAs: 'photo'
             })
@@ -82,7 +82,7 @@
             url: 'places',
             views: {
                 'content@': {
-                    templateUrl: 'views/internal/place/places.view.html',
+                    templateUrl: 'assets/views/internal/place/places.view.html',
                 },
                 redirectTo: 'app.places.myplaces'
             },
@@ -91,14 +91,14 @@
 
         .state('app.places.myplaces', {
             url: '/myplaces',
-            templateUrl: 'views/internal/place/places.myplaces.view.html',
+            templateUrl: 'assets/views/internal/place/places.myplaces.view.html',
             controller: 'OwnedPlacesController',
             controllerAs: 'vm'
         })
 
         .state('app.places.created', {
             url: '/created',
-            templateUrl: 'views/internal/place/places.created.view.html',
+            templateUrl: 'assets/views/internal/place/places.created.view.html',
             controller: 'CreatedPlacesController',
             controllerAs: 'vm'
         })
@@ -108,7 +108,7 @@
                 params: {
                     parse_place: null
                 },
-                templateUrl: 'views/internal/place/event/place.events.view.html',
+                templateUrl: 'assets/views/internal/place/event/place.events.view.html',
                 redirectTo: 'app.places.events.list',
                 controller: 'PlaceEventsController',
                 controllerAs: 'vm'
@@ -118,7 +118,7 @@
                 params: {
                     parse_place: null
                 },
-                templateUrl: 'views/internal/place/event/place.events.list.view.html',
+                templateUrl: 'assets/views/internal/place/event/place.events.list.view.html',
                 controller: 'PlaceEventsListController',
                 controllerAs: 'events'
             })
@@ -128,7 +128,7 @@
                     parse_place: null,
                     parse_event: null
                 },
-                templateUrl: 'views/internal/place/event/place.events.edit.view.html',
+                templateUrl: 'assets/views/internal/place/event/place.events.edit.view.html',
                 controller: 'EventsEditController',
                 controllerAs: 'edit'
             })
@@ -139,7 +139,7 @@
                     place: null,
                     parse_place: null
                 },
-                templateUrl: 'views/internal/place/edit/places.edit.view.html',
+                templateUrl: 'assets/views/internal/place/edit/places.edit.view.html',
                 redirectTo: 'app.places.edit.data',
                 controller: 'PlacesController',
                 controllerAs: 'vm'
@@ -150,7 +150,7 @@
                     place: null,
                     parse_place: null
                 },
-                templateUrl: 'views/internal/place/edit/places.edit.data.view.html',
+                templateUrl: 'assets/views/internal/place/edit/places.edit.data.view.html',
                 controller: 'PlacesEditController',
                 controllerAs: 'edit'
             })
@@ -160,7 +160,7 @@
                     place: null,
                     parse_place: null
                 },
-                templateUrl: 'views/internal/place/edit/places.edit.contactdata.view.html',
+                templateUrl: 'assets/views/internal/place/edit/places.edit.contactdata.view.html',
                 controller: 'PlacesEditController',
                 controllerAs: 'edit'
             })
@@ -170,7 +170,7 @@
                     place: null,
                     parse_place: null
                 },
-                templateUrl: 'views/internal/place/edit/places.edit.address.view.html',
+                templateUrl: 'assets/views/internal/place/edit/places.edit.address.view.html',
                 controller: 'PlacesEditAddressController',
                 controllerAs: 'editaddr'
             })
@@ -180,7 +180,7 @@
                     place: null,
                     parse_place: null
                 },
-                templateUrl: 'views/internal/place/edit/places.edit.hours.view.html',
+                templateUrl: 'assets/views/internal/place/edit/places.edit.hours.view.html',
                 controller: 'PlacesEditHoursController',
                 controllerAs: 'edithours'
             })
@@ -190,7 +190,7 @@
                     place: null,
                     parse_place: null
                 },
-                templateUrl: 'views/internal/place/edit/places.edit.images.view.html',
+                templateUrl: 'assets/views/internal/place/edit/places.edit.images.view.html',
                 redirectTo: 'app.places.edit.images.gallery'
             })
             .state('app.places.edit.images.gallery', {
@@ -199,7 +199,7 @@
                     place: null,
                     parse_place: null
                 },
-                templateUrl: 'views/internal/place/edit/places.edit.images.gallery.view.html',
+                templateUrl: 'assets/views/internal/place/edit/places.edit.images.gallery.view.html',
                 controller: 'PlacesEditImagesController',
                 controllerAs: 'editimages'
             })
@@ -209,7 +209,7 @@
                     place: null,
                     parse_place: null
                 },
-                templateUrl: 'views/internal/place/edit/places.edit.images.new.view.html',
+                templateUrl: 'assets/views/internal/place/edit/places.edit.images.new.view.html',
                 controller: 'PlacesEditNewImagesController',
                 controllerAs: 'editimagesnew'
             })
@@ -220,7 +220,7 @@
                     place: null,
                     parse_place: null
                 },
-                templateUrl: 'views/internal/place/requestadmin/places.requestadmin.view.html',
+                templateUrl: 'assets/views/internal/place/requestadmin/places.requestadmin.view.html',
                 controller: 'PlacesRequestAdminRedirectController',
                 controllerAs: 'request'
             })
@@ -232,7 +232,7 @@
                     user: null,
                     user_info: null
                 },
-                templateUrl: 'views/internal/place/requestadmin/places.requestadmin.userdata.view.html',
+                templateUrl: 'assets/views/internal/place/requestadmin/places.requestadmin.userdata.view.html',
                 controller: 'PlacesRequestAdminUserDataController',
                 controllerAs: 'userdata'
             })
@@ -244,7 +244,7 @@
                 },
                 controller: 'PlacesRequestAdminRequestController',
                 controllerAs: 'request',
-                templateUrl: 'views/internal/place/requestadmin/places.requestadmin.request.view.html',
+                templateUrl: 'assets/views/internal/place/requestadmin/places.requestadmin.request.view.html',
             })
 
         // Approval requests
@@ -253,7 +253,7 @@
             views: {
                 'content@': {
                     controller: 'ApprovalRequestsController',
-                    templateUrl: 'views/internal/approvalrequests/approvalrequestslist.view.html',
+                    templateUrl: 'assets/views/internal/approvalrequests/approvalrequestslist.view.html',
                     controllerAs: 'vm'
                 }
             }
@@ -265,19 +265,19 @@
                 redirectTo: 'app.locations.cities',
                 views: {
                     'content@': {
-                        templateUrl: 'views/internal/city/admin.locations.view.html'
+                        templateUrl: 'assets/views/internal/city/admin.locations.view.html'
                     }
                 }
             })
             .state('app.locations.cities', {
                 url: '/cities',
-                templateUrl: 'views/internal/city/city.view.html',
+                templateUrl: 'assets/views/internal/city/city.view.html',
                 controller: 'CitiesController',
                 controllerAs: 'vm',
             })
             .state('app.locations.states', {
                 url: '/states',
-                templateUrl: 'views/internal/city/states.view.html',
+                templateUrl: 'assets/views/internal/city/states.view.html',
                 controller: 'StatesController',
                 controllerAs: 'vm',
             })
@@ -286,7 +286,7 @@
         .state('login', {
             url: '/login',
             controller: 'LoginController',
-            templateUrl: 'views/external/login/login.view.html',
+            templateUrl: 'assets/views/external/login/login.view.html',
             controllerAs: 'vm'
         })
 
@@ -294,7 +294,7 @@
         .state('register', {
             url: '/register',
             controller: 'RegisterController',
-            templateUrl: 'views/external/register/register.view.html',
+            templateUrl: 'assets/views/external/register/register.view.html',
             controllerAs: 'vm'
         });
 
