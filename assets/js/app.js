@@ -6,13 +6,6 @@
         .config(config)
         .run(run);
 
-    //PRD Parse
-    //Parse.initialize("d6cfb8df821968fa818da234b7786c0e");    
-    //Parse.serverURL = 'https://gparse.azurewebsites.net/parse';
-    //DEV Parse
-    Parse.initialize("92f067f59fe76249b67d268b581fee64");
-    Parse.serverURL = 'https://gparsedev.azurewebsites.net/parse';
-
     config.$inject = ['$stateProvider', '$urlRouterProvider', '$translateProvider'];
 
     function config($stateProvider, $urlRouterProvider, $translateProvider) {
