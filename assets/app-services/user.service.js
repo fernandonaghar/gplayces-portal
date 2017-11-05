@@ -21,7 +21,13 @@
 
         function GetProfilePhotoURL() {
             var user = GetCurrentUser();
-            var photoURL = AzureStorageService.getBlobURI() + '/profilephoto/' + user.picture;
+            var photoURL;
+
+            if (user.picture != null && user.picture != "") {
+                photoURL = AzureStorageService.getBlobURI() + '/profilephoto/' + user.picture;
+            } else {
+                photoURL = null;
+            }
             return photoURL;
         }
 
