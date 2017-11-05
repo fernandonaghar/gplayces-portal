@@ -33,6 +33,7 @@
             var City = Parse.Object.extend("City");
 
             var query = new Parse.Query(City);
+            query.equalTo("active", true);
             query.include(["state", "state.country"]);
             query.find({
                 success: function(results) {

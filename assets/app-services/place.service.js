@@ -186,6 +186,7 @@
             var deferred = $q.defer();
             var Category = Parse.Object.extend("Category");
             var query = new Parse.Query(Category);
+            query.equalTo("active", true);
             query.find({
                 success: function(results) {
                     deferred.resolve({ success: true, parse_data: results });
