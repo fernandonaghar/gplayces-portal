@@ -40,7 +40,10 @@
             userObject.phone = parse_user.attributes.phone;
             userObject.picture = parse_user.attributes.picture;
             userObject.parse_object = parse_user;
-            userObject.isAdmin = parse_user.attributes.ACL.getRoleReadAccess("admin");
+
+            if (parse_user.attributes.ACL != null) {
+                userObject.isAdmin = parse_user.attributes.ACL.getRoleReadAccess("admin");
+            }
             return userObject;
         }
 
