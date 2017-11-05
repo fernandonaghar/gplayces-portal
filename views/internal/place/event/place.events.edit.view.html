@@ -1,0 +1,115 @@
+<form name="form">
+    <div class="x_panel">
+        <div class="x_title">
+            <h4>Dados do evento</h4>
+            <div class="clearfix"></div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label">Nome do Evento</label>
+            <input type="text" name="name" placeholder="Nome do Evento" ng-model="edit.event.name" class="form-control" required>
+            <span ng-show="form.name.$dirty && form.name.$error.required" class="help-block">O nome do evento é obrigatório.</span>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label">Descrição</label>
+            <textarea ng-maxlength="250" placeholder="Descrição" ng-model="edit.event.description" class="form-control"></textarea>
+        </div>
+    </div>
+    <div class="x_panel">
+        <div class="x_title">
+            <h4>Datas do evento</h4>
+            <div class="clearfix"></div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-3 col-sm-3 col-xs-3 form-group has-feedback">
+                    <label class="form-control-label">Dia</label>
+                </div>
+                <div class="col-md-3 col-sm-3 col-xs-3 form-group has-feedback">
+                    <label class="form-control-label">Início</label>
+                </div>
+                <div class="col-md-3 col-sm-3 col-xs-3 form-group has-feedback">
+                    <label class="form-control-label">Fim</label>
+                </div>
+            </div>
+            <form name="formdates">
+                <div class="row">
+                    <div class="col-md-3 col-sm-3 col-xs-3 form-group has-feedback">
+                        <input type="date" name="day" placeholder="Dia" ng-model="edit.selectedDate" class="form-control">
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-xs-3 form-group has-feedback">
+                        <select placeholder="Início" ng-model="edit.selectedStart" ng-options="day as day for day in edit.availableHours" class="form-control"></select>
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-xs-3 form-group has-feedback">
+                        <select placeholder="Fim" ng-model="edit.selectedEnd" ng-options="day as day for day in edit.availableHours" class="form-control"></select>
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-xs-3 form-group has-feedback">
+                        <button ng-click="edit.addEventDate()" ng-disabled="!edit.selectedStart || !edit.selectedDate || !edit.selectedEnd" class="btn btn-primary">Adicionar</button>
+                        <i ng-if="edit.saveHoursLoading" class="fa fa-spinner fa-pulse fa-fw"></i>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="form-group">
+            <div class="x_title">
+                <h4>Horários cadastrados</h4>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Dia</th>
+                            <th>Início</th>
+                            <th>Fim</th>
+                            <th>Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <div ng-if="edit.datesLoading">
+                            <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                        <tr ng-repeat="date in edit.eventDates | orderBy:'date'">
+                            <th scope="row">{{ date.date | date:'dd/MM/yyyy' }}</th>
+                            <td>{{ date.start }}</td>
+                            <td>{{ date.end }}</td>
+                            <td><button ng-click="edit.removeEventDate(date)" class="btn btn-xs btn-danger">Remover</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="x_title">
+            <h4>Imagem de capa</h4>
+            <div class="clearfix"></div>
+        </div>
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-header">
+                    Selecione uma foto:
+                    <input type="file" id="fileInput" accept="image/*" ng-model="image1" image="image1" resize-max-height="1024" resize-max-width="768" resize-quality="0.7" resize-type="image/jpg" ng-image-compress/></div>
+                <div class="cropArea card-body">
+                    <ui-cropper image="image1.compressed.dataURL" result-blob="edit.resultBlob" result-image-format="image/jpg" result-image-size="400" area-type="square" result-image="edit.myCroppedImage"></ui-cropper>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-header">Preview</div>
+                <div class="card-body">
+                    <div class="cropped-area form-group text-center">
+                        <img ng-src="{{edit.myCroppedImage}}" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }" ng-if="flash" ng-bind="flash.message"></div>
+    <div class="form-group">
+        <button ng-click="edit.saveEvent()" ng-disabled="form.$invalid || edit.dataLoading" class="btn btn-primary">Salvar</button>
+        <i ng-if="edit.dataLoading" class="fa fa-spinner fa-pulse fa-fw"></i>
+    </div>
+</form>

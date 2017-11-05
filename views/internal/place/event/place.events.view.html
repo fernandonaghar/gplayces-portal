@@ -1,0 +1,22 @@
+<div class="x_panel">
+    <div class="x_title">
+        <h2>{{ vm.place.attributes.name }}</h2>
+        <div class="clearfix"></div>
+    </div>
+    <div class="x_content">
+        <div class="" role="tabpanel" data-example-id="togglable-tabs">
+            <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+                <li role="presentation" ui-sref-active="active">
+                    <a ui-sref="app.places.events.list({ parse_place: vm.place })" aria-expanded="false"><i class="fa fa-calendar"></i> Eventos</a>
+                </li>
+                <li role="presentation" ui-sref-active="active">
+                    <a ui-sref="app.places.events.edit({ parse_place: vm.place })" aria-expanded="false"><i class="fa fa-plus"></i> Novo Evento</a>
+                </li>
+            </ul>
+            <div class="x_content">
+                <div id="views" ui-view>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

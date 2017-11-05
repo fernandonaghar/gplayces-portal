@@ -5,9 +5,9 @@
         .module('app')
         .controller('PlacesEditController', PlacesEditController);
 
-    PlacesEditController.$inject = ['$state', '$rootScope', 'PlaceService', 'GeneralServices', 'FlashService', '$stateParams', '$timeout'];
+    PlacesEditController.$inject = ['$state', '$rootScope', 'PlaceService', 'GeneralServices', 'FlashService', '$stateParams', '$timeout', 'UserService'];
 
-    function PlacesEditController($state, $rootScope, PlaceService, GeneralServices, FlashService, $stateParams, $timeout) {
+    function PlacesEditController($state, $rootScope, PlaceService, GeneralServices, FlashService, $stateParams, $timeout, UserService) {
         var edit = this;
         edit.savePlaceData = savePlaceData;
         edit.isNewRecord = true;

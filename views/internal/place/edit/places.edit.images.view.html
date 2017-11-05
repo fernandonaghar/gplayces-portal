@@ -1,0 +1,19 @@
+<div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }" ng-if="flash" ng-bind="flash.message"></div>
+<form name="form" id="sliding-form">
+    <div>
+        <div class="x_panel">
+            <div class="x_title">
+                <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+                    <li role="presentation" ui-sref-active="active">
+                        <h4><a ui-sref="app.places.edit.images.gallery({ place: vm.place })" aria-expanded="false"><i class="fa fa-picture-o"></i> Galeria</a></h4>
+                    </li>
+                    <li role="presentation" ui-sref-active="active">
+                        <h4><a ui-sref="app.places.edit.images.new({ place: vm.place })" aria-expanded="false"><i class="fa fa-plus"></i> Adicionar Foto</a></h4>
+                    </li>
+                </ul>
+            </div>
+            <div id="detail-views" ui-view>
+            </div>
+        </div>
+    </div>
+</form>

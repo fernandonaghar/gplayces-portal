@@ -1,2 +1,22 @@
-<div id="detail-views" ui-view>
+<div class="page-title">
+    <div class="title_left">
+        <h2>Locais</h2>
+    </div>
+</div>
+<div class="x_panel">
+    <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+        <li role="presentation" ui-sref-active="active">
+            <h4><a ui-sref="app.places.myplaces" aria-expanded="false"><i class="fa fa-home"></i> Meus locais</a></h4>
+        </li>
+        <li role="presentation" ui-sref-active="active">
+            <h4><a ui-sref="app.places.created" aria-expanded="false"><i class="fa fa-search-plus "></i> Buscar</a></h4>
+        </li>
+        <li role="presentation" ui-sref-active="active">
+            <h4><a ui-sref="app.places.edit" aria-expanded="false"><i class="fa fa-plus"></i> Novo local</a></h4>
+        </li>
+    </ul>
+    <div class="x_content">
+        <div id="detail-views" ui-view>
+        </div>
+    </div>
 </div>

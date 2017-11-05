@@ -1,0 +1,39 @@
+<div class="x_content">
+    <div class="row">
+        <div ng-if="editimages.GalleryLoading">
+            <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+            <span class="sr-only">Carregando...</span>
+        </div>
+        <div ng-if="!editimages.GalleryLoading && editimages.noImagesFound">
+            <p>Nenhuma foto encontrada.</p>
+        </div>
+        <div class="col-md-55" ng-repeat="image in editimages.filteredGallery">
+            <div class="thumbnail">
+                <div class="image view view-first">
+                    <!-- Mensagem de erro no console a img abaixo, browser tenta buscar a imagem sem antes resolver a expressao -->
+                    <img style="width: 100%; display: block;" src="{{ image.image }}">
+                    <div class="mask">
+                        <div class="tools">
+                            <button class="red" ng-click="editimages.RemovePhoto(image)"><i class="fa fa-times"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group text-center">
+                    <h4>
+                        <button ng-disabled="editimages.positionChangeLoading" ng-click="editimages.backwardPosition(image)" class="btn btn-primary"><i class="fa fa-backward"></i></button>Posição: {{ image.position }}
+                        <button ng-disabled="editimages.positionChangeLoading" ng-click="editimages.nextPosition(image)" class="btn btn-primary"><i class="fa fa-forward"></i></button>
+                    </h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }" ng-if="flash" ng-bind="flash.message"></div>
+        <ul ng-if="(!editimages.GalleryLoading && !editimages.noImagesFound) && (editimages.photoGallery.length > editimages.numPerPage)" uib-pagination direction-links="false" boundary-links="false" items-per-page="editimages.numPerPage" total-items="editimages.photoGallery.length"
+            ng-model="editimages.currentPage"></ul>
+    </div>
+    <div class="form-actions">
+        <button ng-click="editimages.advanceFlow()" ng-disabled="editimages.GalleryLoading || editimages.positionChangeLoading" class="btn btn-primary">Concluir</button>
+        <i ng-if="editimages.GalleryLoading" class="fa fa-spinner fa-pulse fa-fw"></i>
+    </div>
+</div>

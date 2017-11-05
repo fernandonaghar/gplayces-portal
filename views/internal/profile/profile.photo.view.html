@@ -1,9 +1,10 @@
 <div class="row">
     <div class="col-lg-8">
         <div class="card">
-            <div class="card-header">Selecione uma foto: <input type="file" id="fileInput" /></div>
+            <div class="card-header">Selecione uma foto:
+                <input type="file" id="fileInput" accept="image/*" ng-model="image1" image="image1" resize-max-height="1024" resize-max-width="768" resize-quality="0.7" resize-type="image/jpg" ng-image-compress/></div>
             <div class="cropArea card-body">
-                <ui-cropper image="myImage" result-blob="photo.resultBlob" result-image-format="image/png" result-image-size="100" area-type="rectangle" result-image="photo.myCroppedImage"></ui-cropper>
+                <ui-cropper image="image1.compressed.dataURL" result-blob="photo.resultBlob" result-image-format="image/jpg" result-image-size="150" area-type="rectangle" result-image="photo.myCroppedImage"></ui-cropper>
             </div>
         </div>
     </div>
@@ -22,7 +23,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <button ng-click="photo.updateProfilePhoto()" class="btn btn-primary pull-right">Salvar</button>
+                    <button ng-click="photo.updateProfilePhoto()" ng-disabled="!image1" class="btn btn-primary pull-right">Salvar</button>
                 </div>
             </div>
         </div>

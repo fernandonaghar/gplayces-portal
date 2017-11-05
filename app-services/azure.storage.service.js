@@ -13,6 +13,7 @@
         service.BuildblobService = BuildblobService;
         service.ListBlobs = ListBlobs;
         service.UploadBlob = UploadBlob;
+        service.DeleteBlob = DeleteBlob;
         service.getBlobURI = getBlobURI;
         service.getKey = getKey;
 
@@ -83,6 +84,20 @@
             var speedSummary = blobService.createBlockBlobFromBrowserFile(container, fileName, file, options, f);
             return speedSummary;
         }
+
+        function DeleteBlob(container, blob) {
+
+            var blobService = BuildblobService();
+
+            blobService.deleteBlobIfExists(container, blob, function(error, result) {
+                if (error) {
+                    // Delete blob failed
+                } else {
+                    // Delete blob successfully
+                }
+            });
+        }
+
     }
 
 })();

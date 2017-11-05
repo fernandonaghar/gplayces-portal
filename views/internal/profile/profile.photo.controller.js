@@ -14,30 +14,29 @@
         photo.uploadFinished = true;
         var speedSummary;
 
-        $scope.myImage = UserService.GetProfilePhotoURL();
+        photo.currentPicture = UserService.GetProfilePhotoURL();
+        if (photo.currentPicture != null) {
+            var compressed = [];
+            $scope.image1 = [];
+            compressed.dataURL = UserService.GetProfilePhotoURL();
+            $scope.image1.compressed = compressed;
+        }
 
         photo.myCroppedImage = '';
         photo.resultBlob = '';
 
-        var handleFileSelect = function(evt) {
-            var file = evt.currentTarget.files[0];
-            photo.file = file;
-            var reader = new FileReader();
-            reader.onload = function(evt) {
-                $scope.$apply(function(photo) {
-                    $scope.myImage = evt.target.result;
-                });
-            };
-            reader.readAsDataURL(file);
-        };
-        angular.element(document.querySelector('#fileInput')).on('change', handleFileSelect);
-
         function updateProfilePhoto() {
 
-            photo.uploadFinished = false;
-            var timestamp = new Date().getUTCMilliseconds();
-            photo.resultBlob.name = photo.user.id + '_' + timestamp + '.png';
+            if (photo.user.picture != null) {
+                AzureStorageService.DeleteBlob('profilephoto', photo.user.picture);
+            }
 
+            displayProcess(0);
+            photo.uploadFinished = false;
+            var timestamp = new Date().toISOString();
+            photo.resultBlob.name = photo.user.id + '_' + timestamp + '.jpg';
+
+            refreshProgress();
             speedSummary = AzureStorageService.UploadBlob('profilephoto', photo.resultBlob.name, photo.resultBlob, function(error, result, response) {
                 photo.uploadFinished = true;
                 if (error) {
@@ -74,7 +73,6 @@
                 }
             }, 200);
         }
-        refreshProgress();
     }
 
 })();

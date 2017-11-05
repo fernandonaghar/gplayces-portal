@@ -1,0 +1,102 @@
+<div class="col-lg-12">
+    <div class="col-lg-6 col-md-6 col-sm-12">
+        <div class="x_panel">
+            <h3 ng-if="vm.newRecord">Nova Cidade</h3>
+            <h3 ng-if="!vm.newRecord">Editar Cidade</h3>
+            <button ng-if="!vm.newRecord" ng-click="vm.CancelEdit()" ng-disabled="vm.saveLoading" class="btn btn-primary btn-xs">Desfazer</button>
+            <form name="form">
+                <div class="form-group">
+                    <label class="form-control-label">País</label>
+                    <select placeholder="País" ng-model="vm.newcity.country" required class="form-control" ng-disabled="vm.disabledCountries" ng-options="option.attributes.country for option in vm.countries track by option.id" title="País">
+                            </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label">Estado</label><i ng-if="vm.newCityStatesLoading" class="fa fa-spinner fa-pulse fa-fw"></i>
+                    <select placeholder="Estado" ng-model="vm.newcity.state" required ng-disabled="vm.newCityStatesLoading || vm.disabledNewCityStates" class="form-control" ng-options="option.attributes.state for option in vm.newCityStates track by option.id" title="Estado">
+                            </select>
+                </div>
+                <div class="form-group">
+                    <div class="checkbox">
+                        <label><input type="checkbox" ng-model="vm.newcity.active" checked> Ativo</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label">Busca no mapa</label>
+                    <input id="pac-input" type="text" name="placename" required placeholder="Busca" ng-model="vm.mapSearch" class="form-control">
+                </div>
+                <i ng-if="vm.mapLoading" class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+                <div id="map"></div>
+                <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDjp7HdY1pzClTzrbdqHtPuliZ1PBaq7DI&libraries=geometry,places" async defer></script>
+
+                <div class="form-group">
+                    <label class="form-control-label">Nome da Cidade</label>
+                    <input id="pac-name" type="text" name="placename" ng-disabled="!vm.newcity.state" required placeholder="Nome da Cidade" ng-model="vm.newcity.name" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label">Latitude</label>
+                    <input id="pac-lat" type="text" disabled placeholder="Latitude" ng-model="vm.newcity.latitude" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label">Longitude</label>
+                    <input id="pac-long" type="text" disabled placeholder="Longitude" ng-model="vm.newcity.longitude" class="form-control">
+                </div>
+            </form>
+            <div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }" ng-if="flash" ng-bind="flash.message"></div>
+            <div class="form-actions">
+                <button ng-click="vm.SaveCity()" ng-disabled="vm.saveLoading" class="btn btn-primary">Salvar</button>
+                <i ng-if="vm.saveLoading" class="fa fa-spinner fa-pulse fa-fw"></i>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6 col-sm-12">
+        <div class="x_panel">
+            <h3>Pesquisar</h3>
+            <form name="search">
+                <div class="form-group">
+                    <label class="form-control-label">País</label>
+                    <select placeholder="País" ng-model="vm.searchCountry" required class="form-control" ng-disabled="vm.disabledCountries" ng-options="option.attributes.country for option in vm.countries track by option.id" title="País">
+                        </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label">Estado</label><i ng-if="vm.searchCityStatesLoading" class="fa fa-spinner fa-pulse fa-fw"></i>
+                    <select placeholder="Estado" ng-model="vm.searchState" ng-disabled="vm.searchCityStatesLoading || vm.disabledSearchCityStates" class="form-control" ng-options="option.attributes.state for option in vm.searchStates track by option.id" title="Estado">
+                        </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label">Cidade</label>
+                    <input id="searchstring" type="text" placeholder="Pesquisar" ng-model="vm.searchCity" class="form-control">
+                </div>
+                <div class="form-actions">
+                    <button ng-click="vm.SearchCities()" ng-disabled="!vm.searchCountry || vm.searchLoading" class="btn btn-primary ">Buscar</button>
+                    <i ng-if="vm.searchLoading " class="fa fa-spinner fa-pulse fa-fw "></i>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6 col-sm-12 ">
+        <div class="x_panel ">
+            <div class="x_title ">
+                <h3>Cidades</h3>
+            </div>
+            <div class="x_content ">
+                <div ng-if="vm.citiesLoading ">
+                    <i class="fa fa-spinner fa-pulse fa-3x fa-fw "></i>
+                    <span class="sr-only ">Loading...</span>
+                </div>
+                <div ng-if="!vm.citiesLoading && vm.noCitiesFound ">
+                    <p>Nenhuma cidade encontrada.</p>
+                </div>
+                <uib-accordion close-others="true ">
+                    <div uib-accordion-group class="panel-default" ng-repeat="object in vm.filteredCities">
+                        <div uib-accordion-heading>
+                            <b>{{ object.name }}</b>
+                        </div>
+                        <button ng-click="vm.EditCity(object)" class="btn btn-primary">Editar</button>
+                        <i ng-if="vm.saveLoading" class="fa fa-spinner fa-pulse fa-fw"></i>
+                    </div>
+                </uib-accordion>
+            </div>
+            <ul ng-if="!vm.citiesLoading && !vm.noCitiesFound && (vm.cities.length > vm.numPerPage)" uib-pagination direction-links="false " boundary-links="false " items-per-page="vm.numPerPage " total-items="vm.cities.length " ng-model="vm.currentPage "></ul>
+        </div>
+    </div>
+</div>

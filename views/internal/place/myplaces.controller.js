@@ -12,7 +12,7 @@
         vm.dataLoading = true;
         vm.requestsLoading = true;
         vm.cancelRequest = cancelRequest;
-        vm.numPerPage = 5;
+        vm.numPerPage = 10;
 
         vm.owned_places = [];
         vm.filteredPlaces = [];

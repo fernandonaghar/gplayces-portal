@@ -2,7 +2,7 @@
     'use strict';
 
     var app = angular
-        .module('app', ['ngAnimate', 'ngCookies', 'ui.router', 'ngSanitize', 'ui.bootstrap', 'uiCropper', 'pascalprecht.translate', 'ui.utils.masks'])
+        .module('app', ['ngAnimate', 'ngCookies', 'ui.router', 'ngSanitize', 'ui.bootstrap', 'uiCropper', 'pascalprecht.translate', 'ui.utils.masks', 'ngImageCompress'])
         .config(config)
         .run(run);
 
@@ -45,16 +45,6 @@
                     'content@': {
                         controller: 'DashboardController',
                         templateUrl: 'views/internal/dashboard/dashboard.view.html',
-                        controllerAs: 'vm'
-                    }
-                }
-            })
-            .state('app.events', {
-                url: 'events',
-                views: {
-                    'content@': {
-                        controller: 'EventController',
-                        templateUrl: 'views/internal/event/event.view.html',
                         controllerAs: 'vm'
                     }
                 }
@@ -113,16 +103,46 @@
             controllerAs: 'vm'
         })
 
+        .state('app.places.events', {
+                url: '/events',
+                params: {
+                    parse_place: null
+                },
+                templateUrl: 'views/internal/place/event/place.events.view.html',
+                redirectTo: 'app.places.events.list',
+                controller: 'PlaceEventsController',
+                controllerAs: 'vm'
+            })
+            .state('app.places.events.list', {
+                url: '/list',
+                params: {
+                    parse_place: null
+                },
+                templateUrl: 'views/internal/place/event/place.events.list.view.html',
+                controller: 'PlaceEventsListController',
+                controllerAs: 'events'
+            })
+            .state('app.places.events.edit', {
+                url: '/edit',
+                params: {
+                    parse_place: null,
+                    parse_event: null
+                },
+                templateUrl: 'views/internal/place/event/place.events.edit.view.html',
+                controller: 'EventsEditController',
+                controllerAs: 'edit'
+            })
+
         .state('app.places.edit', {
                 url: '/edit',
                 params: {
                     place: null,
                     parse_place: null
                 },
-                templateUrl: 'views/internal/place/places.edit.view.html',
+                templateUrl: 'views/internal/place/edit/places.edit.view.html',
                 redirectTo: 'app.places.edit.data',
-                controller: 'PlacesEditController',
-                controllerAs: 'edit'
+                controller: 'PlacesController',
+                controllerAs: 'vm'
             })
             .state('app.places.edit.data', {
                 url: '/data',
@@ -130,7 +150,9 @@
                     place: null,
                     parse_place: null
                 },
-                templateUrl: 'views/internal/place/places.edit.data.view.html',
+                templateUrl: 'views/internal/place/edit/places.edit.data.view.html',
+                controller: 'PlacesEditController',
+                controllerAs: 'edit'
             })
             .state('app.places.edit.contact', {
                 url: '/contact',
@@ -138,7 +160,7 @@
                     place: null,
                     parse_place: null
                 },
-                templateUrl: 'views/internal/place/places.edit.contactdata.view.html',
+                templateUrl: 'views/internal/place/edit/places.edit.contactdata.view.html',
                 controller: 'PlacesEditController',
                 controllerAs: 'edit'
             })
@@ -148,7 +170,7 @@
                     place: null,
                     parse_place: null
                 },
-                templateUrl: 'views/internal/place/places.edit.address.view.html',
+                templateUrl: 'views/internal/place/edit/places.edit.address.view.html',
                 controller: 'PlacesEditAddressController',
                 controllerAs: 'editaddr'
             })
@@ -158,7 +180,7 @@
                     place: null,
                     parse_place: null
                 },
-                templateUrl: 'views/internal/place/places.edit.hours.view.html',
+                templateUrl: 'views/internal/place/edit/places.edit.hours.view.html',
                 controller: 'PlacesEditHoursController',
                 controllerAs: 'edithours'
             })
@@ -168,7 +190,16 @@
                     place: null,
                     parse_place: null
                 },
-                templateUrl: 'views/internal/place/places.edit.images.view.html',
+                templateUrl: 'views/internal/place/edit/places.edit.images.view.html',
+                redirectTo: 'app.places.edit.images.gallery'
+            })
+            .state('app.places.edit.images.gallery', {
+                url: '/gallery',
+                params: {
+                    place: null,
+                    parse_place: null
+                },
+                templateUrl: 'views/internal/place/edit/places.edit.images.gallery.view.html',
                 controller: 'PlacesEditImagesController',
                 controllerAs: 'editimages'
             })
@@ -178,9 +209,9 @@
                     place: null,
                     parse_place: null
                 },
-                templateUrl: 'views/internal/place/places.edit.images.view.html',
-                controller: 'PlacesEditImagesController',
-                controllerAs: 'editimages'
+                templateUrl: 'views/internal/place/edit/places.edit.images.new.view.html',
+                controller: 'PlacesEditNewImagesController',
+                controllerAs: 'editimagesnew'
             })
 
         .state('app.places.request_admin', {
@@ -189,7 +220,7 @@
                     place: null,
                     parse_place: null
                 },
-                templateUrl: 'views/internal/place/places.requestadmin.view.html',
+                templateUrl: 'views/internal/place/requestadmin/places.requestadmin.view.html',
                 controller: 'PlacesRequestAdminRedirectController',
                 controllerAs: 'request'
             })
@@ -201,7 +232,7 @@
                     user: null,
                     user_info: null
                 },
-                templateUrl: 'views/internal/place/places.requestadmin.userdata.view.html',
+                templateUrl: 'views/internal/place/requestadmin/places.requestadmin.userdata.view.html',
                 controller: 'PlacesRequestAdminUserDataController',
                 controllerAs: 'userdata'
             })
@@ -213,7 +244,7 @@
                 },
                 controller: 'PlacesRequestAdminRequestController',
                 controllerAs: 'request',
-                templateUrl: 'views/internal/place/places.requestadmin.request.view.html',
+                templateUrl: 'views/internal/place/requestadmin/places.requestadmin.request.view.html',
             })
 
         // Approval requests
@@ -227,6 +258,29 @@
                 }
             }
         })
+
+        // Cities
+        .state('app.locations', {
+                url: 'locations',
+                redirectTo: 'app.locations.cities',
+                views: {
+                    'content@': {
+                        templateUrl: 'views/internal/city/admin.locations.view.html'
+                    }
+                }
+            })
+            .state('app.locations.cities', {
+                url: '/cities',
+                templateUrl: 'views/internal/city/city.view.html',
+                controller: 'CitiesController',
+                controllerAs: 'vm',
+            })
+            .state('app.locations.states', {
+                url: '/states',
+                templateUrl: 'views/internal/city/states.view.html',
+                controller: 'StatesController',
+                controllerAs: 'vm',
+            })
 
         // login
         .state('login', {

@@ -142,8 +142,8 @@
                 document.getElementById('pac-long'));
 
             editaddr.place.address = input.value;
-            editaddr.place.latitude = lat.value;
-            editaddr.place.longitude = long.value;
+            editaddr.place.latitude = Math.round(lat.value * 10000000) / 10000000;
+            editaddr.place.longitude = Math.round(long.value * 10000000) / 10000000;
 
             editaddr.dataLoading = true;
             PlaceService.SavePlace(editaddr.place).then(function(response) {

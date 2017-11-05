@@ -1,0 +1,39 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <form>
+                    <div class="form-group">
+                        <label class="form-control-label">Tipo de foto</label>
+                        <select ng-model="editimagesnew.photoType" class="form-control" ng-options="photoType.value for photoType in editimagesnew.photoTypeOptions track by photoType.id" title="Tipo de foto"></select>
+                    </div>
+                    <div class="form-group" ng-if="editimagesnew.photoType.id == '1'">
+                        <label class="form-control-label">Posição na galeria</label>
+                        <input type="number" placeholder="Posição" ng-model="editimagesnew.sequence" class="form-control">
+                    </div>
+
+                    <div class="form-group" ng-class="{ 'hidden': editimagesnew.photoType.id == null || editimagesnew.photoType.id == '' }">
+                        <label class="form-control-label">Selecione uma foto:</label>
+                        <input type="file" id="fileInput" accept="image/*" ng-model="image1" image="image1" resize-max-height="768" resize-max-width="768" resize-quality="0.7" resize-type="image/jpg" ng-image-compress/>
+                    </div>
+                </form>
+            </div>
+            <div class="cropArea card-body" ng-if="editimagesnew.displayPhotoSelected">
+                <ui-cropper image="image1.compressed.dataURL" result-blob="editimagesnew.resultBlob" result-image-format="image/jpg" result-image-size="editimagesnew.resultImageSize" area-type="square" result-image="editimagesnew.myCroppedImage"></ui-cropper>
+            </div>
+            <div class="card-body" ng-if="editimagesnew.displayPhotoSelected">
+                <div class="form-group">
+                    <div class="progress">
+                        <div id="progress" class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                            0%
+                        </div>
+                    </div>
+                </div>
+                <div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }" ng-if="flash" ng-bind="flash.message"></div>
+                <div class="form-group">
+                    <button ng-disabled="!editimagesnew.photoType" ng-click="editimagesnew.AddPhotoToGallery()" class="btn btn-primary pull-right">Adicionar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -41,5 +41,5 @@
             </div>
         </uib-accordion>
     </div>
-    <ul ng-if="!vm.requestsLoading && !vm.noAdminRequestsFound" uib-pagination direction-links="false" boundary-links="false" items-per-page="vm.numPerPage" total-items="vm.adminRequests.length" ng-model="vm.currentRequestPage"></ul>
+    <ul ng-if="!vm.requestsLoading && !vm.noAdminRequestsFound && (vm.adminRequests.length > vm.numPerPage)" uib-pagination direction-links="false" boundary-links="false" items-per-page="vm.numPerPage" total-items="vm.adminRequests.length" ng-model="vm.currentRequestPage"></ul>
 </div>

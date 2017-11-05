@@ -5,27 +5,36 @@
         .module('app')
         .factory('PlaceService', PlaceService);
 
-    PlaceService.$inject = ['$http', '$q'];
+    PlaceService.$inject = ['$http', '$q', 'AzureStorageService'];
 
-    function PlaceService($http, $q) {
+    function PlaceService($http, $q, AzureStorageService) {
         var service = {};
         service.GetCreatedPlaces = GetCreatedPlaces;
         service.GetOwnedPlaces = GetOwnedPlaces;
+        service.SearchPlaces = SearchPlaces;
         service.GetPlaceCategories = GetPlaceCategories;
+        service.GetcoverImageURL = GetcoverImageURL;
 
         service.GetPlaceHours = GetPlaceHours;
         service.AddPlaceHours = AddPlaceHours;
         service.RemovePlaceHours = RemovePlaceHours;
 
+        service.AddPlacePicture = AddPlacePicture;
+        service.GetPlacePictures = GetPlacePictures;
+        service.RemovePlacePicture = RemovePlacePicture;
+        service.UpdatePlacePicturePosition = UpdatePlacePicturePosition;
+        service.PlacePictureParseToAngularObject = PlacePictureParseToAngularObject;
+
         service.SavePlace = SavePlace;
         service.ParseToAngularObject = ParseToAngularObject;
-        service.CreatePlaceAdministrationRequest = CreatePlaceAdministrationRequest;
 
+        service.CreatePlaceAdministrationRequest = CreatePlaceAdministrationRequest;
         service.GetMyApprovalRequests = GetMyApprovalRequests;
         service.GetPendingApprovalRequests = GetPendingApprovalRequests;
         service.cancelAdministrationRequest = cancelAdministrationRequest;
         service.ApproveAdministrationRequest = ApproveAdministrationRequest;
         service.DenyAdministrationRequest = DenyAdministrationRequest;
+
         return service;
 
         function GetCreatedPlaces() {
@@ -94,6 +103,39 @@
             return deferred.promise;
         }
 
+        function SearchPlaces(searchcategory, searchcity, searchobj) {
+
+            var deferred = $q.defer();
+            var parse_user = Parse.User.current();
+            var Place = Parse.Object.extend("Place");
+
+            var query1 = new Parse.Query(Place);
+            query1.equalTo("city", searchcity);
+
+            if (searchcategory == 0) {
+                query1.matches("name", searchobj);
+            } else if (searchcategory == 1) {
+                query1.matches("address", searchobj);
+            } else if (searchcategory == 2) {
+                query1.equalTo("category", searchobj);
+            }
+
+            query1.include(["city", "category"]);
+            query1.find({
+                success: function(results) {
+                    deferred.resolve({ success: true, parse_data: results });
+
+                    for (var i = 0; i < results.length; i++) {
+                        var object = results[i];
+                        object.isOwner = true;
+                    }
+                },
+                error: function(error) {
+                    deferred.resolve({ success: false, message: 'Erro: "' + error.code + '": ' + error.message });
+                }
+            });
+            return deferred.promise;
+        }
 
         function GetOwnedPlaces() {
 
@@ -226,6 +268,13 @@
             parse_object.set("site", place.site);
             parse_object.set("approvalStatus", place.approvalStatus);
             parse_object.set("approvalRequest", place.approvalRequest);
+            parse_object.set("coverImage", place.coverImage);
+
+            if (place.isActive == null) {
+                parse_object.set("isActive", true);
+            } else {
+                parse_object.set("isActive", place.isActive);
+            }
 
             if (place.latitude != null && place.longitude != null) {
                 var point = new Parse.GeoPoint({ latitude: place.latitude, longitude: place.longitude });
@@ -233,6 +282,24 @@
             }
 
             return parse_object;
+        }
+
+        function GetcoverImageURL(angular_place) {
+            return AzureStorageService.getBlobURI() + '/place/' + angular_place.coverImage;
+        }
+
+        function PlacePictureParseToAngularObject(parse_object) {
+
+            var angular_object = [];
+            angular_object.id = parse_object.id;
+            angular_object.position = parse_object.attributes.position;
+            angular_object.fileURL = parse_object.attributes.fileURL;
+            angular_object.place = parse_object.attributes.place;
+            angular_object.parse_object = parse_object;
+
+            angular_object.image = AzureStorageService.getBlobURI() + '/place/' + parse_object.attributes.fileURL;
+
+            return angular_object;
         }
 
         function ParseToAngularObject(parse_object) {
@@ -254,6 +321,8 @@
             angular_object.location = parse_object.attributes.location;
             angular_object.approvalStatus = parse_object.attributes.approvalStatus;
             angular_object.approvalRequest = parse_object.attributes.approvalRequest;
+            angular_object.isActive = parse_object.attributes.isActive;
+            angular_object.coverImage = parse_object.attributes.coverImage;
 
             if (parse_object.attributes.owner != null) {
                 var current_user = Parse.User.current();
@@ -442,6 +511,71 @@
         function RemovePlaceHours(parse_object) {
             parse_object.destroy(null, {}).catch(angular.noop);
         }
+
+
+        function AddPlacePicture(parse_place, filename, position) {
+
+            var deferred = $q.defer();
+            var parse_object;
+
+            var PlacePictures = Parse.Object.extend("PlacePictures");
+            parse_object = new PlacePictures();
+
+            parse_object.set("place", parse_place);
+            parse_object.set("fileURL", filename);
+            parse_object.set("position", position);
+
+            parse_object.save(null, {
+                success: function(parse_object) {
+                    deferred.resolve({ success: true, parse_object: parse_object });
+                },
+                error: function(parse_user, error) {
+                    deferred.resolve({ success: false, message: 'Erro: "' + error.code + '": ' + error.message });
+                }
+            }).catch(angular.noop);
+
+            return deferred.promise;
+        }
+
+        function UpdatePlacePicturePosition(parse_object, position) {
+
+            var deferred = $q.defer();
+
+            parse_object.set("position", position);
+
+            parse_object.save(null, {
+                success: function(parse_object) {
+                    deferred.resolve({ success: true, parse_object: parse_object });
+                },
+                error: function(parse_user, error) {
+                    deferred.resolve({ success: false, message: 'Erro: "' + error.code + '": ' + error.message });
+                }
+            }).catch(angular.noop);
+
+            return deferred.promise;
+        }
+
+        function GetPlacePictures(parse_place) {
+
+            var deferred = $q.defer();
+            var PlacePictures = Parse.Object.extend("PlacePictures");
+            var query = new Parse.Query(PlacePictures);
+            query.equalTo("place", parse_place);
+            query.find({
+                success: function(results) {
+                    deferred.resolve({ success: true, parse_data: results });
+                },
+                error: function(error) {
+                    deferred.resolve({ success: false, message: 'Erro: "' + error.code + '": ' + error.message });
+                }
+            });
+            return deferred.promise;
+        }
+
+        function RemovePlacePicture(parse_object) {
+            parse_object.destroy(null, {}).catch(angular.noop);
+        }
+
     }
 
 })();
