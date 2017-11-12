@@ -5,17 +5,21 @@
         .module('app')
         .controller('ProfileController', ProfileController);
 
-    ProfileController.$inject = ['$state', 'UserService', '$scope', 'FlashService', 'GeneralServices'];
+    ProfileController.$inject = ['$state', 'UserService', '$scope', 'FlashService', 'GeneralServices', 'EmailService'];
 
-    function ProfileController($state, UserService, $scope, FlashService, GeneralServices) {
+    function ProfileController($state, UserService, $scope, FlashService, GeneralServices, EmailService) {
         var profile = this;
         profile.saveUserData = saveUserData;
         profile.saveAddressData = saveAddressData;
+        profile.linkWithFacebook = linkWithFacebook;
+        profile.testEmail = testEmail;
 
         initController();
 
         function initController() {
             profile.user = UserService.GetCurrentUser();
+            profile.isFacebookLinked = UserService.isFacebookLinked();
+            setFacebookStatus();
 
             // Get User profile Data
             UserService.GetCurrentUserInfo().then(function(response) {
@@ -70,6 +74,49 @@
                 };
             }).catch(angular.noop);
         };
+
+        function testEmail() {
+            EmailService.sendEmail();
+        }
+
+        function linkWithFacebook(action) {
+            profile.facebookLoading = true;
+            if (action == 'Link') {
+                UserService.LinkFacebook().then(function(response) {
+                    if (response != null) {
+                        if (response.success) {
+                            profile.isFacebookLinked = UserService.isFacebookLinked();
+                            setFacebookStatus();
+                            profile.facebookLoading = false;
+                        } else {
+                            FlashService.Error("A associação com o facebook falhou.");
+                            profile.facebookLoading = false;
+                        }
+                    };
+                }).catch(angular.noop);
+            } else {
+                UserService.UnlinkFacebook().then(function(response) {
+                    if (response != null) {
+                        if (response.success) {
+                            profile.isFacebookLinked = UserService.isFacebookLinked();
+                            setFacebookStatus();
+                            profile.facebookLoading = false;
+                        } else {
+                            FlashService.Error("A desassociação da conta do facebook falhou.");
+                            profile.facebookLoading = false;
+                        }
+                    };
+                }).catch(angular.noop);
+            }
+        }
+
+        function setFacebookStatus() {
+            if (profile.isFacebookLinked) {
+                profile.facebookStatus = 'Associada';
+            } else {
+                profile.facebookStatus = 'Não associada';
+            }
+        }
 
     }
 

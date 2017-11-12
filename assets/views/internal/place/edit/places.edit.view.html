@@ -1,12 +1,37 @@
 <div class="x_panel">
-    <div class="x_title">
-        <div id="status-buttons" class="card-header text-center">
-            <a ui-sref-active="active" ui-sref="app.places.edit.data({ place: vm.place })"><span>1</span>Dados</a>
-            <a a-disabled="vm.isNewRecord" ui-sref-active="active" ui-sref="app.places.edit.address({ place: vm.place })"><span>2</span>Endereço</a>
-            <a a-disabled="vm.isNewRecord" ng-if="isAdmin || vm.place.isOwner" ui-sref-active="active" ui-sref="app.places.edit.contact({ place: vm.place })"><span>3</span>Contato</a>
-            <a a-disabled="vm.isNewRecord" ng-if="isAdmin || vm.place.isOwner" ui-sref-active="active" ui-sref="app.places.edit.hours({ place: vm.place })"><span>4</span>Horários</a>
-            <a a-disabled="vm.isNewRecord" ng-if="isAdmin || vm.place.isOwner" ui-sref-active="active" ui-sref="app.places.edit.images({ place: vm.place })"><span>5</span>Imagens</a>
-        </div>
+    <div id="wizard" class="x_title form_wizard wizard_horizontal">
+        <ul class="wizard_steps anchor">
+            <li>
+                <a ui-sref-active="selected" ui-sref="app.places.edit.data({ place: vm.place })">
+                    <span class="step_no">1</span>
+                    <span class="step_descr">Dados</span>
+                </a>
+            </li>
+            <li>
+                <a a-disabled="vm.isNewRecord" ui-sref-active="selected" ui-sref="app.places.edit.address({ place: vm.place })">
+                    <span class="step_no">2</span>
+                    <span class="step_descr">Endereço</span>
+                </a>
+            </li>
+            <li>
+                <a a-disabled="vm.isNewRecord" ng-if="isAdmin || vm.place.isOwner" ui-sref-active="selected" ui-sref="app.places.edit.contact({ place: vm.place })">
+                    <span class="step_no">3</span>
+                    <span class="step_descr">Contato</span>
+                </a>
+            </li>
+            <li>
+                <a a-disabled="vm.isNewRecord" ng-if="isAdmin || vm.place.isOwner" ui-sref-active="selected" ui-sref="app.places.edit.hours({ place: vm.place })">
+                    <span class="step_no">4</span>
+                    <span class="step_descr">Horários</span>
+                </a>
+            </li>
+            <li>
+                <a a-disabled="vm.isNewRecord" ng-if="isAdmin || vm.place.isOwner" ui-sref-active="selected" ui-sref="app.places.edit.images({ place: vm.place })">
+                    <span class="step_no">5</span>
+                    <span class="step_descr">Imagens</span>
+                </a>
+            </li>
+        </ul>
     </div>
     <div class="well well-sm" ng-show="!vm.isNewRecord">
         <h3><img src="{{ vm.placeCoverImage }}" alt="" class="place_thumbnail"> {{ vm.place.name }}</h3>

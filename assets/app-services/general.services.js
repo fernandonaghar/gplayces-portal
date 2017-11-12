@@ -5,9 +5,9 @@
         .module('app')
         .factory('GeneralServices', GeneralServices);
 
-    GeneralServices.$inject = ['$http', '$q', 'ParseObject', 'ParseQuery'];
+    GeneralServices.$inject = ['$q'];
 
-    function GeneralServices($http, $q, ParseObject, ParseQuery) {
+    function GeneralServices($q) {
         var service = {};
         service.GetCities = GetCities;
         service.SearchCities = SearchCities;

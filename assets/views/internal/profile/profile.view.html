@@ -6,24 +6,38 @@
 </div>
 <div class="x_panel">
     <div class="col-lg-12">
-        <div class="x_title">
-            <div id="status-buttons" class="card-header text-center">
-                <a ui-sref-active="active" ui-sref="app.profile.personal"><span>1</span>Pessoal</a>
-                <a ui-sref-active="active" ui-sref="app.profile.address"><span>2</span>Endereço</a>
-                <a ui-sref-active="active" ui-sref="app.profile.photo"><span>3</span>Foto de Perfil</a>
-            </div>
+        <div id="wizard" class="x_title form_wizard wizard_horizontal">
+            <ul class="wizard_steps anchor">
+                <li>
+                    <a ui-sref-active="selected" ui-sref="app.profile.personal">
+                        <span class="step_no">1</span>
+                        <span class="step_descr">Dados Pessoais</span>
+                    </a>
+                </li>
+                <li>
+                    <a ui-sref-active="selected" ui-sref="app.profile.address">
+                        <span class="step_no">2</span>
+                        <span class="step_descr">Endereço</span>
+                    </a>
+                </li>
+                <li>
+                    <a ui-sref-active="selected" ui-sref="app.profile.photo">
+                        <span class="step_no">3</span>
+                        <span class="step_descr">Foto do Perfil</span>
+                    </a>
+                </li>
+            </ul>
         </div>
     </div>
     <div>
-        <div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }" ng-if="flash" ng-bind="flash.message"></div>
-
         <div class="col-lg-12">
             <form id="sliding-form">
                 <div id="form-views" ui-view>
                 </div>
+                <div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }" ng-if="flash" ng-bind="flash.message"></div>
             </form>
-        </div>
 
+        </div>
     </div>
 </div>
 </div>

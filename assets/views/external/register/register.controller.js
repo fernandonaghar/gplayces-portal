@@ -11,6 +11,7 @@
         var vm = this;
 
         vm.register = register;
+        vm.resetPassword = resetPassword;
 
         function register() {
             vm.dataLoading = true;
@@ -24,6 +25,20 @@
                         vm.dataLoading = false;
                     }
                 });
+        }
+
+        function resetPassword() {
+            vm.dataLoading = true;
+            Parse.User.requestPasswordReset(vm.lostpasswordemail, {
+                success: function() {
+                    FlashService.Success('Um e-mail foi enviado para sua caixa, por favor siga as instruções para realizar o reset da senha.', true);
+                    vm.dataLoading = false;
+                },
+                error: function(error) {
+                    FlashService.Error(error.code + " " + error.message);
+                    vm.dataLoading = false;
+                }
+            });
         }
     }
 

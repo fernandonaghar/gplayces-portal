@@ -283,6 +283,14 @@
             controllerAs: 'vm'
         })
 
+        // lostpassword
+        .state('lostpassword', {
+            url: '/lostpassword',
+            controller: 'RegisterController',
+            templateUrl: 'assets/views/external/register/lostpassword.view.html',
+            controllerAs: 'vm'
+        })
+
         // register
         .state('register', {
             url: '/register',

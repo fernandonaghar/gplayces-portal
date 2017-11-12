@@ -16,6 +16,9 @@
         service.SaveUserInfo = SaveUserInfo;
         service.GetProfilePhotoURL = GetProfilePhotoURL;
         service.UpdateProfilePicture = UpdateProfilePicture;
+        service.isFacebookLinked = isFacebookLinked;
+        service.UnlinkFacebook = UnlinkFacebook;
+        service.LinkFacebook = LinkFacebook;
 
         return service;
 
@@ -187,14 +190,50 @@
             return deferred.promise;
         }
 
-        function handleSuccess(res) {
-            return res.data;
+        function isFacebookLinked() {
+            return Parse.FacebookUtils.isLinked(Parse.User.current());
+        }
+
+        function LinkFacebook() {
+
+            var deferred = $q.defer();
+
+            Parse.FacebookUtils.link(Parse.User.current(), null, {
+                success: function(user) {
+                    deferred.resolve({ success: true });
+                },
+                error: function(user, error) {
+                    deferred.resolve({ success: false, message: 'Erro: "' + error.code + '": ' + error.message });
+                }
+            });
+
+            return deferred.promise;
+        }
+
+        function UnlinkFacebook() {
+
+            var deferred = $q.defer();
+
+            Parse.FacebookUtils.unlink(Parse.User.current(), {
+                success: function(user) {
+                    deferred.resolve({ success: true });
+                },
+                error: function(user, error) {
+                    deferred.resolve({ success: false, message: 'Erro: "' + error.code + '": ' + error.message });
+                }
+            });
+
+            return deferred.promise;
         }
 
         function handleError(error) {
             return function() {
                 return { success: false, message: error };
             };
+        }
+
+        function handleSuccess(res) {
+            return res.data;
         }
     }
 

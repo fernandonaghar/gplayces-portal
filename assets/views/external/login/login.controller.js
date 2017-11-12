@@ -5,9 +5,9 @@
         .module('app')
         .controller('LoginController', LoginController);
 
-    LoginController.$inject = ['$state', 'AuthenticationService', 'FlashService'];
+    LoginController.$inject = ['$state', 'AuthenticationService', 'FlashService', 'AzureStorageService'];
 
-    function LoginController($state, AuthenticationService, FlashService) {
+    function LoginController($state, AuthenticationService, FlashService, AzureStorageService) {
         var vm = this;
 
         vm.login = login;
@@ -25,7 +25,10 @@
                 .then(function(response) {
                     if (response != null) {
                         if (response.success) {
-                            $state.go('app.dashboard');
+                            AzureStorageService.loadConfig()
+                                .then(function(response) {
+                                    $state.go('app.dashboard');
+                                }).catch(angular.noop);
                         } else {
                             FlashService.Error(response.message);
                             vm.dataLoading = false;

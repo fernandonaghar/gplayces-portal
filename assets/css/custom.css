@@ -4639,8 +4639,13 @@ fieldset {
     left: 0
 }
 
-.wizard_horizontal ul.wizard_steps li a.disabled .step_no {
+.wizard_horizontal ul.wizard_steps li a .step_no {
     background: #ccc
+}
+
+.wizard_horizontal ul.wizard_steps li a.selected .step_no {
+    background: #34495E !important;
+    color: #fff;
 }
 
 .wizard_horizontal ul.wizard_steps li a .step_no {
@@ -4669,7 +4674,7 @@ fieldset {
 }
 
 .wizard_horizontal ul.wizard_steps li:first-child a:before {
-    left: 50%
+    left: 48%
 }
 
 .wizard_horizontal ul.wizard_steps li:last-child a:before {

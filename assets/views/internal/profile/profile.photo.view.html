@@ -24,6 +24,7 @@
                 </div>
                 <div class="form-group">
                     <button ng-click="photo.updateProfilePhoto()" ng-disabled="!image1" class="btn btn-primary pull-right">Salvar</button>
+                    <i ng-if="!photo.uploadFinished" class="fa fa-spinner fa-pulse fa-fw"></i>
                 </div>
             </div>
         </div>

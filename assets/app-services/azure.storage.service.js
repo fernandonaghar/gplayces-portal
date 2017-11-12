@@ -16,15 +16,30 @@
         service.DeleteBlob = DeleteBlob;
         service.getBlobURI = getBlobURI;
         service.getKey = getKey;
+        service.loadConfig = loadConfig;
 
         return service;
 
         function getBlobURI() {
-            return 'https://gplaycesstorage.blob.core.windows.net';
+            var config = Parse.Config.current();
+            return config.get("storageEnv");
         }
 
         function getKey() {
-            return '?sv=2017-04-17&ss=b&srt=sco&sp=rwdlac&se=2017-11-30T20:48:03Z&st=2017-10-08T12:48:03Z&sip=191.177.185.236&spr=https&sig=uWtgLxPdlDRcIlWq63fhMayi3%2BHYwQL%2BDUzIcYotkeE%3D';
+            var config = Parse.Config.current();
+            return config.get("storageKey");
+        }
+
+        function loadConfig() {
+
+            var deferred = $q.defer();
+            Parse.Config.get().then(function(config) {
+                deferred.resolve({ success: true, config: config });
+            }, function(error) {
+                var config2 = Parse.Config.current();
+                deferred.resolve({ success: true, config: config2 });
+            });
+            return deferred.promise;
         }
 
         function BuildblobService() {
@@ -32,9 +47,6 @@
             var blobUri = getBlobURI();
             var SASkey = getKey();
             var blobService = AzureStorage.createBlobServiceWithSas(blobUri, SASkey);
-            //var blobUri = 'gplaycesstorage';
-            //var key = 'dsskz8bM7PTxmBWo3RbK+Bxm5eGGkK2B/mrYz1uUfVNQwGRrIrP0XWka5Z/3ausMnEwhKWpacUrjL7e8EOtJbA==';
-            //var blobService = AzureStorage.createBlobService(blobUri, key);
 
             return blobService;
         }
