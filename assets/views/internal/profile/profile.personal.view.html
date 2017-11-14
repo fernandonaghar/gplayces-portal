@@ -30,7 +30,7 @@
                 <input type="text" placeholder="facebook" ng-model="profile.facebookStatus" disabled class="form-control">
                 <span class="input-group-btn">
                             <i ng-if="profile.facebookLoading" class="fa fa-spinner fa-pulse fa-fw"></i>
-                    <button ng-if="!profile.isFacebookLinked" ng-click="profile.linkWithFacebook()" class="btn btn-primary">Associar</button>
+                    <button ng-disabled="profile.isFacebookLinked" ng-click="profile.linkWithFacebook()" class="btn btn-primary">Associar</button>
                   </div>            
             </div>
         </div>
