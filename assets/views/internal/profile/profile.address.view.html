@@ -18,7 +18,7 @@
             <input type="text" placeholder="Complemento" ng-model="profile.userinfo.complement" class="form-control">
         </div>
         <div class="form-actions">
-            <button ng-click="profile.saveAddressData()" class="btn btn-primary">Avançar</button>
+            <button ng-disabled="profile.dataLoading" ng-click="profile.saveAddressData()" class="btn btn-primary">Avançar</button>
             <i ng-if="profile.dataLoading" class="fa fa-spinner fa-pulse fa-fw"></i>
         </div>
     </div>

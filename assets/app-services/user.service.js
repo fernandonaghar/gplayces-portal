@@ -16,6 +16,7 @@
         service.SaveUserInfo = SaveUserInfo;
         service.GetProfilePhotoURL = GetProfilePhotoURL;
         service.UpdateProfilePicture = UpdateProfilePicture;
+        service.ChangePassword = ChangePassword;
         service.isFacebookLinked = isFacebookLinked;
         service.UnlinkFacebook = UnlinkFacebook;
         service.LinkFacebook = LinkFacebook;
@@ -69,6 +70,24 @@
             parse_user.set("lastName", user.lastName);
             parse_user.set("birthday", user.birthday);
             parse_user.set("document", user.document);
+
+            parse_user.save(null, {
+                success: function(parse_user) {
+                    deferred.resolve({ success: true });
+                },
+                error: function(parse_user, error) {
+                    deferred.resolve({ success: false, message: 'Erro: "' + error.code + '": ' + error.message });
+                }
+            });
+            return deferred.promise;
+        }
+
+        function ChangePassword(password) {
+
+            var deferred = $q.defer();
+            var parse_user = Parse.User.current();
+
+            parse_user.set("password", password);
 
             parse_user.save(null, {
                 success: function(parse_user) {

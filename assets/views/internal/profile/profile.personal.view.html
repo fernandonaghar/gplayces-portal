@@ -30,13 +30,12 @@
                 <input type="text" placeholder="facebook" ng-model="profile.facebookStatus" disabled class="form-control">
                 <span class="input-group-btn">
                             <i ng-if="profile.facebookLoading" class="fa fa-spinner fa-pulse fa-fw"></i>
-                    <button ng-if="profile.isFacebookLinked" ng-click="profile.linkWithFacebook('Unlink')" class="btn btn-primary">Desassociar</button>
-                    <button ng-if="!profile.isFacebookLinked" ng-click="profile.linkWithFacebook('Link')" class="btn btn-primary">Associar</button>
+                    <button ng-if="!profile.isFacebookLinked" ng-click="profile.linkWithFacebook()" class="btn btn-primary">Associar</button>
                   </div>            
             </div>
         </div>
         <div class="form-actions">
-            <button ng-click="profile.saveUserData()" class="btn btn-primary">Avançar</button>
+            <button ng-disabled="profile.dataLoading" ng-click="profile.saveUserData()" class="btn btn-primary">Avançar</button>
             <i ng-if="profile.dataLoading" class="fa fa-spinner fa-pulse fa-fw"></i>
         </div>
     </div>

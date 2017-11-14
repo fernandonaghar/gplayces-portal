@@ -13,6 +13,7 @@
         profile.saveAddressData = saveAddressData;
         profile.linkWithFacebook = linkWithFacebook;
         profile.testEmail = testEmail;
+        profile.updatePassword = updatePassword;
 
         initController();
 
@@ -79,35 +80,21 @@
             EmailService.sendEmail();
         }
 
-        function linkWithFacebook(action) {
+        function linkWithFacebook() {
             profile.facebookLoading = true;
-            if (action == 'Link') {
-                UserService.LinkFacebook().then(function(response) {
-                    if (response != null) {
-                        if (response.success) {
-                            profile.isFacebookLinked = UserService.isFacebookLinked();
-                            setFacebookStatus();
-                            profile.facebookLoading = false;
-                        } else {
-                            FlashService.Error("A associação com o facebook falhou.");
-                            profile.facebookLoading = false;
-                        }
-                    };
-                }).catch(angular.noop);
-            } else {
-                UserService.UnlinkFacebook().then(function(response) {
-                    if (response != null) {
-                        if (response.success) {
-                            profile.isFacebookLinked = UserService.isFacebookLinked();
-                            setFacebookStatus();
-                            profile.facebookLoading = false;
-                        } else {
-                            FlashService.Error("A desassociação da conta do facebook falhou.");
-                            profile.facebookLoading = false;
-                        }
-                    };
-                }).catch(angular.noop);
-            }
+            UserService.LinkFacebook().then(function(response) {
+                if (response != null) {
+                    if (response.success) {
+                        profile.isFacebookLinked = UserService.isFacebookLinked();
+                        setFacebookStatus();
+                        profile.facebookLoading = false;
+                        FlashService.Success("Sua conta foi associada a seu login do facebook com sucesso, você já pode utilizar o facebook para fazer login.");
+                    } else {
+                        FlashService.Error("A associação com o facebook falhou.");
+                        profile.facebookLoading = false;
+                    }
+                };
+            }).catch(angular.noop);
         }
 
         function setFacebookStatus() {
@@ -116,6 +103,27 @@
             } else {
                 profile.facebookStatus = 'Não associada';
             }
+        }
+
+        function updatePassword() {
+            profile.dataLoading = true;
+            if (profile.newpassword == profile.newpasswordcheck) {
+
+                UserService.ChangePassword(profile.newpassword).then(function(response) {
+                    if (response != null) {
+                        if (response.success) {
+                            FlashService.Success("Senha atualizada com sucesso.");
+                        } else {
+                            FlashService.Error(response.message);
+                        }
+                        profile.dataLoading = false;
+                    };
+                }).catch(angular.noop);
+
+            } else {
+                FlashService.Error("As senhas digitadas não conferem.");
+            }
+
         }
 
     }

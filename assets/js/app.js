@@ -69,6 +69,10 @@
                 controller: 'ProfilePhotoController',
                 controllerAs: 'photo'
             })
+            .state('app.profile.changepassword', {
+                url: '/changepassword',
+                templateUrl: 'assets/views/internal/profile/profile.changepassword.html',
+            })
 
         // Places
         .state('app.places', {
