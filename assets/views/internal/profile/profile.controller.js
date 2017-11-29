@@ -14,6 +14,7 @@
         profile.linkWithFacebook = linkWithFacebook;
         profile.testEmail = testEmail;
         profile.updatePassword = updatePassword;
+        profile.testCloudCode = EmailService.testCloudCode;
 
         initController();
 
@@ -123,9 +124,7 @@
             } else {
                 FlashService.Error("As senhas digitadas não conferem.");
             }
-
         }
-
     }
 
 })();

@@ -272,7 +272,7 @@
             parse_object.set("coverImage", place.coverImage);
 
             if (place.isActive == null) {
-                parse_object.set("isActive", true);
+                parse_object.set("isActive", false);
             } else {
                 parse_object.set("isActive", place.isActive);
             }

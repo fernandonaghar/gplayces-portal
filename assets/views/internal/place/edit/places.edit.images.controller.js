@@ -5,9 +5,9 @@
         .module('app')
         .controller('PlacesEditImagesController', PlacesEditImagesController);
 
-    PlacesEditImagesController.$inject = ['$state', '$rootScope', 'PlaceService', 'FlashService', '$stateParams', 'AzureStorageService'];
+    PlacesEditImagesController.$inject = ['$state', '$rootScope', 'PlaceService', 'FlashService', '$stateParams', 'AzureStorageService', '$translate'];
 
-    function PlacesEditImagesController($state, $rootScope, PlaceService, FlashService, $stateParams, AzureStorageService) {
+    function PlacesEditImagesController($state, $rootScope, PlaceService, FlashService, $stateParams, AzureStorageService, $translate) {
         var editimages = this;
         editimages.advanceFlow = advanceFlow;
         editimages.RemovePhoto = RemovePhoto;
@@ -134,7 +134,26 @@
         };
 
         function advanceFlow() {
-            $state.go('app.places.myplaces');
+
+            if (editimages.place.coverImage == null) {
+                FlashService.Error($translate.instant('COVER_IMAGE_REQUIRED'));
+            } else {
+                editimages.place.isActive = true;
+
+                editimages.GalleryLoading = true;
+                PlaceService.SavePlace(editimages.place).then(function(response) {
+                    if (response != null) {
+                        if (response.success) {
+                            editimages.GalleryLoading = false;
+
+                            $state.go('app.places.myplaces');
+                        } else {
+                            FlashService.Error(response.message);
+                            editimages.GalleryLoading = false;
+                        }
+                    };
+                }).catch(angular.noop);
+            }
         };
     }
 

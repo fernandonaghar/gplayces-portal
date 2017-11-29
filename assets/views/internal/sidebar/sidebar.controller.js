@@ -5,9 +5,9 @@
         .module('app')
         .controller('SidebarController', SidebarController);
 
-    SidebarController.$inject = ['$scope', 'UserService', '$rootScope'];
+    SidebarController.$inject = ['$scope', 'UserService', '$rootScope', '$translate'];
 
-    function SidebarController($scope, UserService, $rootScope) {
+    function SidebarController($scope, UserService, $rootScope, $translate) {
         var vm = this;
         vm.user = UserService.GetCurrentUser();
 

@@ -10,6 +10,7 @@
     function EmailService($q, $http) {
         var service = {};
         service.sendEmail = sendEmail;
+        service.testCloudCode = testCloudCode;
         return service;
 
         function sendEmail() {
@@ -56,7 +57,16 @@
             req.end(body);
         }
 
-    }
+        function testCloudCode() {
 
+            Parse.Cloud.run('sendEmail', {
+                To: 'fernando.naghar@gmail.com',
+                Subject: 'assunto',
+                TextPart: 'texto do corpo do email'
+            }).then(function(response) {
+                var a = response;
+            });
+        };
+    }
 
 })();

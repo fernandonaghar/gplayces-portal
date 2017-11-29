@@ -5,9 +5,9 @@
         .module('app')
         .controller('RegisterController', RegisterController);
 
-    RegisterController.$inject = ['$state', 'UserService', '$rootScope', 'FlashService'];
+    RegisterController.$inject = ['$state', 'UserService', '$rootScope', 'FlashService', '$translate'];
 
-    function RegisterController($state, UserService, $rootScope, FlashService) {
+    function RegisterController($state, UserService, $rootScope, FlashService, $translate) {
         var vm = this;
 
         vm.register = register;
@@ -18,7 +18,7 @@
             UserService.Create(vm.user)
                 .then(function(response) {
                     if (response.success) {
-                        FlashService.Success('Registro realizado com sucesso, você já pode realizar login.', true);
+                        FlashService.Success($translate.instant('REGISTRATION_SUCCESSFUL'), true);
                         $state.go('login');
                     } else {
                         FlashService.Error(response.message);
@@ -31,7 +31,7 @@
             vm.dataLoading = true;
             Parse.User.requestPasswordReset(vm.lostpasswordemail, {
                 success: function() {
-                    FlashService.Success('Um e-mail foi enviado para sua caixa, por favor siga as instruções para realizar o reset da senha.', true);
+                    FlashService.Success($translate.instant('PASSWORD_RESET_MESSAGE'), true);
                     vm.dataLoading = false;
                 },
                 error: function(error) {

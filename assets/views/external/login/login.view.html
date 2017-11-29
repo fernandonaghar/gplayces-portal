@@ -7,11 +7,11 @@
                     <h1>Login</h1>
                     <div ng-class="{ 'has-error': form.username.$dirty && form.username.$error.required }">
                         <input type="text" name="username" id="username" placeholder="E-mail" class="form-control" ng-model="vm.username" required />
-                        <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">E-mail é requerido.</span>
+                        <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">{{ 'FIELD_REQUIRED' | translate }}</span>
                     </div>
                     <div class="form-group" ng-class="{ 'has-error': form.password.$dirty && form.password.$error.required }">
-                        <input type="password" name="password" id="password" placeholder="Senha" class="form-control" ng-model="vm.password" required />
-                        <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Senha é requerida.</span>
+                        <input type="password" name="password" id="password" placeholder="{{ 'PASSWORD' | translate }}" class="form-control" ng-model="vm.password" required />
+                        <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">{{ 'FIELD_REQUIRED' | translate }}</span>
                     </div>
                     <div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }" ng-if="flash" ng-bind="flash.message"></div>
                     <div class="form-actions">
@@ -20,20 +20,24 @@
                     </div>
                     <div class="separator"></div>
                     <p class="change_link">
-                        <a ui-sref="lostpassword" class="to_register">Esqueceu sua senha?</a>
+                        <a ui-sref="lostpassword" class="to_register">{{ 'FORGOT_PASSWORD' | translate }}</a>
                     </p>
                     <div class="separator"></div>
                     <div class="facebook_button">
-                        <p>Ou se preferir</p>
-                        <button type="button" ng-click="vm.login_facebook()" class="btn btn-primary">Entrar com o Facebook</button>
+                        <p>{{ 'LOGIN_PREFER' | translate }}</p>
+                        <button type="button" ng-click="vm.login_facebook()" class="btn btn-primary">{{ 'LOGIN_FACEBOOK' | translate }}</button>
                     </div>
                     <div class="separator"></div>
-                    <p class="change_link">Novo ao GPlayces?
-                        <a ui-sref="register" class="to_register">Registre-se!</a>
+                    <p class="change_link">{{ 'NEW_TO_GPLAYCES' | translate }}
+                        <a ui-sref="register" class="to_register">{{ 'REGISTER' | translate }}</a>
                     </p>
                     <br>
                     <div>
                         <h1><i class="fa fa-paw"></i> GPlayces</h1>
+                    </div>
+                    <div>
+                        <select placeholder="Language" ng-model="vm.language" required ng-options="option.language for option in vm.languageList track by option.code" title="Language">
+                        </select>
                     </div>
                 </form>
             </section>

@@ -5,9 +5,9 @@
         .module('app')
         .factory('AuthenticationService', AuthenticationService);
 
-    AuthenticationService.$inject = ['$http', '$cookies', '$rootScope', '$timeout', 'UserService', '$q'];
+    AuthenticationService.$inject = ['$http', '$cookies', '$rootScope', '$timeout', 'UserService', '$q', '$translate'];
 
-    function AuthenticationService($http, $cookies, $rootScope, $timeout, UserService, $q) {
+    function AuthenticationService($http, $cookies, $rootScope, $timeout, UserService, $q, $translate) {
         var service = {};
 
         service.Login = Login;
@@ -24,7 +24,7 @@
                     deferred.resolve({ success: true, user_id: user.id });
                 },
                 error: function(user, error) {
-                    deferred.resolve({ success: false, message: 'Login pelo facebook falhou, se desejar, você pode realizar a criação de uma conta a partir de seu e-mail e posteriormente associar sua conta do facebook.' });
+                    deferred.resolve({ success: false, message: $translate.instant('FACEBOOK_LOGIN_FAILED') });
                 }
             });
 
@@ -40,7 +40,7 @@
                     deferred.resolve({ success: true });
                 },
                 error: function(user, error) {
-                    deferred.resolve({ success: false, message: 'E-mail e/ou senha inválidos.' });
+                    deferred.resolve({ success: false, message: $translate.instant('INVALID_EMAIL_OR_PWD') });
                 }
             });
 

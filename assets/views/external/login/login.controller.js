@@ -5,16 +5,26 @@
         .module('app')
         .controller('LoginController', LoginController);
 
-    LoginController.$inject = ['$state', 'AuthenticationService', 'FlashService', 'AzureStorageService'];
+    LoginController.$inject = ['$scope', '$state', 'AuthenticationService', 'FlashService', 'AzureStorageService', '$translate'];
 
-    function LoginController($state, AuthenticationService, FlashService, AzureStorageService) {
+    function LoginController($scope, $state, AuthenticationService, FlashService, AzureStorageService, $translate) {
         var vm = this;
 
         vm.login = login;
         vm.login_facebook = login_facebook;
 
+        vm.languageList = [
+            { 'code': 'ptb', 'language': 'Português' },
+            { 'code': 'enu', 'language': 'English' }
+        ];
+
+        vm.language = { 'code': 'ptb', 'language': 'Português' };
+
+        $scope.$watch('vm.language', function() {
+            $translate.use(vm.language.code);
+        });
+
         (function initController() {
-            // reset login status
             AuthenticationService.ClearCredentials();
         })();
 
