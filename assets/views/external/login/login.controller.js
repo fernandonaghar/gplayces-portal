@@ -13,17 +13,6 @@
         vm.login = login;
         vm.login_facebook = login_facebook;
 
-        vm.languageList = [
-            { 'code': 'ptb', 'language': 'Português' },
-            { 'code': 'enu', 'language': 'English' }
-        ];
-
-        vm.language = { 'code': 'ptb', 'language': 'Português' };
-
-        $scope.$watch('vm.language', function() {
-            $translate.use(vm.language.code);
-        });
-
         (function initController() {
             AuthenticationService.ClearCredentials();
         })();

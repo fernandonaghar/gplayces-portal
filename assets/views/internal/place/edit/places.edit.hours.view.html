@@ -1,33 +1,33 @@
 <div ng-if="isAdmin || edit.place.isOwner">
     <form name="form" id="sliding-form">
         <div class="x_title">
-            <h4>Adicionar novo período</h4>
+            <h4>{{ 'ADD_NEW_PERIOD' | translate }}</h4>
             <div class="clearfix"></div>
         </div>
         <div class="form-group">
             <div class="row">
                 <div class="col-md-3 col-sm-3 col-xs-3 form-group has-feedback">
-                    <label class="form-control-label">Dia</label>
+                    <label class="form-control-label">{{ 'DAY' | translate }}</label>
                 </div>
                 <div class="col-md-3 col-sm-3 col-xs-3 form-group has-feedback">
-                    <label class="form-control-label">Início</label>
+                    <label class="form-control-label">{{ 'START' | translate }}</label>
                 </div>
                 <div class="col-md-3 col-sm-3 col-xs-3 form-group has-feedback">
-                    <label class="form-control-label">Fim</label>
+                    <label class="form-control-label">{{ 'END' | translate }}</label>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-3 col-sm-3 col-xs-3 form-group has-feedback">
-                    <select placeholder="Dia" ng-model="edithours.selectedDay" ng-options="day.day for day in edithours.weekdays track by day.id" class="form-control" required></select>
+                    <select placeholder="{{ 'DAY' | translate }}" ng-model="edithours.selectedDay" ng-options="day.day for day in edithours.weekdays track by day.id" class="form-control" required></select>
                 </div>
                 <div class="col-md-3 col-sm-3 col-xs-3 form-group has-feedback">
-                    <select placeholder="Início" ng-model="edithours.selectedStart" ng-options="day as day for day in edithours.availableHours" class="form-control" required></select>
+                    <select placeholder="{{ 'START' | translate }}" ng-model="edithours.selectedStart" ng-options="day as day for day in edithours.availableHours" class="form-control" required></select>
                 </div>
                 <div class="col-md-3 col-sm-3 col-xs-3 form-group has-feedback">
-                    <select placeholder="Fim" ng-model="edithours.selectedEnd" ng-options="day as day for day in edithours.availableHours" class="form-control" required></select>
+                    <select placeholder="{{ 'END' | translate }}" ng-model="edithours.selectedEnd" ng-options="day as day for day in edithours.availableHours" class="form-control" required></select>
                 </div>
                 <div class="col-md-3 col-sm-3 col-xs-3 form-group has-feedback">
-                    <button ng-click="edithours.saveHoursData()" ng-disabled="form.$invalid || edithours.saveHoursLoading" class="btn btn-primary">Adicionar</button>
+                    <button ng-click="edithours.saveHoursData()" ng-disabled="form.$invalid || edithours.saveHoursLoading" class="btn btn-primary">{{ 'ADD' | translate }}</button>
                     <i ng-if="edithours.saveHoursLoading" class="fa fa-spinner fa-pulse fa-fw"></i>
                 </div>
             </div>
@@ -35,17 +35,17 @@
         </div>
         <div class="form-group">
             <div class="x_title">
-                <h4>Horários cadastrados</h4>
+                <h4>{{ 'PERIODS_REGISTERED' | translate }}</h4>
                 <div class="clearfix"></div>
             </div>
             <div class="x_content">
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            <th>Dia</th>
-                            <th>Início</th>
-                            <th>Fim</th>
-                            <th>Ação</th>
+                            <th>{{ 'DAY' | translate }}</th>
+                            <th>{{ 'START' | translate }}</th>
+                            <th>{{ 'END' | translate }}</th>
+                            <th>{{ 'ACTION' | translate }}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -57,7 +57,7 @@
                             <th scope="row">{{ hours.attributes.day }}</th>
                             <td>{{ hours.attributes.start }}</td>
                             <td>{{ hours.attributes.end }}</td>
-                            <td><button ng-click="edithours.removeHoursData(hours)" ng-disabled="edithours.removeHoursLoading" class="btn btn-xs btn-danger">Remover</button>
+                            <td><button ng-click="edithours.removeHoursData(hours)" ng-disabled="edithours.removeHoursLoading" class="btn btn-xs btn-danger">{{ 'REMOVE' | translate }}</button>
                                 <i ng-if="edithours.removeHoursLoading" class="fa fa-spinner fa-pulse fa-fw"></i>
                             </td>
                         </tr>
@@ -66,7 +66,7 @@
             </div>
         </div>
         <div class="form-actions">
-            <button ng-click="edithours.advanceFlow()" ng-disabled="edithours.hoursLoading" class="btn btn-primary">Avançar</button>
+            <button ng-click="edithours.advanceFlow()" ng-disabled="edithours.hoursLoading" class="btn btn-primary">{{ 'ADVANCE' | translate }}</button>
         </div>
     </form>
 </div>

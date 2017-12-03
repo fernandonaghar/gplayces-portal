@@ -1,8 +1,8 @@
 <form name="form" id="sliding-form">
 
     <div class="form-group">
-        <label class="form-control-label">Endereço</label>
-        <input id="pac-input" type="text" name="placename" required placeholder="Endereço" ng-model="editaddr.place.address" class="form-control">
+        <label class="form-control-label">{{ 'ADDRESS' | translate }}</label>
+        <input id="pac-input" type="text" name="placename" required placeholder="{{ 'ADDRESS' | translate }}" ng-model="editaddr.place.address" class="form-control">
     </div>
     <div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }" ng-if="flash" ng-bind="flash.message"></div>
     <i ng-if="editaddr.mapLoading" class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
@@ -10,7 +10,7 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDjp7HdY1pzClTzrbdqHtPuliZ1PBaq7DI&libraries=geometry,places" async defer></script>
 
     <div class="form-group">
-        <button ng-click="editaddr.savePlaceAddressData()" ng-disabled="form.$invalid || edit.dataLoading" class="btn btn-primary">Avançar</button>
+        <button ng-click="editaddr.savePlaceAddressData()" ng-disabled="form.$invalid || edit.dataLoading" class="btn btn-primary">{{ 'ADVANCE' | translate }}</button>
         <i ng-if="editaddr.dataLoading" class="fa fa-spinner fa-pulse fa-fw"></i>
     </div>
 </form>

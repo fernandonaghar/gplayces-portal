@@ -1,39 +1,39 @@
 <div class="col-lg-6 col-md-12">
     <div class="x_panel">
         <div class="x_title">
-            <h3>Pesquisar</h3>
+            <h3>{{ 'SEARCH' | translate }}</h3>
             <form name="form">
                 <div class="form-group">
-                    <label class="form-control-label">Cidade</label>
-                    <select placeholder="Cidade" ng-model="vm.searchcity" required class="form-control" ng-disabled="vm.disabledCities" ng-options="option.attributes.name for option in vm.cities track by option.id" title="Cidade">
+                    <label class="form-control-label">{{ 'CITY' | translate }}</label>
+                    <select placeholder="{{ 'CITY' | translate }}" ng-model="vm.searchcity" required class="form-control" ng-disabled="vm.disabledCities" ng-options="option.attributes.name for option in vm.cities track by option.id">
                     </select>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label">Critério de busca</label>
-                    <select placeholder="Critério de busca" ng-model="vm.searchcategory" required name="searchcategory" class="form-control" ng-options="option.criteria for option in vm.searchcategorylist track by option.id" title="Critério">
+                    <label class="form-control-label">{{ 'SEARCH_CRITERIA' | translate }}</label>
+                    <select placeholder="{{ 'SEARCH_CRITERIA' | translate }}" ng-model="vm.searchcategory" required name="searchcategory" class="form-control" ng-options="option.criteria for option in vm.searchcategorylist track by option.id">
                     </select>
                 </div>
                 <div class="form-group" ng-if="vm.searchcategory.id == 0">
-                    <label class="form-control-label">Nome</label>
-                    <input id="searchstring" type="text" placeholder="Pesquisar" ng-model="vm.searchobj" class="form-control">
+                    <label class="form-control-label">{{ 'NAME' | translate }}</label>
+                    <input id="searchstring" type="text" placeholder="{{ 'NAME' | translate }}" ng-model="vm.searchobj" class="form-control">
                 </div>
                 <div class="form-group" ng-if="vm.searchcategory.id == 1">
-                    <label class="form-control-label">Rua</label>
-                    <input id="searchstring" type="text" placeholder="Logradouro" ng-model="vm.searchobj" class="form-control">
+                    <label class="form-control-label">{{ 'ADDRESS' | translate }}</label>
+                    <input id="searchstring" type="text" placeholder="{{ 'ADDRESS' | translate }}" ng-model="vm.searchobj" class="form-control">
                 </div>
                 <div class="form-group" ng-if="vm.searchcategory.id == 2">
-                    <label class="form-control-label">Categoria</label>
-                    <select ng-model="vm.searchobj" name="searchcategory" class="form-control" ng-options="option.attributes.namePT for option in vm.categories track by option.id" title="Critério">
+                    <label class="form-control-label">{{ 'CATEGORY' | translate }}</label>
+                    <select ng-model="vm.searchobj" name="searchcategory" class="form-control" ng-options="option.attributes.namePT for option in vm.categories track by option.id">
                     </select>
                 </div>
                 <div class="form-actions">
-                    <button ng-click="vm.SearchPlaces()" ng-disabled="!vm.searchobj || vm.searchLoading" class="btn btn-primary">Buscar</button>
+                    <button ng-click="vm.SearchPlaces()" ng-disabled="!vm.searchobj || vm.searchLoading" class="btn btn-primary">{{ 'SEARCH' | translate }}</button>
                     <i ng-if="vm.searchLoading" class="fa fa-spinner fa-pulse fa-fw"></i>
                 </div>
             </form>
         </div>
         <div class="x_title" ng-if="vm.SearchPerformed">
-            <h3>Resultados da pesquisa</h3>
+            <h3>{{ 'SEARCH_RESULTS' | translate }}</h3>
         </div>
         <div class="x_content">
             <div ng-if="vm.searchLoading">
@@ -41,16 +41,20 @@
                 <span class="sr-only">Loading...</span>
             </div>
             <div ng-if="!vm.searchLoading && vm.SearchPerformed && vm.noSearchedPlacesFound">
-                <p>Nenhum local encontrado.</p>
+                <p>{{ 'NO_PLACE_FOUND' | translate }}</p>
             </div>
             <uib-accordion close-others="true">
                 <div uib-accordion-group class="panel-default" ng-repeat="place in vm.filteredSearchedPlaces">
                     <div uib-accordion-heading>
-                        <b>{{ place.attributes.name }} <small> {{ place.attributes.category.attributes.namePT }}</small></b>
+                        <b>{{ place.attributes.name }} 
+                            <small ng-if="vm.currentLanguage=='ptb'"> {{ place.attributes.category.attributes.namePT }} </small>
+                            <small ng-if="vm.currentLanguage=='enu'"> {{ place.attributes.category.attributes.nameEN }} </small>
+                            <small ng-if="vm.currentLanguage=='esp'"> {{ place.attributes.category.attributes.nameES }} </small>   
+                        </b>
                     </div>
-                    <p>Endereço: {{ place.attributes.address }}</p>
-                    <a ui-sref="app.places.request_admin({ parse_place: place })" class="btn btn-primary"><i class="fa fa-unlock-alt"></i> Gerir Local</a>
-                    <a ui-sref="app.places.edit({ parse_place: place })" class="btn btn-primary"><i class="fa fa-pencil-square-o"></i> Editar</a>
+                    <p>{{ 'ADDRESS' | translate }}: {{ place.attributes.address }}</p>
+                    <a ui-sref="app.places.request_admin({ parse_place: place })" class="btn btn-primary"><i class="fa fa-unlock-alt"></i> {{ 'MANAGE_PLACE' | translate }}</a>
+                    <a ui-sref="app.places.edit({ parse_place: place })" class="btn btn-primary"><i class="fa fa-pencil-square-o"></i> {{ 'EDIT' | translate }}</a>
                 </div>
             </uib-accordion>
         </div>
@@ -60,7 +64,7 @@
 <div class="col-lg-6 col-md-12">
     <div class="x_panel">
         <div class="x_title">
-            <h3>Locais cadastrados por mim</h3>
+            <h3>{{ 'PLACES_I_REGISTERED' | translate }}</h3>
         </div>
         <div class="x_content">
             <div ng-if="vm.dataLoading">
@@ -68,16 +72,20 @@
                 <span class="sr-only">Loading...</span>
             </div>
             <div ng-if="!vm.dataLoading && vm.noCreatedPlacesFound">
-                <p>Nenhum local cadastrado.</p>
+                <p>{{ 'NO_PLACE_FOUND' | translate }}</p>
             </div>
             <uib-accordion close-others="true">
                 <div uib-accordion-group class="panel-default" ng-repeat="place in vm.filteredPlaces">
                     <div uib-accordion-heading>
-                        <b>{{ place.attributes.name }} <small> {{ place.attributes.category.attributes.namePT }}</small></b>
+                        <b>{{ place.attributes.name }} 
+                            <small ng-if="vm.currentLanguage=='ptb'"> {{ place.attributes.category.attributes.namePT }} </small>
+                            <small ng-if="vm.currentLanguage=='enu'"> {{ place.attributes.category.attributes.nameEN }} </small>
+                            <small ng-if="vm.currentLanguage=='esp'"> {{ place.attributes.category.attributes.nameES }} </small>   
+                        </b>
                     </div>
-                    <p>Endereço: {{ place.attributes.address }}</p>
-                    <a ui-sref="app.places.request_admin({ parse_place: place })" class="btn btn-primary"><i class="fa fa-unlock-alt"></i> Gerir Local</a>
-                    <a ui-sref="app.places.edit({ parse_place: place })" class="btn btn-primary"><i class="fa fa-pencil-square-o"></i> Editar</a>
+                    <p>{{ 'ADDRESS' | translate }}: {{ place.attributes.address }}</p>
+                    <a ui-sref="app.places.request_admin({ parse_place: place })" class="btn btn-primary"><i class="fa fa-unlock-alt"></i> {{ 'MANAGE_PLACE' | translate }}</a>
+                    <a ui-sref="app.places.edit({ parse_place: place })" class="btn btn-primary"><i class="fa fa-pencil-square-o"></i> {{ 'EDIT' | translate }}</a>
                 </div>
             </uib-accordion>
         </div>

@@ -4,13 +4,13 @@
             <li>
                 <a class="selected">
                     <span class="step_no">1</span>
-                    <span class="step_descr">Dados Pessoais</span>
+                    <span class="step_descr">{{ 'PERSONAL_DATA' | translate }}</span>
                 </a>
             </li>
             <li>
                 <a>
                     <span class="step_no">2</span>
-                    <span class="step_descr">Comprovante</span>
+                    <span class="step_descr">{{ 'PROOF' | translate }}</span>
                 </a>
             </li>
         </ul>
@@ -18,26 +18,26 @@
 </div>
 <div class="x_panel">
     <div class="x_content">
-        <p>Por favor confirme seus dados antes de prosseguir</p>
+        <p>{{ 'CONFIRM_DATA' | translate }}</p>
         <form id="sliding-form">
             <div class="form-group">
-                <label class="form-control-label">Primeiro nome</label>
-                <input type="text" placeholder="Primeiro nome" ng-model="userdata.user.firstName" class="form-control" required>
+                <label class="form-control-label">{{ 'FIRST_NAME' | translate }}</label>
+                <input type="text" placeholder="{{ 'FIRST_NAME' | translate }}" ng-model="userdata.user.firstName" class="form-control" required>
             </div>
             <div class="form-group">
-                <label class="form-control-label">Sobrenome</label>
-                <input type="text" placeholder="Sobrenome" ng-model="userdata.user.lastName" class="form-control" required>
+                <label class="form-control-label">{{ 'LAST_NAME' | translate }}</label>
+                <input type="text" placeholder="{{ 'LAST_NAME' | translate }}" ng-model="userdata.user.lastName" class="form-control" required>
             </div>
             <div class="form-group">
-                <label class="form-control-label">CPF</label>
-                <input type="number" placeholder="CPF" ng-model="userdata.user.document" class="form-control" required>
+                <label class="form-control-label">{{ 'DOCUMENT' | translate }}</label>
+                <input type="number" placeholder="{{ 'DOCUMENT' | translate }}" ng-model="userdata.user.document" class="form-control" required>
             </div>
             <div class="form-group">
-                <label class="form-control-label">Telefone de contato</label>
-                <input type="number" placeholder="Telefone de contato" ng-model="userdata.user_info.phone" class="form-control" required>
+                <label class="form-control-label">{{ 'PHONE' | translate }}</label>
+                <input type="number" placeholder="{{ 'PHONE' | translate }}" ng-model="userdata.user_info.phone" class="form-control" required>
             </div>
             <div class="form-actions">
-                <button type="submit" ng-click="userdata.saveUserData()" ng-disabled="form.$invalid || userdata.dataLoading" class="btn btn-primary">Avançar</button>
+                <button type="submit" ng-click="userdata.saveUserData()" ng-disabled="form.$invalid || userdata.dataLoading" class="btn btn-primary">{{ 'ADVANCE' | translate }}</button>
                 <i ng-if="userdata.dataLoading" class="fa fa-spinner fa-pulse fa-fw"></i>
             </div>
         </form>

@@ -421,7 +421,8 @@ body {
 
 @media (min-width: 480px) {
     .nav_menu {
-        position: static
+        position: static;
+        min-height: 60px;
     }
 }
 
@@ -600,14 +601,6 @@ body .container.body .right_col {
 .navbar-brand,
 .navbar-nav>li>a {
     color: #fff !important
-}
-
-.top_nav .nav>li>a:focus,
-.top_nav .nav>li>a:hover,
-.top_nav .nav .open>a,
-.top_nav .nav .open>a:focus,
-.top_nav .nav .open>a:hover {
-    background: #D9DEE4
 }
 
 body {
@@ -837,12 +830,13 @@ a:focus {
 .top_nav .navbar-right {
     margin: 0;
     width: 70%;
-    float: right
+    float: right;
+    margin-right: 20px;
 }
 
 .top_nav .navbar-right li {
     float: right;
-    position: static
+    position: static;
 }
 
 @media (min-width: 480px) {
@@ -857,12 +851,34 @@ a:focus {
 
 .top_nav .dropdown-menu li a {
     width: 100%;
-    padding: 12px 20px
+    padding: 12px 20px;
+    line-height: 1;
+}
+
+.language-selector {
+    font-size: 24px;
+}
+
+.language-selector:focus,
+.language-selector:hover,
+.language-selector:active {
+    cursor: pointer;
 }
 
 .top_nav li a i,
 .top_nav li a span {
     font-size: 26px
+}
+
+.language-selector-image {
+    height: 36px;
+    width: 55px;
+    float: left;
+}
+
+.language-selector-button {
+    width: 160px;
+    line-height: 3;
 }
 
 .navbar-static-top {
@@ -1805,7 +1821,6 @@ ul.msg_list li {
 
 ul.msg_list li:last-child {
     margin-bottom: 6px;
-    padding: 10px
 }
 
 ul.msg_list li a {
@@ -1817,7 +1832,7 @@ ul.msg_list li a .image img {
     -webkit-border-radius: 2px 2px 2px 2px;
     float: left;
     margin-right: 10px;
-    width: 11%
+    width: 50px;
 }
 
 ul.msg_list li a .time {
@@ -1872,7 +1887,7 @@ ul.msg_list li a .message {
 }
 
 .navbar-nav .open .dropdown-menu.msg_list {
-    width: 300px
+    width: 130px
 }
 
 .info-number .badge {

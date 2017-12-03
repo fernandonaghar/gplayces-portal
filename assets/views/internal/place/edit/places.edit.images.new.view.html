@@ -4,16 +4,16 @@
             <div class="card-header">
                 <form>
                     <div class="form-group">
-                        <label class="form-control-label">Tipo de foto</label>
+                        <label class="form-control-label">{{ 'PHOTO_TYPE' | translate }}</label>
                         <select ng-model="editimagesnew.photoType" class="form-control" ng-options="photoType.value for photoType in editimagesnew.photoTypeOptions track by photoType.id" title="Tipo de foto"></select>
                     </div>
                     <div class="form-group" ng-if="editimagesnew.photoType.id == '1'">
-                        <label class="form-control-label">Posição na galeria</label>
-                        <input type="number" placeholder="Posição" ng-model="editimagesnew.sequence" class="form-control">
+                        <label class="form-control-label">{{ 'GALLERY_SEQUENCE' | translate }}</label>
+                        <input type="number" placeholder="{{ 'GALLERY_SEQUENCE' | translate }}" ng-model="editimagesnew.sequence" class="form-control">
                     </div>
 
                     <div class="form-group" ng-class="{ 'hidden': editimagesnew.photoType.id == null || editimagesnew.photoType.id == '' }">
-                        <label class="form-control-label">Selecione uma foto:</label>
+                        <label class="form-control-label">{{ 'CHOOSE_A_PHOTO' | translate }}:</label>
                         <input type="file" id="fileInput" accept="image/*" ng-model="image1" image="image1" resize-max-height="768" resize-max-width="768" resize-quality="0.7" resize-type="image/jpg" ng-image-compress/>
                     </div>
                 </form>
@@ -31,7 +31,7 @@
                 </div>
                 <div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }" ng-if="flash" ng-bind="flash.message"></div>
                 <div class="form-group">
-                    <button ng-disabled="!editimagesnew.photoType" ng-click="editimagesnew.AddPhotoToGallery()" class="btn btn-primary pull-right">Adicionar</button>
+                    <button ng-disabled="!editimagesnew.photoType" ng-click="editimagesnew.AddPhotoToGallery()" class="btn btn-primary pull-right">{{ 'ADD' | translate }}</button>
                 </div>
             </div>
         </div>

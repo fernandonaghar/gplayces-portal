@@ -1,41 +1,41 @@
 <div class="card">
     <div class="card-body">
         <div class="form-group">
-            <label class="form-control-label">Primeiro nome</label>
-            <input type="text" placeholder="Primeiro nome" ng-model="profile.user.firstName" class="form-control">
+            <label class="form-control-label">{{ 'FIRST_NAME' | translate }}</label>
+            <input type="text" placeholder="{{ 'FIRST_NAME' | translate }}" ng-model="profile.user.firstName" class="form-control">
         </div>
         <div class="form-group">
-            <label class="form-control-label">Sobrenome</label>
-            <input type="text" placeholder="Sobrenome" ng-model="profile.user.lastName" class="form-control">
+            <label class="form-control-label">{{ 'LAST_NAME' | translate }}</label>
+            <input type="text" placeholder="{{ 'LAST_NAME' | translate }}" ng-model="profile.user.lastName" class="form-control">
         </div>
         <div class="form-group">
-            <label class="form-control-label">Data de Nascimento</label>
-            <input type="date" placeholder="Data de Nascimento" ng-model="profile.user.birthday" class="form-control">
+            <label class="form-control-label">{{ 'BIRTH_DT' | translate }}</label>
+            <input type="date" placeholder="{{ 'BIRTH_DT' | translate }}" ng-model="profile.user.birthday" class="form-control">
         </div>
         <div class="form-group">
-            <label class="form-control-label">CPF</label>
-            <input type="text" placeholder="CPF" ng-model="profile.user.document" ui-br-cpf-mask class="form-control">
+            <label class="form-control-label">{{ 'DOCUMENT' | translate }}</label>
+            <input type="text" placeholder="DOCUMENT" ng-model="profile.user.document" ui-br-cpf-mask class="form-control">
         </div>
         <div class="form-group">
-            <label class="form-control-label">Telefone de contato</label>
-            <input type="text" ui-br-phone-number placeholder="Telefone" ng-model="profile.userinfo.phone" class="form-control">
+            <label class="form-control-label">{{ 'PHONE' | translate }}</label>
+            <input type="text" ui-br-phone-number placeholder="{{ 'PHONE' | translate }}" ng-model="profile.userinfo.phone" class="form-control">
         </div>
         <div class="form-group">
-            <label class="form-control-label">E-mail</label>
-            <input type="email" placeholder="E-mail" ng-model="profile.user.email" class="form-control">
+            <label class="form-control-label">{{ 'EMAIL' | translate }}</label>
+            <input type="email" placeholder="{{ 'EMAIL' | translate }}" ng-model="profile.user.email" class="form-control">
         </div>
         <div class="form-group">
-            <label class="form-control-label">Situação da Conta do Facebook: </label>
+            <label class="form-control-label">{{ 'FACEBOOK_ACCOUNT_SITUATION' | translate }}: </label>
             <div class="input-group">
                 <input type="text" placeholder="facebook" ng-model="profile.facebookStatus" disabled class="form-control">
                 <span class="input-group-btn">
                             <i ng-if="profile.facebookLoading" class="fa fa-spinner fa-pulse fa-fw"></i>
-                    <button ng-disabled="profile.isFacebookLinked" ng-click="profile.linkWithFacebook()" class="btn btn-primary">Associar</button>
+                    <button ng-disabled="profile.isFacebookLinked" ng-click="profile.linkWithFacebook()" class="btn btn-primary">{{ 'LINK' | translate }}</button>
                   </div>            
             </div>
         </div>
         <div class="form-actions">
-            <button ng-disabled="profile.dataLoading" ng-click="profile.saveUserData()" class="btn btn-primary">Avançar</button>
+            <button ng-disabled="profile.dataLoading" ng-click="profile.saveUserData()" class="btn btn-primary">{{ 'ADVANCE' | translate }}</button>
             <i ng-if="profile.dataLoading" class="fa fa-spinner fa-pulse fa-fw"></i>
         </div>
     </div>

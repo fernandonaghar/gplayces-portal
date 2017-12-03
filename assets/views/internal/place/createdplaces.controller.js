@@ -5,9 +5,9 @@
         .module('app')
         .controller('CreatedPlacesController', CreatedPlacesController);
 
-    CreatedPlacesController.$inject = ['$scope', '$state', '$rootScope', 'PlaceService', 'FlashService', 'GeneralServices'];
+    CreatedPlacesController.$inject = ['$scope', '$state', '$rootScope', 'PlaceService', 'FlashService', 'GeneralServices', '$translate'];
 
-    function CreatedPlacesController($scope, $state, $rootScope, PlaceService, FlashService, GeneralServices) {
+    function CreatedPlacesController($scope, $state, $rootScope, PlaceService, FlashService, GeneralServices, $translate) {
         var vm = this;
         vm.SearchPlaces = SearchPlaces;
         vm.dataLoading = true;
@@ -23,10 +23,12 @@
         vm.currentSearchPage = 1;
         vm.numSearchPerPage = 6;
 
+        vm.currentLanguage = $translate.use();
+
         vm.searchcategorylist = [
-            { 'id': '0', 'criteria': 'Nome do local' },
-            { 'id': '1', 'criteria': 'Endereço' },
-            { 'id': '2', 'criteria': 'Categoria' },
+            { 'id': '0', 'criteria': $translate.instant('NAME') },
+            { 'id': '1', 'criteria': $translate.instant('ADDRESS') },
+            { 'id': '2', 'criteria': $translate.instant('CATEGORY') },
         ];
 
         initController();

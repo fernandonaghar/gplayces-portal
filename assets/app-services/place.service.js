@@ -5,9 +5,9 @@
         .module('app')
         .factory('PlaceService', PlaceService);
 
-    PlaceService.$inject = ['$http', '$q', 'AzureStorageService'];
+    PlaceService.$inject = ['$http', '$q', 'AzureStorageService', '$translate'];
 
-    function PlaceService($http, $q, AzureStorageService) {
+    function PlaceService($http, $q, AzureStorageService, $translate) {
         var service = {};
         service.GetCreatedPlaces = GetCreatedPlaces;
         service.GetOwnedPlaces = GetOwnedPlaces;
@@ -189,6 +189,19 @@
             query.equalTo("active", true);
             query.find({
                 success: function(results) {
+
+                    var currentLanguage = $translate.use();
+                    for (var i = 0; i < results.length; i++) {
+
+                        if (currentLanguage == 'ptb') {
+                            results[i].translatedName = results[i].attributes.namePT;
+                        } else if (currentLanguage == 'esp') {
+                            results[i].translatedName = results[i].attributes.nameES;
+                        } else {
+                            results[i].translatedName = results[i].attributes.nameEN;
+                        }
+
+                    }
                     deferred.resolve({ success: true, parse_data: results });
                 },
                 error: function(error) {

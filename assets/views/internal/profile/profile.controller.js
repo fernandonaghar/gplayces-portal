@@ -5,9 +5,9 @@
         .module('app')
         .controller('ProfileController', ProfileController);
 
-    ProfileController.$inject = ['$state', 'UserService', '$scope', 'FlashService', 'GeneralServices', 'EmailService'];
+    ProfileController.$inject = ['$state', 'UserService', '$scope', 'FlashService', 'GeneralServices', 'EmailService', '$translate'];
 
-    function ProfileController($state, UserService, $scope, FlashService, GeneralServices, EmailService) {
+    function ProfileController($state, UserService, $scope, FlashService, GeneralServices, EmailService, $translate) {
         var profile = this;
         profile.saveUserData = saveUserData;
         profile.saveAddressData = saveAddressData;
@@ -89,9 +89,9 @@
                         profile.isFacebookLinked = UserService.isFacebookLinked();
                         setFacebookStatus();
                         profile.facebookLoading = false;
-                        FlashService.Success("Sua conta foi associada a seu login do facebook com sucesso, você já pode utilizar o facebook para fazer login.");
+                        FlashService.Success($translate.instant('FACEBOOK_ACCOUNT_LINKED'));
                     } else {
-                        FlashService.Error("A associação com o facebook falhou.");
+                        FlashService.Error($translate.instant('FACEBOOK_ASSOCIATION_FAILED'));
                         profile.facebookLoading = false;
                     }
                 };
@@ -100,9 +100,10 @@
 
         function setFacebookStatus() {
             if (profile.isFacebookLinked) {
-                profile.facebookStatus = 'Associada';
+                profile.facebookStatus = $translate.instant('LINKED');
+
             } else {
-                profile.facebookStatus = 'Não associada';
+                profile.facebookStatus = $translate.instant('UNLINKED');
             }
         }
 
@@ -113,7 +114,7 @@
                 UserService.ChangePassword(profile.newpassword).then(function(response) {
                     if (response != null) {
                         if (response.success) {
-                            FlashService.Success("Senha atualizada com sucesso.");
+                            FlashService.Success($translate.instant('PASSWORD_UPDATED'));
                         } else {
                             FlashService.Error(response.message);
                         }
@@ -122,7 +123,7 @@
                 }).catch(angular.noop);
 
             } else {
-                FlashService.Error("As senhas digitadas não conferem.");
+                FlashService.Error($translate.instant('PASSWORDS_DONT_MATCH'));
             }
         }
     }

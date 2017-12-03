@@ -2,39 +2,39 @@
 <form name="form" id="sliding-form">
 
     <div class="form-group">
-        <label class="form-control-label">Nome do local</label>
-        <input type="text" name="placename" placeholder="Nome do local" ng-model="edit.place.name" class="form-control" required>
-        <span ng-show="form.placename.$dirty && form.placename.$error.required" class="help-block">O nome do local é obrigatório.</span>
+        <label class="form-control-label">{{ 'NAME' | translate }}</label>
+        <input type="text" name="placename" placeholder="{{ 'NAME' | translate }}" ng-model="edit.place.name" class="form-control" required>
+        <span ng-show="form.placename.$dirty && form.placename.$error.required" class="help-block">{{ 'REQUIRED' | translate }}</span>
     </div>
     <div class="form-group">
-        <label class="form-control-label">Cidade</label>
-        <select ng-model="edit.place.city" required name="city" class="form-control" ng-disabled="edit.disabledCities" ng-options="option.attributes.name for option in edit.cities track by option.id" title="Cidade">
+        <label class="form-control-label">{{ 'CITY' | translate }}</label>
+        <select ng-model="edit.place.city" required name="city" class="form-control" ng-disabled="edit.disabledCities" ng-options="option.attributes.name for option in edit.cities track by option.id">
     </select>
-        <span ng-show="form.city.$dirty && form.city.$error.required" class="help-block">Cidade é obrigatória.</span>
+        <span ng-show="form.city.$dirty && form.city.$error.required" class="help-block">{{ 'REQUIRED' | translate }}</span>
     </div>
     <div class="form-group">
-        <label class="form-control-label">Categoria</label>
-        <select ng-model="edit.place.category" required name="category" class="form-control" ng-disabled="edit.disabledCategories" ng-options="option.attributes.namePT for option in edit.categories track by option.id" title="Categoria">
+        <label class="form-control-label">{{ 'CATEGORY' | translate }}</label>
+        <select ng-model="edit.place.category" required name="category" class="form-control" ng-disabled="edit.disabledCategories" ng-options="option.translatedName for option in edit.categories track by option.id">
     </select>
-        <span ng-show="form.category.$dirty && form.category.$error.required" class="help-block">Categoria é obrigatória.</span>
+        <span ng-show="form.category.$dirty && form.category.$error.required" class="help-block">{{ 'REQUIRED' | translate }}</span>
     </div>
 
     <div ng-if="isAdmin || edit.place.isOwner">
         <div class="form-group">
-            <label class="form-control-label">Descrição em Português</label>
-            <textarea ng-maxlength="250" placeholder="Descrição em Português" ng-model="edit.place.descriptionPT" class="form-control"></textarea>
+            <label class="form-control-label">{{ 'DESCRIPTION_IN_PTB' | translate }}</label>
+            <textarea ng-maxlength="250" placeholder="{{ 'DESCRIPTION_IN_PTB' | translate }}" ng-model="edit.place.descriptionPT" class="form-control"></textarea>
         </div>
         <div class="form-group">
-            <label class="form-control-label">Descrição em Inglês</label>
-            <textarea ng-maxlength="250" placeholder="Descrição em Inglês" ng-model="edit.place.descriptionEN" class="form-control"></textarea>
+            <label class="form-control-label">{{ 'DESCRIPTION_IN_ENU' | translate }}</label>
+            <textarea ng-maxlength="250" placeholder="{{ 'DESCRIPTION_IN_ENU' | translate }}" ng-model="edit.place.descriptionEN" class="form-control"></textarea>
         </div>
         <div class="form-group">
-            <label class="form-control-label">Descrição em Espanhol</label>
-            <textarea ng-maxlength="250" placeholder="Descrição em Espanhol" ng-model="edit.place.descriptionES" class="form-control"></textarea>
+            <label class="form-control-label">{{ 'DESCRIPTION_IN_ESP' | translate }}</label>
+            <textarea ng-maxlength="250" placeholder="{{ 'DESCRIPTION_IN_ESP' | translate }}" ng-model="edit.place.descriptionES" class="form-control"></textarea>
         </div>
     </div>
     <div class="form-actions">
-        <button ng-click="edit.savePlaceData()" ng-disabled="form.$invalid || edit.dataLoading" class="btn btn-primary">Avançar</button>
+        <button ng-click="edit.savePlaceData()" ng-disabled="form.$invalid || edit.dataLoading" class="btn btn-primary">{{ 'ADVANCE' | translate }}</button>
         <i ng-if="request.dataLoading" class="fa fa-spinner fa-pulse fa-fw"></i>
     </div>
 </form>

@@ -1,24 +1,24 @@
 <div class="card">
     <div class="card-body">
         <div class="form-group">
-            <label class="form-control-label">Cidade</label>
-            <select ng-model="profile.userinfo.city" class="form-control" ng-disabled="ctrl.disabled" ng-options="option.attributes.name for option in profile.cities track by option.id" title="Cidade">
+            <label class="form-control-label">{{ 'CITY' | translate }}</label>
+            <select ng-model="profile.userinfo.city" class="form-control" ng-disabled="ctrl.disabled" ng-options="option.attributes.name for option in profile.cities track by option.id">
     </select>
         </div>
         <div class="form-group">
-            <label class="form-control-label">CEP</label>
-            <input type="text" placeholder="CEP" ng-model="profile.userinfo.zipcode" ui-br-cep-mask class="form-control">
+            <label class="form-control-label">{{ 'ZIPCODE' | translate }}</label>
+            <input type="text" placeholder="{{ 'ZIPCODE' | translate }}" ng-model="profile.userinfo.zipcode" ui-br-cep-mask class="form-control">
         </div>
         <div class="form-group">
-            <label class="form-control-label">Endereço</label>
-            <input type="text" placeholder="Endereço" ng-model="profile.userinfo.address" class="form-control">
+            <label class="form-control-label">{{ 'ADDRESS' | translate }}</label>
+            <input type="text" placeholder="{{ 'ADDRESS' | translate }}" ng-model="profile.userinfo.address" class="form-control">
         </div>
         <div class="form-group">
-            <label class="form-control-label">Complemento</label>
-            <input type="text" placeholder="Complemento" ng-model="profile.userinfo.complement" class="form-control">
+            <label class="form-control-label">{{ 'COMPLEMENT' | translate }}</label>
+            <input type="text" placeholder="{{ 'COMPLEMENT' | translate }}" ng-model="profile.userinfo.complement" class="form-control">
         </div>
         <div class="form-actions">
-            <button ng-disabled="profile.dataLoading" ng-click="profile.saveAddressData()" class="btn btn-primary">Avançar</button>
+            <button ng-disabled="profile.dataLoading" ng-click="profile.saveAddressData()" class="btn btn-primary">{{ 'ADVANCE' | translate }}</button>
             <i ng-if="profile.dataLoading" class="fa fa-spinner fa-pulse fa-fw"></i>
         </div>
     </div>

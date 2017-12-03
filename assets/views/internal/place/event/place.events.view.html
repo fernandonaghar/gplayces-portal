@@ -7,10 +7,10 @@
         <div class="" role="tabpanel" data-example-id="togglable-tabs">
             <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
                 <li role="presentation" ui-sref-active="active">
-                    <a ui-sref="app.places.events.list({ parse_place: vm.place })" aria-expanded="false"><i class="fa fa-calendar"></i> Eventos</a>
+                    <a ui-sref="app.places.events.list({ parse_place: vm.place })" aria-expanded="false"><i class="fa fa-calendar"></i> {{ 'EVENTS' | translate }}</a>
                 </li>
                 <li role="presentation" ui-sref-active="active">
-                    <a ui-sref="app.places.events.edit({ parse_place: vm.place })" aria-expanded="false"><i class="fa fa-plus"></i> Novo Evento</a>
+                    <a ui-sref="app.places.events.edit({ parse_place: vm.place })" aria-expanded="false"><i class="fa fa-plus"></i> {{ 'NEW_EVENT' | translate }}</a>
                 </li>
             </ul>
             <div class="x_content">

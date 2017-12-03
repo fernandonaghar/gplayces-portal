@@ -1,11 +1,11 @@
 <div class="x_panel">
     <div class="x_title">
-        <h2>Solicitar gestão de local</h2>
+        <h2>{{ 'REQUEST_PLACE_ADMIN' | translate }}</h2>
         <div class="clearfix"></div>
     </div>
     <div class="well well-sm">
-        <h4>Local: {{ request.place.name }}</h4>
-        <p>Endereço: {{ request.place.address }}</p>
+        <h4>{{ 'PLACE' | translate }}: {{ request.place.name }}</h4>
+        <p>{{ 'ADDRESS' | translate }}: {{ request.place.address }}</p>
     </div>
 
     <div ng-if="request.dataLoading">

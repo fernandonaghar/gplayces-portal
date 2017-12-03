@@ -4,13 +4,13 @@
             <li>
                 <a class="done">
                     <span class="step_no">1</span>
-                    <span class="step_descr">Dados Pessoais</span>
+                    <span class="step_descr">{{ 'DATA' | translate }}</span>
                 </a>
             </li>
             <li>
                 <a class="selected">
                     <span class="step_no">2</span>
-                    <span class="step_descr">Comprovantes</span>
+                    <span class="step_descr">{{ 'PROOF'| translate }}</span>
                 </a>
             </li>
         </ul>
@@ -22,12 +22,12 @@
         <form name="form" id="sliding-form">
 
             <div class="form-group">
-                <label class="form-control-label">Comprovante de Endereço</label>
+                <label class="form-control-label">{{ 'PROOF'| translate }}</label>
                 <input type="file" id="addressAssurance" name="addressAssurance" />
             </div>
             <div class="form-group">
-                <label class="form-control-label">Observações</label>
-                <textarea ng-maxlength="250" name="comments" placeholder="Observações" ng-model="request.adminrequest.requestComments" class="form-control"></textarea>
+                <label class="form-control-label">{{ 'OBSERVATIONS' | translate }}</label>
+                <textarea ng-maxlength="250" name="comments" placeholder="{{ 'OBSERVATIONS' | translate }}" ng-model="request.adminrequest.requestComments" class="form-control"></textarea>
             </div>
             <div class="form-group">
                 <div class="progress">
@@ -37,7 +37,7 @@
                 </div>
             </div>
             <div class="form-actions">
-                <button type="submit" ng-click="request.submitRequest()" class="btn btn-primary">Enviar solicitação</button>
+                <button type="submit" ng-click="request.submitRequest()" class="btn btn-primary">{{ 'SUBMIT_REQUEST' | translate }}</button>
                 <i ng-if="request.dataLoading" class="fa fa-spinner fa-pulse fa-fw"></i>
             </div>
         </form>

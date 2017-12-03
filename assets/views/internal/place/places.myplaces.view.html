@@ -1,7 +1,7 @@
 <div class="col-lg-6 col-md-12">
     <div class="x_panel">
         <div class="x_title">
-            <h3>Meus Locais</h3>
+            <h3>{{ 'MY_PLACES' | translate }}</h3>
         </div>
         <div class="x_content">
             <div ng-if="vm.dataLoading ">
@@ -9,18 +9,22 @@
                 <span class="sr-only">Loading...</span>
             </div>
             <div ng-if="!vm.dataLoading && vm.noOwnedPlacesFound ">
-                <p>Você ainda não possui nenhum local sob sua administração.</p>
+                <p>{{ 'NO_OWNED_PLACES' | translate }}</p>
             </div>
             <uib-accordion close-others="true ">
                 <div uib-accordion-group class="panel-default " ng-repeat="place in vm.filteredPlaces ">
                     <div uib-accordion-heading>
-                        <b>{{ place.attributes.name }} <small> {{ place.attributes.category.attributes.namePT }} </small></b>
-                        <button class="btn-success btn-xs pull-right" ng-if="place.attributes.isActive"><i class="fa fa-check"></i> Ativo</button>
-                        <button class="btn-danger btn-xs pull-right" ng-if="!place.attributes.isActive"><i class="fa fa-times"></i> Inativo</button>
+                        <b>{{ place.attributes.name }} 
+                            <small ng-if="vm.currentLanguage=='ptb'"> {{ place.attributes.category.attributes.namePT }} </small>
+                            <small ng-if="vm.currentLanguage=='enu'"> {{ place.attributes.category.attributes.nameEN }} </small>
+                            <small ng-if="vm.currentLanguage=='esp'"> {{ place.attributes.category.attributes.nameES }} </small>                                                        
+                        </b>
+                        <button class="btn-success btn-xs pull-right" ng-if="place.attributes.isActive"><i class="fa fa-check"></i> {{ 'ACTIVE' | translate }}</button>
+                        <button class="btn-danger btn-xs pull-right" ng-if="!place.attributes.isActive"><i class="fa fa-times"></i> {{ 'INACTIVE' | translate }}</button>
                     </div>
-                    <p>Endereço: {{ place.attributes.address }}</p>
-                    <a ui-sref="app.places.edit.data({ parse_place: place }) " class="btn btn-primary "><i class="fa fa-pencil-square-o"></i> Editar</a>
-                    <a ui-sref="app.places.events({ parse_place: place }) " class="btn btn-primary "><i class="fa fa-calendar"></i> Eventos</a>
+                    <p>{{ 'ADDRESS' | translate }}: {{ place.attributes.address }}</p>
+                    <a ui-sref="app.places.edit.data({ parse_place: place }) " class="btn btn-primary "><i class="fa fa-pencil-square-o"></i> {{ 'EDIT' | translate }}</a>
+                    <a ui-sref="app.places.events({ parse_place: place }) " class="btn btn-primary "><i class="fa fa-calendar"></i> {{ 'EVENTS' | translate }}</a>
                 </div>
             </uib-accordion>
         </div>
@@ -30,7 +34,7 @@
 <div class="col-lg-6 col-md-12">
     <div class="x_panel">
         <div class="x_title ">
-            <h3>Pedidos de administração</h3>
+            <h3>{{ 'ADMIN_REQUESTS' | translate }}</h3>
             <div class="clearfix "></div>
         </div>
         <div class="x_content ">
@@ -39,17 +43,21 @@
                 <span class="sr-only ">Loading...</span>
             </div>
             <div ng-if="!vm.requestsLoading && vm.noAdminRequestsFound ">
-                <p>Nenhum pedido de administração encontrado.</p>
+                <p>{{ 'NO_ADMIN_REQUESTS' | translate }}</p>
             </div>
             <uib-accordion close-others="true ">
                 <div uib-accordion-group class="panel-default " ng-repeat="request in vm.filteredAdminRequests ">
                     <div uib-accordion-heading>
-                        <b>{{ request.attributes.place.attributes.name }} <small> {{  request.attributes.place.attributes.category.attributes.namePT }}</small></b>
+                        <b>{{ request.attributes.place.attributes.name }} 
+                            <small ng-if="vm.currentLanguage=='ptb'"> {{ request.attributes.place.attributes.category.attributes.namePT }} </small>
+                            <small ng-if="vm.currentLanguage=='enu'"> {{ request.attributes.place.attributes.category.attributes.nameEN }} </small>
+                            <small ng-if="vm.currentLanguage=='esp'"> {{ request.attributes.place.attributes.category.attributes.nameES }} </small>   
+                        </b>
                     </div>
-                    <p>Endereço: {{ request.attributes.place.attributes.address }}</p>
-                    <p>Data de solicitação: {{ request.createdAt | date:'dd/MM/yyyy hh:mm:ss' }}</p>
-                    <p>Observações do solicitante: {{ request.attributes.requestComments }}</p>
-                    <button ng-click="vm.cancelRequest(request) " class="btn btn-danger "><i class="fa fa-ban"></i> Cancelar Pedido</button>
+                    <p>{{ 'ADDRESS' | translate }}: {{ request.attributes.place.attributes.address }}</p>
+                    <p>{{ 'REQUEST_DATE' | translate }}: {{ request.createdAt | date:'dd/MM/yyyy hh:mm:ss' }}</p>
+                    <p>{{ 'REQUEST_OBS' | translate }}: {{ request.attributes.requestComments }}</p>
+                    <button ng-click="vm.cancelRequest(request) " class="btn btn-danger "><i class="fa fa-ban"></i> {{ 'CANCEL' | translate }}</button>
                 </div>
             </uib-accordion>
         </div>

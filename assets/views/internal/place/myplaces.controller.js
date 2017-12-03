@@ -5,9 +5,9 @@
         .module('app')
         .controller('OwnedPlacesController', OwnedPlacesController);
 
-    OwnedPlacesController.$inject = ['$scope', '$state', 'PlaceService', 'FlashService'];
+    OwnedPlacesController.$inject = ['$scope', '$state', 'PlaceService', 'FlashService', '$translate'];
 
-    function OwnedPlacesController($scope, $state, PlaceService, FlashService) {
+    function OwnedPlacesController($scope, $state, PlaceService, FlashService, $translate) {
         var vm = this;
         vm.dataLoading = true;
         vm.requestsLoading = true;
@@ -21,6 +21,8 @@
         vm.adminRequests = [];
         vm.filteredAdminRequests = [];
         vm.currentRequestPage = 1;
+
+        vm.currentLanguage = $translate.use();
 
         initController();
 

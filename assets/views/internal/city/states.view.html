@@ -1,22 +1,22 @@
 <div class="col-lg-6">
     <div class="col-lg-12">
         <div class="x_panel">
-            <h3 ng-if="vm.newRecordState">Novo Estado</h3>
-            <h3 ng-if="!vm.newRecordState">Editar Estado</h3>
-            <button ng-if="!vm.newRecordState" ng-click="vm.CancelEditState()" ng-disabled="vm.saveStateLoading" class="btn btn-primary btn-xs">Desfazer</button>
+            <h3 ng-if="vm.newRecordState">{{ 'NEW_STATE' | translate }}</h3>
+            <h3 ng-if="!vm.newRecordState">{{ 'EDIT_STATE' | translate }}</h3>
+            <button ng-if="!vm.newRecordState" ng-click="vm.CancelEditState()" ng-disabled="vm.saveStateLoading" class="btn btn-primary btn-xs">{{ 'UNDO' | translate }}</button>
             <form name="form">
                 <div class="form-group">
-                    <label class="form-control-label">País</label>
-                    <select placeholder="País" ng-model="vm.newstate.country" required class="form-control" ng-disabled="vm.disabledCountries" ng-options="option.attributes.country for option in vm.countries track by option.id" title="País">
+                    <label class="form-control-label">{{ 'COUNTRY' | translate }}</label>
+                    <select placeholder="{{ 'COUNTRY' | translate }}" ng-model="vm.newstate.country" required class="form-control" ng-disabled="vm.disabledCountries" ng-options="option.attributes.country for option in vm.countries track by option.id" title="{{ 'COUNTRY' | translate }}">
                     </select>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label">Nome</label>
-                    <input type="text" name="placename" required placeholder="Nome do estado" ng-model="vm.newstate.state" class="form-control">
+                    <label class="form-control-label">{{ 'NAME' | translate }}</label>
+                    <input type="text" name="placename" required placeholder="{{ 'NAME' | translate }}" ng-model="vm.newstate.state" class="form-control">
                 </div>
                 <div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }" ng-if="flash" ng-bind="flash.message"></div>
                 <div class="form-actions">
-                    <button ng-click="vm.SaveState()" ng-disabled="!vm.newstate.state || vm.saveStateLoading" class="btn btn-primary">Salvar</button>
+                    <button ng-click="vm.SaveState()" ng-disabled="!vm.newstate.state || vm.saveStateLoading" class="btn btn-primary">{{ 'SAVE' | translate }}</button>
                     <i ng-if="vm.saveStateLoading" class="fa fa-spinner fa-pulse fa-fw"></i>
                 </div>
             </form>
@@ -24,19 +24,19 @@
     </div>
     <div class="col-lg-6 col-md-6 col-sm-12">
         <div class="x_panel">
-            <h3>Pesquisar</h3>
+            <h3>{{ 'SEARCH' | translate }}</h3>
             <form name="search">
                 <div class="form-group">
-                    <label class="form-control-label">País</label>
-                    <select placeholder="País" ng-model="vm.searchCountry" required class="form-control" ng-disabled="vm.disabledCountries" ng-options="option.attributes.country for option in vm.countries track by option.id" title="País">
+                    <label class="form-control-label">{{ 'COUNTRY' | translate }}</label>
+                    <select placeholder="{{ 'COUNTRY' | translate }}" ng-model="vm.searchCountry" required class="form-control" ng-disabled="vm.disabledCountries" ng-options="option.attributes.country for option in vm.countries track by option.id" title="{{ 'COUNTRY' | translate }}">
                         </select>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label">Nome do Estado</label>
-                    <input id="searchstring" type="text" placeholder="Pesquisar" ng-model="vm.searchState" class="form-control">
+                    <label class="form-control-label">{{ 'NAME' | translate }}</label>
+                    <input id="searchstring" type="text" placeholder="{{ 'SEARCH' | translate }}" ng-model="vm.searchState" class="form-control">
                 </div>
                 <div class="form-actions">
-                    <button ng-click="vm.SearchStates()" ng-disabled="!vm.searchCountry || vm.searchStatesLoading" class="btn btn-primary ">Buscar</button>
+                    <button ng-click="vm.SearchStates()" ng-disabled="!vm.searchCountry || vm.searchStatesLoading" class="btn btn-primary ">{{ 'SEARCH' | translate }}</button>
                     <i ng-if="vm.searchStatesLoading " class="fa fa-spinner fa-pulse fa-fw "></i>
                 </div>
             </form>
@@ -45,7 +45,7 @@
     <div class="col-lg-6 col-md-6 col-sm-12 ">
         <div class="x_panel ">
             <div class="x_title ">
-                <h3>Estados</h3>
+                <h3>{{ 'STATES' | translate }}</h3>
             </div>
             <div class="x_content ">
                 <div ng-if="vm.statesLoading ">
@@ -53,14 +53,14 @@
                     <span class="sr-only ">Loading...</span>
                 </div>
                 <div ng-if="!vm.statesLoading && vm.noStatesFound ">
-                    <p>Nenhum estado encontrado.</p>
+                    <p>{{ 'NO_STATE_FOUND' | translate }}</p>
                 </div>
                 <uib-accordion close-others="true ">
                     <div uib-accordion-group class="panel-default" ng-repeat="object in vm.filteredStates">
                         <div uib-accordion-heading>
                             <b>{{ object.state }}</b>
                         </div>
-                        <button ng-click="vm.EditState(object)" class="btn btn-primary">Editar</button>
+                        <button ng-click="vm.EditState(object)" class="btn btn-primary">{{ 'EDIT' | translate }}</button>
                         <i ng-if="vm.saveLoading" class="fa fa-spinner fa-pulse fa-fw"></i>
                     </div>
                 </uib-accordion>
@@ -72,17 +72,17 @@
 <div class="col-lg-6">
     <div class="col-lg-12">
         <div class="x_panel">
-            <h3 ng-if="vm.newRecordCountry">Novo País</h3>
-            <h3 ng-if="!vm.newRecordCountry">Editar País</h3>
-            <button ng-if="!vm.newRecordCountry" ng-click="vm.CancelEditCountry()" ng-disabled="vm.saveCountryLoading" class="btn btn-primary btn-xs">Desfazer</button>
+            <h3 ng-if="vm.newRecordCountry">{{ 'NEW_COUNTRY' | translate }}</h3>
+            <h3 ng-if="!vm.newRecordCountry">{{ 'EDIT_COUNTRY' | translate }}</h3>
+            <button ng-if="!vm.newRecordCountry" ng-click="vm.CancelEditCountry()" ng-disabled="vm.saveCountryLoading" class="btn btn-primary btn-xs">{{ 'UNDO' | translate }}</button>
             <form name="form">
                 <div class="form-group">
-                    <label class="form-control-label">Nome</label>
-                    <input type="text" name="placename" required placeholder="Nome do país" ng-model="vm.newcountry.country" class="form-control">
+                    <label class="form-control-label">{{ 'NAME' | translate }}</label>
+                    <input type="text" name="placename" required placeholder="{{ 'NAME' | translate }}" ng-model="vm.newcountry.country" class="form-control">
                 </div>
                 <div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }" ng-if="flash" ng-bind="flash.message"></div>
                 <div class="form-actions">
-                    <button ng-click="vm.SaveCountry()" ng-disabled="!vm.newcountry.country || vm.saveCountryLoading" class="btn btn-primary">Salvar</button>
+                    <button ng-click="vm.SaveCountry()" ng-disabled="!vm.newcountry.country || vm.saveCountryLoading" class="btn btn-primary">{{ 'SAVE' | translate }}</button>
                     <i ng-if="vm.saveCountryLoading" class="fa fa-spinner fa-pulse fa-fw"></i>
                 </div>
             </form>
@@ -90,14 +90,14 @@
     </div>
     <div class="col-lg-6 col-md-6 col-sm-12">
         <div class="x_panel">
-            <h3>Pesquisar</h3>
+            <h3>{{ 'SEARCH' | translate }}</h3>
             <form name="search">
                 <div class="form-group">
-                    <label class="form-control-label">Nome do País</label>
-                    <input id="searchstring" type="text" placeholder="Pesquisar" ng-model="vm.searchStringCountry" class="form-control">
+                    <label class="form-control-label">{{ 'NAME' | translate }}</label>
+                    <input id="searchstring" type="text" placeholder="{{ 'SEARCH' | translate }}" ng-model="vm.searchStringCountry" class="form-control">
                 </div>
                 <div class="form-actions">
-                    <button ng-click="vm.SearchCountries()" ng-disabled="vm.searchCountriesLoading" class="btn btn-primary ">Buscar</button>
+                    <button ng-click="vm.SearchCountries()" ng-disabled="vm.searchCountriesLoading" class="btn btn-primary ">{{ 'SEARCH' | translate }}</button>
                     <i ng-if="vm.searchCountriesLoading " class="fa fa-spinner fa-pulse fa-fw "></i>
                 </div>
             </form>
@@ -106,7 +106,7 @@
     <div class="col-lg-6 col-md-6 col-sm-12 ">
         <div class="x_panel ">
             <div class="x_title ">
-                <h3>Países</h3>
+                <h3>{{ 'COUNTRIES' | translate }}</h3>
             </div>
             <div class="x_content ">
                 <div ng-if="vm.searchCountriesLoading ">
@@ -114,14 +114,14 @@
                     <span class="sr-only ">Loading...</span>
                 </div>
                 <div ng-if="!vm.searchCountriesLoading && vm.noCountryFound ">
-                    <p>Nenhum país encontrado.</p>
+                    <p>{{ 'NO_COUNTRY_FOUND' | translate }}.</p>
                 </div>
                 <uib-accordion close-others="true ">
                     <div uib-accordion-group class="panel-default" ng-repeat="object in vm.filteredAngularCountries">
                         <div uib-accordion-heading>
                             <b>{{ object.country }}</b>
                         </div>
-                        <button ng-click="vm.EditCountry(object)" class="btn btn-primary">Editar</button>
+                        <button ng-click="vm.EditCountry(object)" class="btn btn-primary">{{ 'EDIT' | translate }}</button>
                         <i ng-if="vm.saveCountryLoading" class="fa fa-spinner fa-pulse fa-fw"></i>
                     </div>
                 </uib-accordion>

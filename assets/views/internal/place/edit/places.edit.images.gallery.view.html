@@ -2,10 +2,10 @@
     <div class="row">
         <div ng-if="editimages.GalleryLoading">
             <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
-            <span class="sr-only">Carregando...</span>
+            <span class="sr-only">Loading...</span>
         </div>
         <div ng-if="!editimages.GalleryLoading && editimages.noImagesFound">
-            <p>Nenhuma foto encontrada.</p>
+            <p>{{ 'NO_PHOTO_FOUND' | translate }}</p>
         </div>
         <div class="col-md-55" ng-repeat="image in editimages.filteredGallery">
             <div class="thumbnail">
@@ -20,7 +20,7 @@
                 </div>
                 <div class="form-group text-center">
                     <h4>
-                        <button ng-disabled="editimages.positionChangeLoading" ng-click="editimages.backwardPosition(image)" class="btn btn-primary"><i class="fa fa-backward"></i></button>Posição: {{ image.position }}
+                        <button ng-disabled="editimages.positionChangeLoading" ng-click="editimages.backwardPosition(image)" class="btn btn-primary"><i class="fa fa-backward"></i></button>{{ 'SEQUENCE' | translate }}: {{ image.position }}
                         <button ng-disabled="editimages.positionChangeLoading" ng-click="editimages.nextPosition(image)" class="btn btn-primary"><i class="fa fa-forward"></i></button>
                     </h4>
                 </div>
@@ -33,7 +33,7 @@
             ng-model="editimages.currentPage"></ul>
     </div>
     <div class="form-actions">
-        <button ng-click="editimages.advanceFlow()" ng-disabled="editimages.GalleryLoading || editimages.positionChangeLoading" class="btn btn-primary">Ativar Cadastro</button>
+        <button ng-click="editimages.advanceFlow()" ng-disabled="editimages.GalleryLoading || editimages.positionChangeLoading" class="btn btn-primary">{{ 'ACTIVATE' | translate }}</button>
         <i ng-if="editimages.GalleryLoading" class="fa fa-spinner fa-pulse fa-fw"></i>
     </div>
 </div>

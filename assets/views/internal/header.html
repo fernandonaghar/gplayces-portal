@@ -1,0 +1,28 @@
+<div class="top_nav">
+    <div class="nav_menu">
+        <nav>
+            <div class="nav toggle">
+                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+            </div>
+            <!-- Language selector -->
+            <ul class="nav navbar-nav navbar-right" ng-controller="TranslationsController as transcontrol">
+                <li role="presentation" class="dropdown">
+                    <a class="dropdown-toggle language-selector" data-toggle="dropdown">
+                        <span class="language-selector">
+                            <img class="language-selector-image" src="{{ transcontrol.language.url }}" alt="{{ transcontrol.language.language }}">
+                        </span>
+                    </a>
+                    <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+                        <li ng-repeat="lang in transcontrol.languageList">
+                            <button class="language-selector-button" ng-click="transcontrol.setLanguage(lang)">
+                                <span class="image">
+                                    <img class="language-selector-image" src="{{ lang.url }}">
+                                </span> {{ lang.language }}
+                            </button>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
