@@ -312,4 +312,5 @@ function config($translateProvider) {
     $translateProvider.translations('esp', es_translations);
 
     $translateProvider.preferredLanguage('ptb');
+    $translateProvider.useSanitizeValueStrategy('escape');
 }
