@@ -35,21 +35,18 @@
         </div>
     </div>
 
-    <!-- facebook API -->
-    <div id="fb-root"></div>
     <!-- Parse -->
     <script src="js/parse.min.js"></script>
-    <script>
-        //PRD Parse
-        //Parse.initialize("d6cfb8df821968fa818da234b7786c0e");    
-        //Parse.serverURL = 'https://gparse.azurewebsites.net/parse';
-        //DEV Parse
-        Parse.initialize("92f067f59fe76249b67d268b581fee64");
-        Parse.serverURL = 'https://gparsedev.azurewebsites.net/parse';
 
+    <!-- Load environment variables -->
+    <script src="env.js"></script>
+
+    <!-- facebook API -->
+    <div id="fb-root"></div>
+    <script>
         window.fbAsyncInit = function() {
             Parse.FacebookUtils.init({
-                appId: '340536129479663',
+                appId: facebookAppId,
                 autoLogAppEvents: true,
                 xfbml: true,
                 version: 'v2.4'
@@ -69,13 +66,14 @@
     </script>
 
     <!-- Javascript files Angular -->
-    <script src="js/jquery-3.1.1.min.js"></script>
-
+    <script src="lib/jquery/dist/jquery.min.js"></script>
     <script src="lib/angular/angular.min.js"></script>
     <script src="lib/angular-route/angular-route.min.js"></script>
-    <script src="js/angular-1.6.0/angular-sanitize.min.js"></script>
-    <script src="js/angular-1.6.0/angular-cookies.min.js"></script>
+    <script src="lib/angular-sanitize/angular-sanitize.min.js"></script>
+    <script src="lib/angular-cookies/angular-cookies.min.js"></script>
     <script src="lib/angular-animate/angular-animate.min.js"></script>
+    <script src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="lib/angular-translate/dist/angular-translate.min.js"></script>
 
     <!-- Masks -->
     <script src="js/masks.js"></script>
@@ -90,9 +88,6 @@
     <!-- UI Bootstrap -->
     <script src="lib/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
 
-    <!-- Angular Translate -->
-    <script src="js/angular-translate.min.js"></script>
-
     <!-- Img crop -->
     <script src="js/ui-cropper.js"></script>
 
@@ -102,7 +97,6 @@
 
     <!-- Javascript files App -->
     <script src="app.js"></script>
-    <script src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
 
     <!-- App Translations -->
     <script src="translations.js"></script>

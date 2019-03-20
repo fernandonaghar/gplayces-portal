@@ -1,6 +1,15 @@
-﻿var app = angular
+﻿// app.js
+var env = {};
+
+// Import variables if present (from env.js)
+if(window){  
+  Object.assign(env, window.__env);
+}
+
+var app = angular
     .module('app', ['ngAnimate', 'ngCookies', 'ui.router', 'ngSanitize', 'ui.bootstrap', 'uiCropper', 'ui.utils.masks', 'ngImageCompress', 'pascalprecht.translate'])
     .config(config)
+    .constant('__env', env)
     .run(run);
 
 config.$inject = ['$stateProvider', '$urlRouterProvider'];
