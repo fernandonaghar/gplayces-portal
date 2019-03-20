@@ -1,0 +1,44 @@
+{
+  "name": "gplayces-portal",
+  "private": true,
+  "version": "1.0.0",
+  "description": "GPlayces partner portal",
+  "license": "MIT",
+  "dependencies": {
+    "angular": "1.6.6",
+    "angular-animate": "1.6.6",
+    "angular-resource": "1.6.6",
+    "angular-route": "1.6.6",
+    "angular-ui-router": "1.0.7",
+    "angular-ui-bootstrap": "2.5.0",
+    "bootstrap": "3.3.7",
+    "jquery": "3.1.1"
+  },
+  "devDependencies": {
+    "angular-mocks": "1.6.x",
+    "cpx": "^1.5.0",
+    "http-server": "^0.11.1",
+    "jasmine-core": "^3.3.0",
+    "karma": "^3.1.1",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-firefox-launcher": "^1.1.0",
+    "karma-jasmine": "^1.1.2",
+    "protractor": "^5.4.1"
+  },
+  "scripts": {
+    "loadapp": "http-server ./app -a localhost -p 8000 -c-1",
+    "postinstall": "npm run copy-libs",
+    "update-deps": "npm update",
+    "postupdate-deps": "npm run copy-libs",
+    "copy-libs": "cpx \"node_modules/{angular,angular-*,bootstrap/dist,jquery/dist}/**/*\" app/lib -C",
+    "prestart": "npm install",
+    "start": "http-server ./app -a localhost -p 8000 -c-1",
+    "pretest": "npm install",
+    "test": "karma start karma.conf.js",
+    "test-single-run": "npm test -- --single-run",
+    "preupdate-webdriver": "npm install",
+    "update-webdriver": "webdriver-manager update",
+    "preprotractor": "npm run update-webdriver",
+    "protractor": "protractor e2e-tests/protractor.conf.js"
+  }
+}

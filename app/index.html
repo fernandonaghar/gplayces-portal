@@ -1,0 +1,156 @@
+﻿<!DOCTYPE html>
+<html ng-app="app">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Gplayces</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,700">
+    <link rel="stylesheet" href="css/style.sliding.form.css">
+    <link rel="stylesheet" href="css/plugins.css">
+    <link rel="stylesheet" href="css/custom.css">
+
+    <!-- Font Awesome CDN-->
+    <link rel="stylesheet" href="css/font-awesome-4.7.0/css/font-awesome.css">
+
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+</head>
+
+<body class="nav-md">
+    <div ui-view></div>
+    <div class="container body">
+        <div class="main_container">
+            <div ui-view="header"></div>
+            <div ui-view="sidebar"></div>
+            <div class="right_col" role="main" style="min-height: 100vh">
+                <div ui-view="content"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- facebook API -->
+    <div id="fb-root"></div>
+    <!-- Parse -->
+    <script src="js/parse.min.js"></script>
+    <script>
+        //PRD Parse
+        //Parse.initialize("d6cfb8df821968fa818da234b7786c0e");    
+        //Parse.serverURL = 'https://gparse.azurewebsites.net/parse';
+        //DEV Parse
+        Parse.initialize("92f067f59fe76249b67d268b581fee64");
+        Parse.serverURL = 'https://gparsedev.azurewebsites.net/parse';
+
+        window.fbAsyncInit = function() {
+            Parse.FacebookUtils.init({
+                appId: '340536129479663',
+                autoLogAppEvents: true,
+                xfbml: true,
+                version: 'v2.4'
+            });
+            FB.AppEvents.logPageView();
+        };
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {
+                return;
+            }
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "//connect.facebook.net/pt_BR/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+
+    <!-- Javascript files Angular -->
+    <script src="js/jquery-3.1.1.min.js"></script>
+
+    <script src="js/angular-1.6.0/angular.min.js"></script>
+    <script src="js/angular-1.6.0/angular-route.min.js"></script>
+    <script src="js/angular-1.6.0/angular-sanitize.min.js"></script>
+    <script src="js/angular-1.6.0/angular-cookies.min.js"></script>
+    <script src="js/angular-1.6.0/angular-animate.min.js"></script>
+
+    <!-- Masks -->
+    <script src="js/masks.js"></script>
+
+    <!-- Image compression -->
+    <script src="js/angular-image-compress.js"></script>
+
+    <!-- UI Router -->
+    <script src="node_modules/@uirouter/core/_bundles/ui-router-core.js"></script>
+    <script src="node_modules/@uirouter/angularjs/release/ui-router-angularjs.js"></script>
+
+    <!-- UI Bootstrap -->
+    <script src="node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
+
+    <!-- Angular Translate -->
+    <script src="js/angular-translate.min.js"></script>
+
+    <!-- Img crop -->
+    <script src="js/ui-cropper.js"></script>
+
+    <!-- Azure SDK -->
+    <script src="js/azure-storage.common.min.js"></script>
+    <script src="js/azure-storage.blob.min.js"></script>
+
+    <!-- Javascript files App -->
+    <script src="app.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Javascript App Translations -->
+    <script src="translations.js"></script>
+
+    <!-- Services -->
+    <script src="app-services/authentication.service.js"></script>
+    <script src="app-services/flash.service.js"></script>
+    <script src="app-services/email.service.js"></script>
+    <script src="app-services/user.service.js"></script>
+    <script src="app-services/general.services.js"></script>
+    <script src="app-services/place.service.js"></script>
+    <script src="app-services/event.service.js"></script>
+    <script src="app-services/azure.storage.service.js"></script>
+
+    <!-- controllers -->
+    <script src="views/translations.controller.js"></script>
+    <script src="views/external/login/login.controller.js"></script>
+    <script src="views/external/register/register.controller.js"></script>
+    <script src="views/internal/sidebar/sidebar.controller.js"></script>
+    <script src="views/internal/dashboard/dashboard.controller.js"></script>
+
+    <script src="views/internal/approvalrequests/approvalrequestslist.controller.js"></script>
+    <script src="views/internal/city/city.controller.js"></script>
+    <script src="views/internal/city/states.controller.js"></script>
+
+    <script src="views/internal/place/myplaces.controller.js"></script>
+    <script src="views/internal/place/createdplaces.controller.js"></script>
+
+    <script src="views/internal/place/event/place.events.controller.js"></script>
+    <script src="views/internal/place/event/place.events.list.controller.js"></script>
+    <script src="views/internal/place/event/place.events.edit.controller.js"></script>
+
+    <script src="views/internal/place/edit/places.controller.js"></script>
+    <script src="views/internal/place/edit/places.edit.controller.js"></script>
+    <script src="views/internal/place/edit/places.edit.address.controller.js"></script>
+    <script src="views/internal/place/edit/places.edit.hours.controller.js"></script>
+    <script src="views/internal/place/edit/places.edit.images.controller.js"></script>
+    <script src="views/internal/place/edit/places.edit.images.new.controller.js"></script>
+
+    <script src="views/internal/place/requestadmin/places.requestadmin.controller.js"></script>
+    <script src="views/internal/place/requestadmin/places.requestadmin.userdata.controller.js"></script>
+    <script src="views/internal/place/requestadmin/places.requestadmin.request.controller.js"></script>
+
+    <script src="views/internal/profile/profile.controller.js"></script>
+    <script src="views/internal/profile/profile.photo.controller.js"></script>
+
+    <!-- directives -->
+    <script src="directives/a-disabled.js"></script>
+</body>
+
+</html>
