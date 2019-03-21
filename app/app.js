@@ -2,8 +2,8 @@
 var env = {};
 
 // Import variables if present (from env.js)
-if(window){  
-  Object.assign(env, window.__env);
+if (window) {
+    Object.assign(env, window.__env);
 }
 
 var app = angular
@@ -290,7 +290,8 @@ function config($stateProvider, $urlRouterProvider) {
         url: '/login',
         controller: 'LoginController',
         templateUrl: 'views/external/login/login.view.html',
-        controllerAs: 'vm'
+        controllerAs: 'vm',
+        hideSideBar: true
     })
 
     // lostpassword
@@ -298,7 +299,8 @@ function config($stateProvider, $urlRouterProvider) {
         url: '/lostpassword',
         controller: 'RegisterController',
         templateUrl: 'views/external/register/lostpassword.view.html',
-        controllerAs: 'vm'
+        controllerAs: 'vm',
+        hideSideBar: true
     })
 
     // register
@@ -306,7 +308,8 @@ function config($stateProvider, $urlRouterProvider) {
         url: '/register',
         controller: 'RegisterController',
         templateUrl: 'views/external/register/register.view.html',
-        controllerAs: 'vm'
+        controllerAs: 'vm',
+        hideSideBar: true
     });
 
 }
