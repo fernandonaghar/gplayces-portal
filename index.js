@@ -8,7 +8,7 @@ app.use(function(req, res) {
     res.sendFile(path.join(__dirname, '/app', 'index.html'));
 });
 
-app.set('port', process.env.PORT || 8080);
+app.set('port', process.env.PORT || 1337);
 app.listen(app.get('port'), function() {
     console.log("listening to Port", app.get("port"));
 });
