@@ -30,6 +30,10 @@
         "karma-jasmine": "^1.1.2",
         "protractor": "^5.4.1"
     },
+    "engines": { 
+        "node" : "10.15.1",
+        "npm" : "6.4.1"
+    },    
     "scripts": {
         "load-app": "http-server ./app -a localhost -p 8000 -c-1",
         "postinstall": "npm run copy-libs",
