@@ -9,6 +9,7 @@
 
     function UserService($http, $q, AzureStorageService) {
         var service = {};
+        var adminRole = false;
         service.GetCurrentUser = GetCurrentUser;
         service.GetCurrentUserInfo = GetCurrentUserInfo;
         service.Create = Create;
@@ -20,6 +21,7 @@
         service.isFacebookLinked = isFacebookLinked;
         service.UnlinkFacebook = UnlinkFacebook;
         service.LinkFacebook = LinkFacebook;
+        service.SetAdminRole = setAdminRole;
 
         return service;
 
@@ -50,10 +52,8 @@
             userObject.phone = parse_user.attributes.phone;
             userObject.picture = parse_user.attributes.picture;
             userObject.parse_object = parse_user;
+            userObject.isAdmin = getAdminRole();
 
-            if (parse_user.attributes.ACL != null) {
-                userObject.isAdmin = parse_user.attributes.ACL.getRoleReadAccess("admin");
-            }
             return userObject;
         }
 
@@ -253,6 +253,14 @@
 
         function handleSuccess(res) {
             return res.data;
+        }
+
+        function setAdminRole(roleCheck) {
+            adminRole = roleCheck;
+        }
+
+        function getAdminRole() {
+            return adminRole;
         }
     }
 
