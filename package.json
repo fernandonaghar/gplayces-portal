@@ -36,13 +36,14 @@
         "npm": "6.4.1"
     },
     "scripts": {
-        "load-app": "http-server ./app -a localhost -p 8000 -c-1",
+        "load-app": "http-server ./app -a localhost -p 1337 -c-1",
         "postinstall": "npm run copy-libs",
         "update-deps": "npm update",
         "postupdate-deps": "npm run copy-libs",
-        "copy-libs": "cpx \"node_modules/{angular,angular-*,bootstrap/dist,@uirouter/core/_bundles,jquery/dist}/**/*\" app/lib -C",
-        "prestart": "npm install && npm install cpx -g",
-        "start-local": "http-server ./app -a localhost -p 8000 -c-1",
+        "copy-libs": "deployment.bat",
+        "copy-libs-original": "cpx \"node_modules/{angular,angular-*,bootstrap/dist,@uirouter/core/_bundles,jquery/dist}/**/*\" app/lib -C",
+        "prestart": "npm install",
+        "start-local": "http-server ./app -a localhost -p 1337 -c-1",
         "start": "node index.js",
         "pretest": "npm install",
         "test": "karma start karma.conf.js",

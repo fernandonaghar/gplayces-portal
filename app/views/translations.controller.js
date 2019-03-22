@@ -13,12 +13,12 @@
 
         var enuLanguage = { 'code': 'enu', 'language': 'English', 'url': 'img/usa.svg' };
         var ptbLanguage = { 'code': 'ptb', 'language': 'Português', 'url': 'img/brazil.svg' };
-        var espLanguage = { 'code': 'esp', 'language': 'Español', 'url': 'img/spain.svg' };
+        //var espLanguage = { 'code': 'esp', 'language': 'Español', 'url': 'img/spain.svg' };
 
         transcontrol.languageList = [
             enuLanguage,
             ptbLanguage,
-            espLanguage,
+           // espLanguage,
         ];
 
         transcontrol.defaultLangCode = $cookies.get('GplaycesAppAngJSLangCodePref');

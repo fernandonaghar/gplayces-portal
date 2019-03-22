@@ -327,3 +327,25 @@ function run($rootScope, $location, $cookies, $http) {
         }
     });
 }
+
+function appLoading( $animate ) {
+    debugger
+    // Return the directive configuration.
+    return({
+        link: link,
+        restrict: "C"
+    });
+
+    function link( scope, element, attributes ) {
+        debugger
+        $animate.leave( element.children().eq( 1 ) ).then(
+            function cleanupAfterAnimation() {
+                
+                debugger
+                element.remove();
+                // Clear the closed-over variable references.
+                scope = element = attributes = null;
+            }
+        );
+    }
+}
