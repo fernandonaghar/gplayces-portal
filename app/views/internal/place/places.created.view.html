@@ -55,6 +55,7 @@
                     <p>{{ 'ADDRESS' | translate }}: {{ place.attributes.address }}</p>
                     <a ui-sref="app.places.request_admin({ parse_place: place })" class="btn btn-primary"><i class="fa fa-unlock-alt"></i> {{ 'MANAGE_PLACE' | translate }}</a>
                     <a ui-sref="app.places.edit({ parse_place: place })" class="btn btn-primary"><i class="fa fa-pencil-square-o"></i> {{ 'EDIT' | translate }}</a>
+                    <a ng-if="vm.user.isAdmin" ui-sref="app.places.events({ parse_place: place })" class="btn btn-primary "><i class="fa fa-calendar"></i> {{ 'EVENTS' | translate }}</a>
                 </div>
             </uib-accordion>
         </div>

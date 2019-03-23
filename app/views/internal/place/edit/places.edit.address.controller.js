@@ -21,6 +21,7 @@
         function initController() {
 
             // define input place
+            debugger
             if ($stateParams.parse_place != null || $stateParams.place != null) {
                 if ($stateParams.parse_place != null) {
                     editaddr.place = PlaceService.ParseToAngularObject($stateParams.parse_place);

@@ -255,7 +255,26 @@
                 parse_object = SetPlaceData(place, parse_object);
                 parse_object.save(null, {
                     success: function(parse_object) {
-                        deferred.resolve({ success: true, place: parse_object });
+                        // save PlaceRating when creating Place
+                        var PlaceRating = Parse.Object.extend("PlaceRating");
+                        var parseChildObject = new PlaceRating();
+
+                        parseChildObject.set("place", parse_object);
+                        parseChildObject.set("totalRating", 0);
+                        parseChildObject.set("customByCategory", 0);
+                        parseChildObject.set("attendance", 0);
+                        parseChildObject.set("costBenefit", 0);
+                        parseChildObject.set("numberOfRatings", 0);
+                        parseChildObject.set("ambience", 0);
+
+                        parseChildObject.save(null, {
+                            success: function(parseChildObject) {
+                                deferred.resolve({ success: true, place: parse_object });
+                            },
+                            error: function(parseChildObject, error) {
+                                deferred.resolve({ success: false, message: 'Erro: "' + error.code + '": ' + error.message });
+                            }
+                        }).catch(angular.noop);
                     },
                     error: function(parse_user, error) {
                         deferred.resolve({ success: false, message: 'Erro: "' + error.code + '": ' + error.message });

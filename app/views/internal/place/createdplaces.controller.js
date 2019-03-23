@@ -5,9 +5,9 @@
         .module('app')
         .controller('CreatedPlacesController', CreatedPlacesController);
 
-    CreatedPlacesController.$inject = ['$scope', '$state', '$rootScope', 'PlaceService', 'FlashService', 'GeneralServices', '$translate'];
+    CreatedPlacesController.$inject = ['$scope', '$state', '$rootScope', 'PlaceService', 'UserService', 'FlashService', 'GeneralServices', '$translate'];
 
-    function CreatedPlacesController($scope, $state, $rootScope, PlaceService, FlashService, GeneralServices, $translate) {
+    function CreatedPlacesController($scope, $state, $rootScope, PlaceService, UserService, FlashService, GeneralServices, $translate) {
         var vm = this;
         vm.SearchPlaces = SearchPlaces;
         vm.dataLoading = true;
@@ -22,6 +22,7 @@
         vm.searchedPlaces = [];
         vm.currentSearchPage = 1;
         vm.numSearchPerPage = 6;
+        vm.user = UserService.GetCurrentUser();
 
         vm.currentLanguage = $translate.use();
 
