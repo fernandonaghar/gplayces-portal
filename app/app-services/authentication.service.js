@@ -37,7 +37,39 @@
 
             Parse.User.logIn(username, password, {
                 success: function(user) {
-                    deferred.resolve({ success: true });
+                    var queryRole = new Parse.Query(Parse.Role);
+                    queryRole.equalTo('name', 'admin');
+                    queryRole.first({
+                        success: function(result) { // Role Object
+                    
+                            var role = result;
+                            var adminRelation = new Parse.Relation(role, 'users');
+                            var queryAdmins = adminRelation.query();
+                    
+                            queryAdmins.equalTo('objectId', Parse.User.current().id);
+                            queryAdmins.first({
+                                success: function(result) {    // User Object
+                                    var isAdmin = false;
+                                    if (result)
+                                    {
+                                        isAdmin = true;
+                                    }
+                                    UserService.SetAdminRole(isAdmin);                                
+                                    deferred.resolve({ success: true, user_id: user.id, admin: isAdmin });
+                                },
+                                error: function(error) {
+                                    UserService.SetAdminRole(false); 
+                                    console.log("Error: Admin check failed.");
+                                    deferred.resolve({ success: true, user_id: user.id, admin: false });
+                                }
+                            });
+                        },
+                        error: function(error) {
+                            UserService.SetAdminRole(false); 
+                            console.log("ERROR: ADMIN ROLE NOT FOUND");
+                            deferred.resolve({ success: true });
+                        }
+                    });
                 },
                 error: function(user, error) {
                     deferred.resolve({ success: false, message: $translate.instant('INVALID_EMAIL_OR_PWD') });

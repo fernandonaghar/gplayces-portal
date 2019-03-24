@@ -10,8 +10,16 @@
     function UserService($http, $q, AzureStorageService) {
         var service = {};
 
-        var roleChecked = false;
-        var adminRole = false;
+        var localAdminRole = localStorage.getItem('GplaycesPortalAdminLocalStorage');
+
+        if (localAdminRole) {
+            service.adminRole = localAdminRole;
+        }
+        else 
+        {
+            service.adminRole = false;
+        }
+        
         service.GetCurrentUser = GetCurrentUser;
         service.GetCurrentUserInfo = GetCurrentUserInfo;
         service.Create = Create;
@@ -24,7 +32,6 @@
         service.UnlinkFacebook = UnlinkFacebook;
         service.LinkFacebook = LinkFacebook;
         service.SetAdminRole = setAdminRole;
-        service.GetAdminRole = getAdminRole;
 
         return service;
 
@@ -55,7 +62,7 @@
             userObject.phone = parse_user.attributes.phone;
             userObject.picture = parse_user.attributes.picture;
             userObject.parse_object = parse_user;
-            userObject.isAdmin = getAdminRole();
+            userObject.isAdmin = service.adminRole;
             
             return userObject;
         }
@@ -248,59 +255,17 @@
             return deferred.promise;
         }
 
-        function handleError(error) {
-            return function() {
-                return { success: false, message: error };
-            };
-        }
-
-        function handleSuccess(res) {
-            return res.data;
-        }
-
         function setAdminRole(roleCheck) {
-            roleChecked = true;
-            adminRole = roleCheck;
-        }
-
-        function getAdminRole() {
-
-            var adminCheckPromise = $q.defer();
-
-            if (!roleChecked) {
-
-                var queryRole = new Parse.Query(Parse.Role);
-                queryRole.equalTo('name', 'admin');
-                queryRole.first({
-                    success: function(result) { // Role Object
-                
-                        var role = result;
-                        var adminRelation = new Parse.Relation(role, 'users');
-                        var queryAdmins = adminRelation.query();
-                
-                        queryAdmins.equalTo('objectId', Parse.User.current().id);
-                        queryAdmins.first({
-                            success: function(result) {    // User Object
-                                var isAdmin = false;
-                                if (result)
-                                {
-                                    isAdmin = true;
-                                }
-                                setAdminRole(isAdmin);                                
-                                adminCheckPromise.resolve({ success: true, user_id: user.id, admin: adminRole });
-                            },
-                            error: function(error) {
-                                console.log("Error: Admin check failed.");
-                                adminCheckPromise.resolve({ success: true, user_id: user.id, admin: adminRole });
-                            }
-                        });
-                    },
-                    error: function(error) {
-                        console.log("ERROR: ADMIN ROLE NOT FOUND");
-                    }
-                });
+            
+            service.adminRole = roleCheck;
+            if (roleCheck) {
+                localStorage.setItem('GplaycesPortalAdminLocalStorage', JSON.stringify(true));
             }
-            return adminCheckPromise.promise;
+            else 
+            {
+                localStorage.removeItem('GplaycesPortalAdminLocalStorage');
+            }
+                
         }
     }
 
