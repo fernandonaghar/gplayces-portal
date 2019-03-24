@@ -247,11 +247,12 @@
                         }
                     }
                 }).catch(angular.noop);
-            } else {
+            } else { // new place
                 var Place = Parse.Object.extend("Place");
                 parse_object = new Place();
                 var parse_user = Parse.User.current();
                 parse_object.set("creator", parse_user);
+                parse_object.set("priority", 0);
                 parse_object = SetPlaceData(place, parse_object);
                 parse_object.save(null, {
                     success: function(parse_object) {
@@ -269,7 +270,16 @@
 
                         parseChildObject.save(null, {
                             success: function(parseChildObject) {
-                                deferred.resolve({ success: true, place: parse_object });
+                                // update reference on place
+                                parse_object.set("placeRating", parseChildObject);
+                                parse_object.save(null, {
+                                    success: function(parse_object) {
+                                        deferred.resolve({ success: true, place: parse_object });
+                                    },
+                                    error: function(parseChildObject, error) {
+                                        deferred.resolve({ success: false, message: 'Erro: "' + error.code + '": ' + error.message });
+                                    }
+                                });
                             },
                             error: function(parseChildObject, error) {
                                 deferred.resolve({ success: false, message: 'Erro: "' + error.code + '": ' + error.message });
@@ -302,11 +312,13 @@
             parse_object.set("approvalStatus", place.approvalStatus);
             parse_object.set("approvalRequest", place.approvalRequest);
             parse_object.set("coverImage", place.coverImage);
+            parse_object.set("priority", place.priority);
+            parse_object.set("priority", place.priority);
 
             if (place.isActive == null) {
-                parse_object.set("isActive", false);
+                parse_object.set("isAcessible", false);
             } else {
-                parse_object.set("isActive", place.isActive);
+                parse_object.set("isAcessible", place.isActive);
             }
 
             if (place.latitude != null && place.longitude != null) {
@@ -318,7 +330,13 @@
         }
 
         function GetcoverImageURL(angular_place) {
-            return AzureStorageService.getBlobURI() + '/place/' + angular_place.coverImage;
+            if (angular_place.coverImage) {
+                return AzureStorageService.getBlobURI() + '/place/' + angular_place.coverImage;
+            }
+            else
+            {
+                return "";
+            }
         }
 
         function PlacePictureParseToAngularObject(parse_object) {
@@ -524,10 +542,12 @@
             parse_object = new PlaceHours();
 
             var parse_user = Parse.User.current();
-            parse_object.set("day", hours.day);
+            parse_object.set("day", hours.dayId);
             parse_object.set("place", parse_place);
-            parse_object.set("start", hours.start);
-            parse_object.set("end", hours.end);
+            parse_object.set("startDay", hours.startDay);
+            parse_object.set("endDay", hours.endDay);
+            parse_object.set("startNight", hours.startNight);
+            parse_object.set("endNight", hours.endNight);            
 
             parse_object.save(null, {
                 success: function(parse_object) {

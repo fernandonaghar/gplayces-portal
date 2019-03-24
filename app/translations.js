@@ -86,6 +86,10 @@ function config($translateProvider) {
         'DAY': 'Day',
         'START': 'Start',
         'END': 'End',
+        'START_DAY': 'Start - Day',
+        'END_DAY': 'End - Day',
+        'START_NIGHT': 'Start - Night',
+        'END_NIGHT': 'End - Night',                
         'DESCRIPTION_IN_PTB': 'Description in Portuguese',
         'DESCRIPTION_IN_ENU': 'Description in English',
         'DESCRIPTION_IN_ESP': 'Description in Spanish',
@@ -146,13 +150,24 @@ function config($translateProvider) {
         'FACEBOOK_ACCOUNT_LINKED': 'Facebook account association successful. You may now use your facebook account to login.',
 
         'MONDAY': 'Monday',
+        '2_WEEKDAY': 'Monday',
         'TUESDAY': 'Tuesday',
+        '3_WEEKDAY': 'Tuesday',
         'WEDNESDAY': 'Wednesday',
+        '4_WEEKDAY': 'Wednesday',
         'THURSDAY': 'Thursday',
+        '5_WEEKDAY': 'Thursday',
         'FRIDAY': 'Friday',
+        '6_WEEKDAY': 'Friday',
         'SATURDAY': 'Saturday',
+        '7_WEEKDAY': 'Saturday',
         'SUNDAY': 'Sunday',
+        '1_WEEKDAY': 'Sunday',
         'HOLIDAY': 'Holiday',
+        '0_WEEKDAY': 'Holiday',
+
+        'PHOTO_TYPE': 'Photo Type'
+        
 
     }
 
@@ -235,6 +250,10 @@ function config($translateProvider) {
         'ADD_NEW_PERIOD': 'Adicionar novo período',
         'DAY': 'Dia',
         'START': 'Início',
+        'START_DAY': 'Início - Dia',
+        'END_DAY': 'Fim - Dia',
+        'START_NIGHT': 'Início - Noite',
+        'END_NIGHT': 'Fim - Noite',         
         'END': 'Fim',
         'DESCRIPTION_IN_PTB': 'Descrição em Português',
         'DESCRIPTION_IN_ENU': 'Descrição em Inglês',
@@ -303,6 +322,16 @@ function config($translateProvider) {
         'SATURDAY': 'Sábado',
         'SUNDAY': 'Domingo',
         'HOLIDAY': 'Feriado',
+        '2_WEEKDAY': 'Segunda',
+        '3_WEEKDAY': 'Terça',
+        '4_WEEKDAY': 'Quarta',
+        '5_WEEKDAY': 'Quinta',
+        '6_WEEKDAY': 'Sexta',
+        '7_WEEKDAY': 'Sábado',
+        '1_WEEKDAY': 'Domingo',
+        '0_WEEKDAY': 'Feriado',        
+
+        'PHOTO_TYPE': 'Tipo de foto'
     }
 
     var es_translations = {}

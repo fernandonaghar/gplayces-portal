@@ -23,14 +23,14 @@
         ];
 
         edithours.weekdays = [
-            { 'id': '0', 'day': 'Monday' },
-            { 'id': '1', 'day': 'Tuesday' },
-            { 'id': '2', 'day': 'Wednesday' },
-            { 'id': '3', 'day': 'Thursday' },
-            { 'id': '4', 'day': 'Friday' },
-            { 'id': '5', 'day': 'Saturday' },
-            { 'id': '6', 'day': 'Sunday' },
-            { 'id': '7', 'day': 'Holidays' }
+            { 'id': 2, 'day': 'Monday', 'translation': '2_WEEKDAY' },
+            { 'id': 3, 'day': 'Tuesday', 'translation': '3_WEEKDAY'  },
+            { 'id': 4, 'day': 'Wednesday', 'translation': '4_WEEKDAY'  },
+            { 'id': 5, 'day': 'Thursday', 'translation': '5_WEEKDAY'  },
+            { 'id': 6, 'day': 'Friday', 'translation': '6_WEEKDAY'  },
+            { 'id': 7, 'day': 'Saturday', 'translation': '7_WEEKDAY'  },
+            { 'id': 1, 'day': 'Sunday', 'translation': '1_WEEKDAY'  },
+            { 'id': 0, 'day': 'Holidays', 'translation': '0_WEEKDAY'  }
         ];
 
         initController();
@@ -66,8 +66,10 @@
             var hours = {
                 "dayId": edithours.selectedDay.id,
                 "day": edithours.selectedDay.day,
-                "start": edithours.selectedStart,
-                "end": edithours.selectedEnd
+                "startDay": edithours.selectedStartDay,
+                "endDay": edithours.selectedEndDay,
+                "startNight": edithours.selectedStartNight,
+                "endNight": edithours.selectedEndNight
             };
 
             PlaceService.AddPlaceHours(edithours.place.parse_object, hours).then(function(response) {
