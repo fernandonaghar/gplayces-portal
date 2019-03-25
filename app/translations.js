@@ -105,6 +105,7 @@ function config($translateProvider) {
         'EVENT_DATA': 'Event Data',
         'DESCRIPTION': 'Description',
         'EVENT_DATES': 'Event Dates',
+        'EVENT_DATE': 'Event Date',
         'CHOOSE_A_PHOTO': 'Choose a photo',
         'COVER_IMAGE': 'Cover image',
         'PREVIEW': 'Preview',
@@ -166,8 +167,8 @@ function config($translateProvider) {
         'HOLIDAY': 'Holiday',
         '0_WEEKDAY': 'Holiday',
 
-        'PHOTO_TYPE': 'Photo Type'
-        
+        'PHOTO_TYPE': 'Photo Type',
+        'USE_PLACE_ADDRESS': 'Event is ocurring at the places location.'
 
     }
 
@@ -270,6 +271,7 @@ function config($translateProvider) {
         'EVENT_DATA': 'Dados do evento',
         'DESCRIPTION': 'Descrição',
         'EVENT_DATES': 'Datas do evento',
+        'EVENT_DATE': 'Data do evento',
         'CHOOSE_A_PHOTO': 'Escolha uma foto',
         'COVER_IMAGE': 'Imagem de capa',
         'PREVIEW': 'Preview',
@@ -331,7 +333,8 @@ function config($translateProvider) {
         '1_WEEKDAY': 'Domingo',
         '0_WEEKDAY': 'Feriado',        
 
-        'PHOTO_TYPE': 'Tipo de foto'
+        'PHOTO_TYPE': 'Tipo de foto',
+        'USE_PLACE_ADDRESS': 'Evento ocorrerá no mesmo local do estabelecimento.'
     }
 
     var es_translations = {}

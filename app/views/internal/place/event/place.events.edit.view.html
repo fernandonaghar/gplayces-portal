@@ -12,74 +12,48 @@
         <div class="form-group">
             <label class="form-control-label">{{ 'DESCRIPTION' | translate }}</label>
             <textarea ng-maxlength="250" placeholder="{{ 'DESCRIPTION' | translate }}" ng-model="edit.event.description" class="form-control"></textarea>
-        </div>
-    </div>
-    <div class="x_panel">
-        <div class="x_title">
-            <h4>{{ 'EVENT_DATES' | translate }}</h4>
-            <div class="clearfix"></div>
+        </div>      
+        <div class="form-group">
+            <label class="form-control-label">{{ 'START' | translate }}</label>
+            <input moment-picker="edit.event.start"
+                locale="pt-br"
+                min-view="year"
+                max-view="hour"
+                format="LL LTS"
+                placeholder="{{ 'START' | translate }}" ng-model="edit.event.startMomentObj" class="form-control"></input>
         </div>
         <div class="form-group">
-            <div class="row">
-                <div class="col-md-3 col-sm-3 col-xs-3 form-group has-feedback">
-                    <label class="form-control-label">{{ 'DAY' | translate }}</label>
-                </div>
-                <div class="col-md-3 col-sm-3 col-xs-3 form-group has-feedback">
-                    <label class="form-control-label">{{ 'START' | translate }}</label>
-                </div>
-                <div class="col-md-3 col-sm-3 col-xs-3 form-group has-feedback">
-                    <label class="form-control-label">{{ 'END' | translate }}</label>
-                </div>
-            </div>
-            <form name="formdates">
-                <div class="row">
-                    <div class="col-md-3 col-sm-3 col-xs-3 form-group has-feedback">
-                        <input type="date" name="day" placeholder="{{ 'DAY' | translate }}" ng-model="edit.selectedDate" class="form-control">
-                    </div>
-                    <div class="col-md-3 col-sm-3 col-xs-3 form-group has-feedback">
-                        <select placeholder="{{ 'START' | translate }}" ng-model="edit.selectedStart" ng-options="day as day for day in edit.availableHours" class="form-control"></select>
-                    </div>
-                    <div class="col-md-3 col-sm-3 col-xs-3 form-group has-feedback">
-                        <select placeholder="{{ 'END' | translate }}" ng-model="edit.selectedEnd" ng-options="day as day for day in edit.availableHours" class="form-control"></select>
-                    </div>
-                    <div class="col-md-3 col-sm-3 col-xs-3 form-group has-feedback">
-                        <button ng-click="edit.addEventDate()" ng-disabled="!edit.selectedStart || !edit.selectedDate || !edit.selectedEnd" class="btn btn-primary">{{ 'ADD' | translate }}</button>
-                        <i ng-if="edit.saveHoursLoading" class="fa fa-spinner fa-pulse fa-fw"></i>
-                    </div>
-                </div>
-            </form>
+            <label class="form-control-label">{{ 'END' | translate }}</label>
+            <input moment-picker="edit.event.end"
+                locale="pt-br"
+                min-view="year"
+                max-view="hour"
+                format="LL LTS"
+                placeholder="{{ 'END' | translate }}" ng-model="edit.event.endMomentObj" class="form-control">
+            </input>
         </div>
         <div class="form-group">
-            <div class="x_title">
-                <h4>{{ 'PERIODS_REGISTERED' | translate }}</h4>
-                <div class="clearfix"></div>
-            </div>
-            <div class="x_content">
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th>{{ 'DAY' | translate }}</th>
-                            <th>{{ 'START' | translate }}</th>
-                            <th>{{ 'END' | translate }}</th>
-                            <th>{{ 'ACTION' | translate }}</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <div ng-if="edit.datesLoading">
-                            <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
-                            <span class="sr-only">Loading...</span>
-                        </div>
-                        <tr ng-repeat="date in edit.eventDates | orderBy:'date'">
-                            <th scope="row">{{ date.date | date:'dd/MM/yyyy' }}</th>
-                            <td>{{ date.start }}</td>
-                            <td>{{ date.end }}</td>
-                            <td><button ng-click="edit.removeEventDate(date)" class="btn btn-xs btn-danger">{{ 'REMOVE' | translate }}</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" ng-model="edit.event.useSameAddress" value="true">{{ 'USE_PLACE_ADDRESS' | translate }}
+                </label>
             </div>
         </div>
+        <div ng-if="!edit.event.useSameAddress" class="form-group">
+            <label class="form-control-label">{{ 'ADDRESS' | translate }}</label>
+            <input ng-maxlength="250" placeholder="{{ 'ADDRESS' | translate }}" ng-model="edit.event.address" class="form-control"></textarea>
+        </div>
+        <div ng-if="!edit.event.useSameAddress" class="form-group">
+            <label class="form-control-label">{{ 'CITY' | translate }}</label>
+            <input ng-maxlength="100" placeholder="{{ 'CITY' | translate }}" ng-model="edit.event.city" class="form-control"></textarea>
+        </div>          
+        <div class="form-group">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" ng-model="edit.event.isActive" value="">{{ 'ACTIVE' | translate }}
+                </label>
+            </div>
+        </div>                               
     </div>
     <div class="row">
         <div class="x_title">

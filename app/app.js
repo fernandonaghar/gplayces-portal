@@ -7,7 +7,7 @@ if (window) {
 }
 
 var app = angular
-    .module('app', ['ngAnimate', 'ngCookies', 'ui.router', 'ngSanitize', 'ui.bootstrap', 'uiCropper', 'ui.utils.masks', 'ngImageCompress', 'pascalprecht.translate'])
+    .module('app', ['ngAnimate', 'ngCookies', 'ui.router', 'ngSanitize', 'ui.bootstrap', 'moment-picker', 'uiCropper', 'ui.utils.masks', 'ngImageCompress', 'pascalprecht.translate'])
     .config(config)
     .constant('__env', env)
     .run(run);

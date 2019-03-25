@@ -80,7 +80,6 @@
                             var Event = Parse.Object.extend("Event");
                             parse_object = new Event();
                             parse_object.set("place", place);
-                            parse_object.set("active", true);
                             parse_object = SetEventData(place, parse_object);
                             parse_object.save(null, {
                                 success: function(parse_object) {
@@ -97,7 +96,6 @@
                 var Event = Parse.Object.extend("Event");
                 parse_object = new Event();
                 parse_object.set("place", place);
-                parse_object.set("active", true);
                 parse_object = SetEventData(event, parse_object);
                 parse_object.save(null, {
                     success: function(parse_object) {
@@ -116,6 +114,24 @@
             parse_object.set("name", event.name);
             parse_object.set("description", event.description);
             parse_object.set("coverImage", event.coverImage);
+            parse_object.set("address", event.address);
+            parse_object.set("coverImage", event.coverImage);
+
+            parse_object.set("useSameAddress", event.useSameAddress);
+
+            if(event.startMomentObj) {
+                parse_object.set("start", event.startMomentObj.toDate()); 
+            }
+            if(event.endMomentObj) {
+                parse_object.set("end", event.endMomentObj.toDate()); 
+            }
+
+            parse_object.set("isActive", event.isActive);
+
+            if (event.latitude != null && event.longitude != null) {
+                var point = new Parse.GeoPoint({ latitude: event.latitude, longitude: event.longitude });
+                parse_object.set("location", point);
+            }
 
             return parse_object;
         }
@@ -128,10 +144,21 @@
             angular_object.title = parse_object.attributes.title;
             angular_object.description = parse_object.attributes.description;
             angular_object.coverImage = parse_object.attributes.coverImage;
-            angular_object.active = parse_object.attributes.active;
+
+            angular_object.address = parse_object.attributes.address;
+            angular_object.useSameAddress = parse_object.attributes.useSameAddress;
+
+            angular_object.start = parse_object.attributes.start;
+            angular_object.end = parse_object.attributes.end;  
+            angular_object.isActive = parse_object.attributes.isActive;
             angular_object.place = parse_object.attributes.place;
+
             angular_object.parse_object = parse_object;
 
+            if (parse_object.attributes.location != null) {
+                angular_object.latitude = Number(parse_object.attributes.location.latitude);
+                angular_object.longitude = Number(parse_object.attributes.location.longitude);
+            }
             return angular_object;
         }
 
