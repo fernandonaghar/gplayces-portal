@@ -16,16 +16,17 @@
         <div class="form-group">
             <label class="form-control-label">{{ 'START' | translate }}</label>
             <input moment-picker="edit.event.start"
-                locale="pt-br"
+                locale="en"
                 min-view="year"
                 max-view="hour"
                 format="LL LTS"
-                placeholder="{{ 'START' | translate }}" ng-model="edit.event.startMomentObj" class="form-control"></input>
+                placeholder="{{ 'START' | translate }}" ng-model="edit.event.startMomentObj" class="form-control">
+            </input>
         </div>
         <div class="form-group">
             <label class="form-control-label">{{ 'END' | translate }}</label>
             <input moment-picker="edit.event.end"
-                locale="pt-br"
+                locale="en"
                 min-view="year"
                 max-view="hour"
                 format="LL LTS"
@@ -39,14 +40,22 @@
                 </label>
             </div>
         </div>
-        <div ng-if="!edit.event.useSameAddress" class="form-group">
+        <div ng-show="!edit.event.useSameAddress" class="form-group">
+                <label class="form-control-label">{{ 'CITY' | translate }}</label>
+                <select ng-model="edit.event.city" name="city" class="form-control" ng-disabled="edit.disabledCities" ng-options="option.attributes.name for option in edit.cities track by option.id">
+            </select>
+        </div>                    
+        <div ng-show="!edit.event.useSameAddress" class="form-group">
             <label class="form-control-label">{{ 'ADDRESS' | translate }}</label>
-            <input ng-maxlength="250" placeholder="{{ 'ADDRESS' | translate }}" ng-model="edit.event.address" class="form-control"></textarea>
+            <input id="pac-input" type="text" name="eventaddress" placeholder="{{ 'ADDRESS' | translate }}" ng-model="edit.event.address" class="form-control">
         </div>
-        <div ng-if="!edit.event.useSameAddress" class="form-group">
-            <label class="form-control-label">{{ 'CITY' | translate }}</label>
-            <input ng-maxlength="100" placeholder="{{ 'CITY' | translate }}" ng-model="edit.event.city" class="form-control"></textarea>
-        </div>          
+        <!-- maps API -->
+        <div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }" ng-if="flash" ng-bind="flash.message"></div>
+        <input id="pac-lat" type="text" name="placename" style="display:none;" disabled placeholder="Lat" ng-model="edit.event.latitude" class="form-control">
+        <input id="pac-long" type="text" name="placename" style="display:none;" disabled placeholder="Long" ng-model="edit.event.longitude" class="form-control">
+        <i ng-if="edit.mapLoading" class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+        <div ng-show="!edit.event.useSameAddress" id="map" ></div>
+
         <div class="form-group">
             <div class="checkbox">
                 <label>
@@ -56,33 +65,28 @@
         </div>                               
     </div>
     <div class="row">
-        <div class="x_title">
-            <h4>{{ 'COVER_IMAGE' | translate }}</h4>
+        <div class="x_title" ng-if="edit.event.coverImage">
+            <h4>{{ 'CURRENT_COVER_IMAGE' | translate }}</h4>
             <div class="clearfix"></div>
+            <img style="width: 100%; display: block;" ng-src="{{ edit.previousFile }}">
         </div>
-        <div class="col-lg-8">
+        <div class="x_title">
+            <h4>{{ 'NEW_COVER_IMAGE' | translate }}</h4>
+            <div class="clearfix"></div>
+        </div>        
+        <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
                     {{ 'CHOOSE_A_PHOTO' | translate }}:
                     <input type="file" id="fileInput" accept="image/*" ng-model="image1" image="image1" resize-max-height="1024" resize-max-width="768" resize-quality="0.7" resize-type="image/jpg" ng-image-compress/></div>
-                <div class="cropArea card-body">
+                <div class="cropArea card-body pt10">
                     <ui-cropper image="image1.compressed.dataURL" result-blob="edit.resultBlob" result-image-format="image/jpg" result-image-size="400" area-type="square" result-image="edit.myCroppedImage"></ui-cropper>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4">
-            <div class="card">
-                <div class="card-header">{{ 'PREVIEW' | translate }}</div>
-                <div class="card-body">
-                    <div class="cropped-area form-group text-center">
-                        <img ng-src="{{edit.myCroppedImage}}" />
-                    </div>
                 </div>
             </div>
         </div>
     </div>
     <div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }" ng-if="flash" ng-bind="flash.message"></div>
-    <div class="form-group">
+    <div class="form-group pt10">
         <button ng-click="edit.saveEvent()" ng-disabled="form.$invalid || edit.dataLoading" class="btn btn-primary">{{ 'SAVE' | translate }}</button>
         <i ng-if="edit.dataLoading" class="fa fa-spinner fa-pulse fa-fw"></i>
     </div>

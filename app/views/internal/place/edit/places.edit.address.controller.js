@@ -47,7 +47,7 @@
                 //Map initialization
                 $timeout(function($scope) {
 
-                    map = new google.maps.Map(document.getElementById('map'), {
+                    var map = new google.maps.Map(document.getElementById('map'), {
                         center: {
                             lat: initial_latitude,
                             lng: initial_longitude
@@ -63,7 +63,9 @@
                     var autocomplete = new google.maps.places.Autocomplete(input);
                     autocomplete.bindTo('bounds', map);
 
-                    var infowindow = new google.maps.InfoWindow();
+                    if (!infowindow) {
+                        var infowindow = new google.maps.InfoWindow();
+                    }
                     var marker = new google.maps.Marker({
                         map: map,
                         position: {
@@ -118,7 +120,7 @@
                         infowindow.setContent('<div><strong>' + map_place.name + '</strong><br>' + address);
                         infowindow.open(map, marker);
                     });
-                }, 2000);
+                }, 1000);
             } else {
                 $state.go('app.places.myplaces');
             };

@@ -216,7 +216,16 @@ function config($stateProvider, $urlRouterProvider) {
             controller: 'PlacesEditNewImagesController',
             controllerAs: 'editimagesnew'
         })
-
+    .state('app.places.edit.activation', {
+        url: '/activation',
+        params: {
+            place: null,
+            parse_place: null
+        },
+        templateUrl: 'views/internal/place/edit/places.edit.activation.view.html',
+        controller: 'PlacesEditController',
+        controllerAs: 'edit'
+    })
     .state('app.places.request_admin', {
             url: '/admin',
             params: {

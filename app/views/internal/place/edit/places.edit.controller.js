@@ -40,6 +40,10 @@
             } else if ($stateParams.place != null) {
                 edit.place = $stateParams.place;
                 edit.isNewRecord = false;
+
+            // if no input place found and not place creation mode, redirect to my places
+            } else if ($state.current.name != 'app.places.edit.data') {
+                $state.go('app.places.myplaces');
             }
         }
 
@@ -64,6 +68,8 @@
                             $state.go('app.places.edit.address', { place: edit.place });
                         } else if ($state.current.name == 'app.places.edit.contact') {
                             $state.go('app.places.edit.hours', { place: edit.place });
+                        } else if ($state.current.name == 'app.places.edit.activation') {
+                            $state.go('app.places.myplaces');
                         }
 
                     } else {

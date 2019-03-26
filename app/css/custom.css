@@ -623,7 +623,7 @@ body {
 }
 
 .page-title .title_left {
-    width: 45%;
+    /*width: 45%; */
     float: left;
     display: block
 }

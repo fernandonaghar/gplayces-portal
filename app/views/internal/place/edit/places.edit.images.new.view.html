@@ -31,7 +31,8 @@
                 </div>
                 <div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }" ng-if="flash" ng-bind="flash.message"></div>
                 <div class="form-group">
-                    <button ng-disabled="!editimagesnew.photoType" ng-click="editimagesnew.AddPhotoToGallery()" class="btn btn-primary pull-right">{{ 'ADD' | translate }}</button>
+                    <i ng-if="!editimagesnew.uploadFinished" class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+                    <button ng-disabled="!editimagesnew.uploadFinished" ng-click="editimagesnew.AddPhotoToGallery()" class="btn btn-primary pull-right">{{ 'ADD' | translate }}</button>
                 </div>
             </div>
         </div>

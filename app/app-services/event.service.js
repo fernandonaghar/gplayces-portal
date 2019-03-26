@@ -28,7 +28,7 @@
 
             var query = new Parse.Query(Event);
             query.equalTo("place", place);
-            query.equalTo("active", true);
+            query.equalTo("isActive", true);
             query.descending("createdAt");
             query.find({
                 success: function(results) {
@@ -126,6 +126,10 @@
                 parse_object.set("end", event.endMomentObj.toDate()); 
             }
 
+            if(event.city) {
+                parse_object.set("city", event.city); 
+            }
+
             parse_object.set("isActive", event.isActive);
 
             if (event.latitude != null && event.longitude != null) {
@@ -148,8 +152,16 @@
             angular_object.address = parse_object.attributes.address;
             angular_object.useSameAddress = parse_object.attributes.useSameAddress;
 
-            angular_object.start = parse_object.attributes.start;
-            angular_object.end = parse_object.attributes.end;  
+            if (parse_object.attributes.start) {
+                angular_object.startMomentObj = moment(parse_object.attributes.start);
+                angular_object.start = parse_object.attributes.start.toLocaleDateString();
+            }
+            if (parse_object.attributes.end) {
+                angular_object.endMomentObj = moment(parse_object.attributes.end);
+                angular_object.end = parse_object.attributes.end.toLocaleDateString();
+            }
+            angular_object.city = parse_object.attributes.city;
+
             angular_object.isActive = parse_object.attributes.isActive;
             angular_object.place = parse_object.attributes.place;
 
@@ -212,7 +224,7 @@
 
             var deferred = $q.defer();
 
-            parse_object.set("active", false);
+            parse_object.set("isActive", false);
             parse_object.save(null, {
                 success: function(parse_object) {
                     deferred.resolve({ success: true, parse_object: parse_object });

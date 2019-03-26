@@ -31,6 +31,12 @@
                     <span class="step_descr">{{ 'IMAGES' | translate }}</span>
                 </a>
             </li>
+            <li ng-if="isAdmin || vm.place.isOwner">
+                <a a-disabled="vm.isNewRecord" ui-sref-active="selected" ui-sref="app.places.edit.activation({ place: vm.place })">
+                    <span class="step_no">Final</span>
+                    <span class="step_descr">{{ 'ACTIVATION' | translate }}</span>
+                </a>
+            </li>            
         </ul>
     </div>
     <div class="well well-sm" ng-show="!vm.isNewRecord">

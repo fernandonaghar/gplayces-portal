@@ -313,13 +313,8 @@
             parse_object.set("approvalRequest", place.approvalRequest);
             parse_object.set("coverImage", place.coverImage);
             parse_object.set("priority", place.priority);
-            parse_object.set("priority", place.priority);
-
-            if (place.isActive == null) {
-                parse_object.set("isAcessible", false);
-            } else {
-                parse_object.set("isAcessible", place.isActive);
-            }
+            parse_object.set("isAccessible", place.isAccessible);
+            parse_object.set("isActive", place.isActive);
 
             if (place.latitude != null && place.longitude != null) {
                 var point = new Parse.GeoPoint({ latitude: place.latitude, longitude: place.longitude });
@@ -372,8 +367,10 @@
             angular_object.location = parse_object.attributes.location;
             angular_object.approvalStatus = parse_object.attributes.approvalStatus;
             angular_object.approvalRequest = parse_object.attributes.approvalRequest;
-            angular_object.isActive = parse_object.attributes.isActive;
             angular_object.coverImage = parse_object.attributes.coverImage;
+
+            angular_object.isActive = parse_object.attributes.isActive;
+            angular_object.isAccessible = parse_object.attributes.isAccessible;            
 
             if (parse_object.attributes.owner != null) {
                 var current_user = Parse.User.current();

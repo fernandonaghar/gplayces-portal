@@ -18,10 +18,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-group text-center">
+                <div class="form-group text-center pt-5">
                     <h4>
-                        <button ng-disabled="editimages.positionChangeLoading" ng-click="editimages.backwardPosition(image)" class="btn btn-primary"><i class="fa fa-backward"></i></button>{{ 'SEQUENCE' | translate }}: {{ image.position }}
-                        <button ng-disabled="editimages.positionChangeLoading" ng-click="editimages.nextPosition(image)" class="btn btn-primary"><i class="fa fa-forward"></i></button>
+                        <button ng-disabled="editimages.positionChangeLoading" ng-click="editimages.backwardPosition(image)" class="btn btn-sm btn-primary"><i class="fa fa-backward"></i></button>{{ image.position }}
+                        <button ng-disabled="editimages.positionChangeLoading" ng-click="editimages.nextPosition(image)" class="btn btn-sm btn-primary"><i class="fa fa-forward"></i></button>
                     </h4>
                 </div>
             </div>
@@ -33,7 +33,7 @@
             ng-model="editimages.currentPage"></ul>
     </div>
     <div class="form-actions">
-        <button ng-click="editimages.advanceFlow()" ng-disabled="editimages.GalleryLoading || editimages.positionChangeLoading" class="btn btn-primary">{{ 'ACTIVATE' | translate }}</button>
+        <button ng-click="editimages.advanceFlow()" ng-disabled="editimages.GalleryLoading || editimages.positionChangeLoading" class="btn btn-primary">{{ 'ADVANCE' | translate }}</button>
         <i ng-if="editimages.GalleryLoading" class="fa fa-spinner fa-pulse fa-fw"></i>
     </div>
 </div>

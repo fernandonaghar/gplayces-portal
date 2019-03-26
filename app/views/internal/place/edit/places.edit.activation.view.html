@@ -1,0 +1,22 @@
+<div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }" ng-if="flash" ng-bind="flash.message"></div>
+<form name="form" id="sliding-form">
+        <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" ng-model="edit.place.isAccessible" value="true">{{ 'PLACE_ISACCESSIBLE_DETAIL' | translate }}
+                    </label>
+                </div>
+            </div>         
+        <div class="form-group">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" ng-model="edit.place.isActive" value="true">{{ 'PLACE_ACTIVE_DETAIL' | translate }}
+                </label>
+            </div>
+        </div>        
+        <div class="form-actions">
+            <button ng-click="edit.savePlaceData()" ng-disabled="form.$invalid || edit.dataLoading" class="btn btn-primary">{{ 'SAVE' | translate }}</button>
+            <i ng-if="request.dataLoading" class="fa fa-spinner fa-pulse fa-fw"></i>
+        </div>
+    </div>
+</form>
