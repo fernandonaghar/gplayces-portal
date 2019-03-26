@@ -30,12 +30,13 @@
             </div>
             <div class="form-group">
                 <label class="form-control-label">{{ 'DOCUMENT' | translate }}</label>
-                <input type="number" placeholder="{{ 'DOCUMENT' | translate }}" ng-model="userdata.user.document" class="form-control" required>
+                <input type="string" placeholder="{{ 'DOCUMENT' | translate }}" ng-model="userdata.user.document" class="form-control" required>
             </div>
             <div class="form-group">
                 <label class="form-control-label">{{ 'PHONE' | translate }}</label>
-                <input type="number" placeholder="{{ 'PHONE' | translate }}" ng-model="userdata.user_info.phone" class="form-control" required>
+                <input type="text" placeholder="{{ 'PHONE' | translate }}" ng-model="userdata.user_info.phone" class="form-control" required>
             </div>
+            <div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }" ng-if="flash" ng-bind="flash.message"></div>
             <div class="form-actions">
                 <button type="submit" ng-click="userdata.saveUserData()" ng-disabled="form.$invalid || userdata.dataLoading" class="btn btn-primary">{{ 'ADVANCE' | translate }}</button>
                 <i ng-if="userdata.dataLoading" class="fa fa-spinner fa-pulse fa-fw"></i>
