@@ -30,7 +30,7 @@
                             <li ui-sref-active="active"><a ui-sref="app.places.created"> {{ 'CREATED_PLACES' | translate }}</a></li>
                         </ul>
                     </li>
-                    <li ng-if="vm.user.isAdmin" ui-sref-active="active">
+                    <li ng-show="vm.user.isAdmin" ui-sref-active="active">
                         <a><i class="fa fa-lock fa-2x"></i> {{ 'ADMIN' | translate }}<span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
                             <li ui-sref-active="active"><a ui-sref="app.approvalrequests"> {{ 'ADMIN_REQUESTS' | translate }}</a></li>
