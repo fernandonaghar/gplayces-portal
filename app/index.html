@@ -57,14 +57,12 @@
     <!-- google maps API -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDjp7HdY1pzClTzrbdqHtPuliZ1PBaq7DI&libraries=geometry,places" async defer></script>
 
-    <!-- Javascript files Angular -->
+    <!-- Template -->
     <script src="js/template/jquery.min.js"></script>
     <script src="js/template/bootstrap.min.js"></script>
-    <!-- Template -->
-    <script src="js/template/fastclick.js"></script>
-    <script src="js/template/nprogress.js"></script>
-    <script src="js/template/custom.min.js"></script>   
+    <script src="js/template/switchery.min.js"></script>
 
+    <!-- Javascript files Angular -->
     <script src="lib/angular/angular.min.js"></script>
     <script src="lib/angular-route/angular-route.min.js"></script>
     <script src="lib/angular-sanitize/angular-sanitize.min.js"></script>
@@ -154,15 +152,13 @@
 
     <div ui-view></div>
     <div class="container body">
-        <div class="main_container">
-            <div ui-view="header"></div>
-            <div ui-view="sidebar"></div>
-            <div class="right_col" role="main" style="min-height: 100vh">
-                <div ui-view="content"></div>
-            </div>
+        <div ui-view="sidebar"></div>
+        <div ui-view="header" class="top_nav"></div>
+        <div class="right_col" role="main" style="min-height: 100vh">
+            <div ui-view="content"></div>
+
         </div>
     </div>
-
 </body>
 
 </html>
