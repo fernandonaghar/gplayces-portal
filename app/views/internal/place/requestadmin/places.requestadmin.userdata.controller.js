@@ -16,6 +16,7 @@
         userdata.user_info = $stateParams.user_info;
 
         function saveUserData() {
+
             userdata.dataLoading = true;
             UserService.SaveCurrentUser(userdata.user).then(function(response) {
                 if (response != null) {

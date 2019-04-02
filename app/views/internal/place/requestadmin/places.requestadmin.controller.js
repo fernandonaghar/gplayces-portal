@@ -33,7 +33,10 @@
                         if (response != null) {
                             if (response.success) {
                                 request.user_info = response.info;
-                                if (request.user.firstName != null && request.user.lastName != null && request.user.document != null && request.user_info.phone != null) {
+                                if (request.user.firstName != null && request.user.firstName != '' &&
+                                    request.user.lastName != null && request.user.lastName != '' &&
+                                    request.user.document != null && request.user.document != '' &&
+                                    request.user_info.phone != null && request.user_info.phone != '') {
                                     $state.go('app.places.request_admin.request', { place: request.place, parse_place: request.parse_place, user: request.user, user_info: request.user_info });
                                 } else {
                                     $state.go('app.places.request_admin.userdata', { place: request.place, parse_place: request.parse_place, user: request.user, user_info: request.user_info });

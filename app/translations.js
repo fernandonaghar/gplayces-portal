@@ -173,7 +173,8 @@ function config($translateProvider) {
         '0_WEEKDAY': 'Holiday',
 
         'PHOTO_TYPE': 'Photo Type',
-        'USE_PLACE_ADDRESS': 'Event is ocurring at the places location.'
+        'USE_PLACE_ADDRESS': 'Event is ocurring at the places location.',
+        'DATA_REQ_FOR_ADMIN_REQUEST': 'First Name, Last Name, Document and Phone number are required for the analysis of your administration request. Please complete all required fields.'
 
     }
 
@@ -344,7 +345,8 @@ function config($translateProvider) {
         '0_WEEKDAY': 'Feriado',        
 
         'PHOTO_TYPE': 'Tipo de foto',
-        'USE_PLACE_ADDRESS': 'Evento ocorrerá no mesmo local do estabelecimento.'
+        'USE_PLACE_ADDRESS': 'Evento ocorrerá no mesmo local do estabelecimento.',
+        'DATA_REQ_FOR_ADMIN_REQUEST': 'First Name, Last Name, Document and Phone number are required for the analysis of your administration request. Please complete all required fields.'
     }
 
     var es_translations = {}

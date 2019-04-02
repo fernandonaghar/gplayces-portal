@@ -23,11 +23,11 @@
 
             <div class="form-group">
                 <label class="form-control-label">{{ 'PROOF'| translate }}</label>
-                <input type="file" id="addressAssurance" name="addressAssurance" />
+                <input type="file" id="addressAssurance" required name="addressAssurance" />
             </div>
             <div class="form-group">
                 <label class="form-control-label">{{ 'OBSERVATIONS' | translate }}</label>
-                <textarea ng-maxlength="250" name="comments" placeholder="{{ 'OBSERVATIONS' | translate }}" ng-model="request.adminrequest.requestComments" class="form-control"></textarea>
+                <textarea ng-maxlength="250" name="comments" required placeholder="{{ 'OBSERVATIONS' | translate }}" ng-model="request.adminrequest.requestComments" class="form-control"></textarea>
             </div>
             <div class="form-group">
                 <div class="progress">
@@ -37,7 +37,7 @@
                 </div>
             </div>
             <div class="form-actions">
-                <button type="submit" ng-click="request.submitRequest()" class="btn btn-primary">{{ 'SUBMIT_REQUEST' | translate }}</button>
+                <button type="submit" ng-click="request.submitRequest()" ng-disabled="form.$invalid || request.dataLoading" class="btn btn-primary">{{ 'SUBMIT_REQUEST' | translate }}</button>
                 <i ng-if="request.dataLoading" class="fa fa-spinner fa-pulse fa-fw"></i>
             </div>
         </form>
