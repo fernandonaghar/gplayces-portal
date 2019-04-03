@@ -143,6 +143,12 @@
                             ].join(' ');
                         }
 
+                        if (map_place) {
+                            var pac_formatted_address = /** @type {!HTMLInputElement} */ (
+                                document.getElementById('pac-formatted-address'));
+                            pac_formatted_address.value = map_place.formatted_address;                            
+                        }                        
+
                         infowindow.setContent('<div><strong>' + map_place.name + '</strong><br>' + address);
                         infowindow.open(map, marker);
                     });
@@ -154,7 +160,7 @@
             edit.dataLoading = true;
 
             var input = /** @type {!HTMLInputElement} */ (
-                document.getElementById('pac-input'));
+                document.getElementById('pac-formatted-address'));
             var lat = /** @type {!HTMLInputElement} */ (
                 document.getElementById('pac-lat'));
             var long = /** @type {!HTMLInputElement} */ (

@@ -32,6 +32,7 @@
         <ul ng-if="(!editimages.GalleryLoading && !editimages.noImagesFound) && (editimages.photoGallery.length > editimages.numPerPage)" uib-pagination direction-links="false" boundary-links="false" items-per-page="editimages.numPerPage" total-items="editimages.photoGallery.length"
             ng-model="editimages.currentPage"></ul>
     </div>
+    <span class="help-block">{{ 'THUMBNAIL_REQUIRED' | translate }}</span>
     <div class="form-actions">
         <button ng-click="editimages.advanceFlow()" ng-disabled="editimages.GalleryLoading || editimages.positionChangeLoading" class="btn btn-primary">{{ 'ADVANCE' | translate }}</button>
         <i ng-if="editimages.GalleryLoading" class="fa fa-spinner fa-pulse fa-fw"></i>

@@ -23,7 +23,7 @@
                         <button class="btn-danger btn-xs pull-right" ng-if="!place.attributes.isActive"><i class="fa fa-times"></i> {{ 'INACTIVE' | translate }}</button>
                     </div>
                     <p>{{ 'ADDRESS' | translate }}: {{ place.attributes.address }}</p>
-                    <a ui-sref="app.places.edit.data({ parse_place: place }) " class="btn btn-primary "><i class="fa fa-pencil-square-o"></i> {{ 'EDIT' | translate }}</a>
+                    <a ui-sref="app.places.edit.data({ place: place }) " class="btn btn-primary "><i class="fa fa-pencil-square-o"></i> {{ 'EDIT' | translate }}</a>
                     <a ui-sref="app.places.events({ parse_place: place }) " class="btn btn-primary "><i class="fa fa-calendar"></i> {{ 'EVENTS' | translate }}</a>
                 </div>
             </uib-accordion>

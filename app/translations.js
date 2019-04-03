@@ -14,7 +14,9 @@ function config($translateProvider) {
         'FORGOT_PASSWORD': 'Forgot your password?',
         'FIELD_REQUIRED': 'Required field.',
         'LOGIN_FACEBOOK': 'Login with Facebook',
+        'THUMBNAIL_REQUIRED': 'Place thumbnail required to activate.',
         'INVALID_EMAIL_OR_PWD': 'Invalid e-mail and/or password.',
+        'INVALID_EMAIL': 'Invalid e-mail.',
         'FACEBOOK_LOGIN_FAILED': 'Facebook login has failed. If you wish, you can register a new account using your e-mail address and link it to facebook at a later time.',
         'REGISTRATION_SUCCESSFUL': 'Registration successful. You may already login.',
         'PASSWORD_RESET_MESSAGE': 'An e-mail has been sent to your e-mail address. Please follow the e-mailed instructions to perform the password reset.',
@@ -32,6 +34,8 @@ function config($translateProvider) {
         'BIRTH_DT': 'Birth Date',
         'PASSWORD': 'Password',
         'ADDRESS': 'Address',
+        'SELECTED_ADDRESS': 'Selected address',
+        'SEARCH_ADDRESS': 'Search for an address',        
         'REQUEST_DATE': 'Request Date',
         'REQUEST_OBS': 'Request Observation',
         'CANCEL': 'Cancel',
@@ -174,6 +178,7 @@ function config($translateProvider) {
 
         'PHOTO_TYPE': 'Photo Type',
         'USE_PLACE_ADDRESS': 'Event is ocurring at the places location.',
+        'PLACE_ADDRESS_REQUIRED': 'Place address is required for activation.',
         'DATA_REQ_FOR_ADMIN_REQUEST': 'First Name, Last Name, Document and Phone number are required for the analysis of your administration request. Please complete all required fields.'
 
     }
@@ -187,6 +192,8 @@ function config($translateProvider) {
         'FIELD_REQUIRED': 'Campo obrigatório.',
         'LOGIN_FACEBOOK': 'Entrar com o Facebook',
         'INVALID_EMAIL_OR_PWD': 'E-mail e/ou senha inválidos.',
+        'INVALID_EMAIL': 'E-mail inválido.',
+        'THUMBNAIL_REQUIRED': 'A thumbnail do local é requerida para realizar a ativação.',
         'FACEBOOK_LOGIN_FAILED': 'Login pelo facebook falhou, se desejar, você pode realizar a criação de uma conta a partir de seu e-mail e posteriormente associar sua conta do facebook.',
         'REGISTRATION_SUCCESSFUL': 'Registro realizado com sucesso, você já pode realizar login.',
         'PASSWORD_RESET_MESSAGE': 'Um e-mail foi enviado para sua caixa, por favor siga as instruções para realizar o reset da senha.',
@@ -204,6 +211,8 @@ function config($translateProvider) {
         'BIRTH_DT': 'Data de nascimento',
         'PASSWORD': 'Senha',
         'ADDRESS': 'Endereço',
+        'SELECTED_ADDRESS': 'Endereço selecionado',
+        'SEARCH_ADDRESS': 'Buscar endereço no mapa',
         'REQUEST_DATE': 'Data de Solicitação',
         'REQUEST_OBS': 'Observações do Solicitante',
         'CANCEL': 'Cancelar',
@@ -345,8 +354,9 @@ function config($translateProvider) {
         '0_WEEKDAY': 'Feriado',        
 
         'PHOTO_TYPE': 'Tipo de foto',
-        'USE_PLACE_ADDRESS': 'Evento ocorrerá no mesmo local do estabelecimento.',
-        'DATA_REQ_FOR_ADMIN_REQUEST': 'First Name, Last Name, Document and Phone number are required for the analysis of your administration request. Please complete all required fields.'
+        'USE_PLACE_ADDRESS': 'Evento ocorrerá no mesmo endereço do local.',
+        'PLACE_ADDRESS_REQUIRED': 'Endereço do local é obrigatório para realizar a ativação.',
+        'DATA_REQ_FOR_ADMIN_REQUEST': 'Nome, Sobrenome, Documento e telefone são requeridos para análise da sua solicitação de administração. Por favor complete todos os campos requeridos.'
     }
 
     var es_translations = {}

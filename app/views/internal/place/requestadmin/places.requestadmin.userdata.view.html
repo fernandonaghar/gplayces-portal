@@ -19,22 +19,26 @@
 <div class="x_panel">
     <div class="x_content">
         <p>{{ 'CONFIRM_DATA' | translate }}</p>
-        <form id="sliding-form">
+        <form id="sliding-form" name="form">
             <div class="form-group">
                 <label class="form-control-label">{{ 'FIRST_NAME' | translate }}</label>
-                <input type="text" required placeholder="{{ 'FIRST_NAME' | translate }}" ng-model="userdata.user.firstName" class="form-control" required>
+                <input type="text" name="firstName" required placeholder="{{ 'FIRST_NAME' | translate }}" ng-model="userdata.user.firstName" class="form-control" required>
+                <span ng-show="form.firstName.$dirty" class="help-block">{{ 'FIELD_REQUIRED' | translate }}</span>
             </div>
             <div class="form-group">
                 <label class="form-control-label">{{ 'LAST_NAME' | translate }}</label>
-                <input type="text" required placeholder="{{ 'LAST_NAME' | translate }}" ng-model="userdata.user.lastName" class="form-control" required>
+                <input type="text" name="lastName" required placeholder="{{ 'LAST_NAME' | translate }}" ng-model="userdata.user.lastName" class="form-control" required>
+                <span ng-show="form.lastName.$dirty" class="help-block">{{ 'FIELD_REQUIRED' | translate }}</span>
             </div>
             <div class="form-group">
                 <label class="form-control-label">{{ 'DOCUMENT' | translate }}</label>
-                <input type="string" required ui-br-cpf-mask placeholder="{{ 'DOCUMENT' | translate }}" ng-model="userdata.user.document" class="form-control" required>
+                <input type="string" name="document" required ui-br-cpf-mask placeholder="{{ 'DOCUMENT' | translate }}" ng-model="userdata.user.document" class="form-control" required>
+                <span ng-show="form.document.$dirty" class="help-block">{{ 'FIELD_REQUIRED' | translate }}</span>
             </div>
             <div class="form-group">
                 <label class="form-control-label">{{ 'PHONE' | translate }}</label>
-                <input type="text" required ui-br-phone-number placeholder="{{ 'PHONE' | translate }}" ng-model="userdata.user_info.phone" class="form-control" required>
+                <input type="text" name="phone" required ui-br-phone-number placeholder="{{ 'PHONE' | translate }}" ng-model="userdata.user_info.phone" class="form-control" required>
+                <span ng-show="form.phone.$dirty && form.phone.$error.required" class="help-block">{{ 'FIELD_REQUIRED' | translate }}</span>
             </div>
             <div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }" ng-if="flash" ng-bind="flash.message"></div>
             <div class="form-actions">

@@ -23,11 +23,13 @@
 
             <div class="form-group">
                 <label class="form-control-label">{{ 'PROOF'| translate }}</label>
-                <input type="file" id="addressAssurance" required name="addressAssurance" />
+                <input type="file" id="addressAssurance" name="file" required name="addressAssurance" />
+                <span ng-show="form.file.$dirty" class="help-block">{{ 'FIELD_REQUIRED' | translate }}</span>
             </div>
             <div class="form-group">
                 <label class="form-control-label">{{ 'OBSERVATIONS' | translate }}</label>
                 <textarea ng-maxlength="250" name="comments" required placeholder="{{ 'OBSERVATIONS' | translate }}" ng-model="request.adminrequest.requestComments" class="form-control"></textarea>
+                <span ng-show="form.comments.$dirty" class="help-block">{{ 'FIELD_REQUIRED' | translate }}</span>
             </div>
             <div class="form-group">
                 <div class="progress">

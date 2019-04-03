@@ -37,7 +37,7 @@
     </div>
     <div>
         <div class="col-lg-12">
-            <form id="sliding-form">
+            <form id="sliding-form" name="form">
                 <div id="form-views" ui-view>
                 </div>
                 <div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }" ng-if="flash" ng-bind="flash.message"></div>

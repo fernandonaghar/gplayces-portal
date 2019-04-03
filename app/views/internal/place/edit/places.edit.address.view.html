@@ -1,15 +1,20 @@
 <form name="form" id="sliding-form">
 
     <div class="form-group">
-        <label class="form-control-label">{{ 'ADDRESS' | translate }}</label>
-        <input id="pac-input" type="text" name="placename" required placeholder="{{ 'ADDRESS' | translate }}" ng-model="editaddr.place.address" class="form-control">
+        <label class="form-control-label">{{ 'SELECTED_ADDRESS' | translate }}</label>
+        <input id="pac-formatted-address" type="text" name="formatted_address" disabled placeholder="{{ 'SELECTED_ADDRESS' | translate }}" ng-model="editaddr.place.address" class="form-control">
     </div>
+    <div class="form-group">
+        <label class="form-control-label">{{ 'SEARCH_ADDRESS' | translate }}</label>
+        <input id="pac-input" type="text" name="placename" placeholder="{{ 'SEARCH_ADDRESS' | translate }}" ng-model="editaddr.place.addressSearch" class="form-control">
+    </div>
+    
     <div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }" ng-if="flash" ng-bind="flash.message"></div>
     <i ng-if="editaddr.mapLoading" class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
     <div id="map"></div>    
 
     <div class="form-group">
-        <button ng-click="editaddr.savePlaceAddressData()" ng-disabled="form.$invalid || edit.dataLoading" class="btn btn-primary">{{ 'ADVANCE' | translate }}</button>
+        <button ng-click="editaddr.savePlaceAddressData()" ng-disabled="edit.dataLoading" class="btn btn-primary">{{ 'ADVANCE' | translate }}</button>
         <i ng-if="editaddr.dataLoading" class="fa fa-spinner fa-pulse fa-fw"></i>
     </div>
 </form>

@@ -9,6 +9,7 @@
     <div uib-accordion-group class="panel-default" ng-repeat="event in events.filteredEvents">
         <div uib-accordion-heading>
             <b>{{ event.attributes.name }}</b>
+            <small> {{ event.attributes.start.toLocaleDateString() }} </small>
         </div>
         <a ui-sref="app.places.events.edit({ parse_place: events.place, parse_event: event })" class="btn btn-primary"><i class="fa fa-pencil-square-o"></i> {{ 'EDIT' | translate }}</a>
         <button ng-click="events.cancelEvent(event)" class="btn btn-danger "><i class="fa fa-ban"></i> {{ 'CANCEL' | translate }}</button>

@@ -22,7 +22,9 @@
         </div>
         <div class="form-group">
             <label class="form-control-label">{{ 'EMAIL' | translate }}</label>
-            <input type="email" placeholder="{{ 'EMAIL' | translate }}" ng-model="profile.user.email" class="form-control">
+            <input type="email" name="email" required placeholder="{{ 'EMAIL' | translate }}" ng-model="profile.user.email" class="form-control">
+            <span ng-show="form.email.$dirty && form.email.$error.required" class="help-block">{{ 'FIELD_REQUIRED' | translate }}</span>
+            <span ng-show="form.email.$dirty" class="help-block">{{ 'INVALID_EMAIL' | translate }}</span>
         </div>
         <div class="form-group">
             <label class="form-control-label">{{ 'FACEBOOK_ACCOUNT_SITUATION' | translate }}: </label>
@@ -35,7 +37,7 @@
             </div>
         </div>
         <div class="form-actions">
-            <button ng-disabled="profile.dataLoading" ng-click="profile.saveUserData()" class="btn btn-primary">{{ 'ADVANCE' | translate }}</button>
+            <button ng-disabled="profile.dataLoading || form.$invalid" ng-click="profile.saveUserData()" class="btn btn-primary">{{ 'ADVANCE' | translate }}</button>
             <i ng-if="profile.dataLoading" class="fa fa-spinner fa-pulse fa-fw"></i>
         </div>
     </div>
