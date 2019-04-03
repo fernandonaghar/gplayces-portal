@@ -26,7 +26,12 @@
                     editaddr.place = PlaceService.ParseToAngularObject($stateParams.parse_place);
                     editaddr.isNewRecord = false;
                 } else if ($stateParams.place != null) {
-                    editaddr.place = $stateParams.place;
+                    if ($stateParams.place.attributes) {
+                        editaddr.place = PlaceService.ParseToAngularObject($stateParams.place);
+                    }
+                    else {
+                        editaddr.place = $stateParams.place;
+                    }
                     editaddr.isNewRecord = false;
                 }
 
@@ -34,11 +39,19 @@
                     var initial_longitude = editaddr.place.longitude;
                     var initial_latitude = editaddr.place.latitude;
                     var vzoom = 17;
-                } else if (editaddr.place.city.attributes.location != null) {
-                    var initial_longitude = editaddr.place.city.attributes.location._longitude;
-                    var initial_latitude = editaddr.place.city.attributes.location._latitude;
-                    var vzoom = 10;
-                } else {
+                } else if (editaddr.place.city) {
+                    if (editaddr.place.city.attributes.location) {
+                        var initial_longitude = editaddr.place.city.attributes.location._longitude;
+                        var initial_latitude = editaddr.place.city.attributes.location._latitude;
+                        var vzoom = 10;
+                    }
+                    else {
+                        var initial_longitude = -13.6576109;
+                        var initial_latitude = -69.7138543;
+                        var vzoom = 8;
+                    }
+                }
+                else {
                     var initial_longitude = -13.6576109;
                     var initial_latitude = -69.7138543;
                     var vzoom = 8;

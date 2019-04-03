@@ -28,8 +28,13 @@
         // define input place
         if ($stateParams.parse_place != null) {
             editimagesnew.place = PlaceService.ParseToAngularObject($stateParams.parse_place);
-        } else if ($stateParams.place != null) {
-            editimagesnew.place = $stateParams.place;
+        } else if ($stateParams.place != null) {             
+            if ($stateParams.place.attributes) {
+                editimagesnew.place = PlaceService.ParseToAngularObject($stateParams.place);
+            }
+            else {
+                editimagesnew.place = $stateParams.place;
+            }            
         } else {
             $state.go('app.places.myplaces');
         }

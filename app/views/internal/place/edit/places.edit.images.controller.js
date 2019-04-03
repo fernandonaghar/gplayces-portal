@@ -27,7 +27,12 @@
             if ($stateParams.parse_place != null) {
                 editimages.place = PlaceService.ParseToAngularObject($stateParams.parse_place);
             } else if ($stateParams.place != null) {
-                editimages.place = $stateParams.place;
+                if ($stateParams.place.attributes) {
+                    editimages.place = PlaceService.ParseToAngularObject($stateParams.place);
+                }
+                else {
+                    editimages.place = $stateParams.place;
+                }
             } else {
                 $state.go('app.places.myplaces');
             }

@@ -42,7 +42,12 @@
                 edithours.place = PlaceService.ParseToAngularObject($stateParams.parse_place);
                 edithours.isNewRecord = false;
             } else if ($stateParams.place != null) {
-                edithours.place = $stateParams.place;
+                if ($stateParams.place.attributes) {
+                    edithours.place = PlaceService.ParseToAngularObject($stateParams.place);
+                } 
+                else {
+                    edithours.place = $stateParams.place;
+                }
                 edithours.isNewRecord = false;
             } else {
                 $state.go('app.places.myplaces');
